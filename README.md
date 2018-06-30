@@ -1,6 +1,8 @@
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) [![CircleCI](https://circleci.com/gh/ethauvin/semver-gradle/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver-gradle/tree/master)
 
-A [Semantic Version](https://semver.org) Plugin for [Gradle](https://gradle.org) that manages a project version via a properties file, and provide tasks to automatically increase major, minor and patch build numbers.
+# Semantic Version Plugin for Gradle
+
+A [Semantic Version](https://semver.org) Plugin for [Gradle](https://gradle.org) that manages a project version via a properties file, and provide tasks to __automatically increment__ major, minor and patch build numbers.
 
 ## Using the plugin
 
@@ -60,6 +62,26 @@ Property                   | Description                 | Default
 `version.buildMeta `       | The build metatdata version |
 `version.preReleasePrefix` | The pre-release prefix      | `-`
 `version.buildMetaPrefix ` | The build metadata prefix   | `+`
+`version.separator`        | The version separator.      | `.`
+
+The version number is built as follows:
+
+
+`version.major` `version.separtor` `version.minor` `version.separator` `version.preReleasePrefix` `version.preRelease` `version.buildMetaPrefix` `version.buildMeta`
+
+for example:
+
+```ini
+#version.properties
+version.major=1
+version.minor=0
+version.patch=0
+version.preRelease=beta
+version.buildMeta=exp.sha.5114f85
+```
+
+`projet.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
+
 
 ### Semver Task
 
@@ -108,3 +130,7 @@ Properties            | Description                             | Default
 `buildMetaKey`        | The build metadata property key.        | `version.buildMeta`
 `buildMetaPrefixKey`  | The build metadata prefix property key. | `version.buildMetaPrefix`
 `separatorKey`        | The separator property key.             | `version.separator`
+
+## Source Code Generation
+
+If you'd like to incorporate the version number data into your source code, please have a look at my [Semantic Version Annotation Processor](https://github.com/ethauvin/semver).
