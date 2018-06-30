@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+       classpath "net.thauvin.erik.gradle:semver:0.9.1"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'net.thauvin.erik.gradle.semver'
+
+mainClassName = 'App'
+
+version = 1.0
+
+dependencies {
+
+}
+
+repositories {
+    jcenter()
+}
+
+run {
+	//dependsOn("incrementPatch")
+    doFirst {
+        println("Version: $version")
+    }
+}
+
+semver {
+    properties = "test.properties"
+    setKeysPrefix("test.")
+    buildMetaKey = "another"
+}

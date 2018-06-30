@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="semver-gradle_main" target="1.10" />
+      <module name="semver-gradle_test" target="1.10" />
+      <module name="semver_main" target="1.10" />
+      <module name="semver_test" target="1.10" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

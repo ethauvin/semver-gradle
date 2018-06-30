@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Sources" pattern="file[semver_main]:kotlin/net/thauvin/erik/gradle/semver//*||file[semver_test]:kotlin/net/thauvin/erik/gradle/semver//*" />
+</component>
