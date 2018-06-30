@@ -37,7 +37,7 @@ import org.gradle.api.Project
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.util.*
+import java.util.Properties
 
 class SemverPlugin : Plugin<Project> {
     private var version = Version()

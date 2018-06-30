@@ -6,15 +6,14 @@ plugins {
     `maven-publish`
     id("com.gradle.plugin-publish") version "0.9.10"
     id("com.github.ben-manes.versions") version "0.20.0"
+    id("org.jmailen.kotlinter") version "1.14.0"
 }
-
-var shortName = "server"
-var github = "https://github.com/ethauvin/gradle-semver-plugin"
-var packageName = "net.thauvin.erik.gradle.semver"
 
 version = "0.9.1"
 group = "net.thauvin.erik.gradle"
 
+var github = "https://github.com/ethauvin/semver-gradle"
+var packageName = "net.thauvin.erik.gradle.semver"
 
 var spekVersion = "1.1.5"
 
@@ -27,6 +26,7 @@ dependencies {
 
     testImplementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
+    testImplementation(gradleTestKit())
 
     testImplementation("org.jetbrains.spek:spek-api:$spekVersion") {
         exclude(group = "org.jetbrains.kotlin")
@@ -40,18 +40,19 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.2.0") {
         because("Needed to run tests IDEs that bundle an older version")
     }
-    testImplementation(gradleTestKit())
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-    // Gradle 4.6
-    kotlinOptions.apiVersion = "1.2"
-}
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.8"
+        // Gradle 4.6
+        kotlinOptions.apiVersion = "1.2"
+    }
 
-tasks.withType<Test> {
-    useJUnitPlatform {
-        includeEngines("spek")
+    withType<Test> {
+        useJUnitPlatform {
+            includeEngines("spek")
+        }
     }
 }
 
@@ -67,13 +68,13 @@ gradlePlugin {
 pluginBundle {
     website = github
     vcsUrl = github
-    description = "Gradle plugin to automatically manage Semantic Version numbering."
-    tags = listOf("semver", "version", "versioning")
+    description = "Semantic Version Plugin for Gradle"
+    tags = listOf("semver", "semantic", "version", "versioning", "auto-increment", "kotlin", "java")
 
     (plugins) {
         project.name {
             id = packageName
-            displayName = "Gradle Semamtic Version Plugin"
+            displayName = project.name
         }
     }
 

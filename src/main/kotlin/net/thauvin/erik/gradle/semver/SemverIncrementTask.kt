@@ -58,5 +58,4 @@ open class SemverIncrementTask : DefaultTask() {
         logger.warn("Version: ${project.version}")
         SemverPlugin.saveProperties(config, version)
     }
-
 }
