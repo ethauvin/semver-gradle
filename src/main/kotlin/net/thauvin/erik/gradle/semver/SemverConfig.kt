@@ -32,7 +32,6 @@
 package net.thauvin.erik.gradle.semver
 
 open class SemverConfig {
-    
     companion object {
         const val DEFAULT_KEY_PREFIX = "version."
         const val DEFAULT_PROPERTIES = "${DEFAULT_KEY_PREFIX}properties"

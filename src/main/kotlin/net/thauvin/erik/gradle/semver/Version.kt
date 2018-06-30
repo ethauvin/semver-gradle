@@ -52,13 +52,20 @@ class Version {
     var separator = DEFAULT_SEPARATOR
 
     val semver: String
-        get()= "$major$separator$minor$separator$patch" +
+        get() = "$major$separator$minor$separator$patch" +
                 (if (preRelease.isNotEmpty()) "$preReleasePrefix$preRelease" else "") +
                 (if (buildMeta.isNotEmpty()) "$buildMetaPrefix$buildMeta" else "")
 
     fun increment(isMajor: Boolean = false, isMinor: Boolean = false, isPatch: Boolean = false) {
-        if (isMajor) major = (major.toInt() + 1).toString()
-        if (isMinor) minor = (minor.toInt() + 1).toString()
+        if (isMajor) {
+            major = (major.toInt() + 1).toString()
+            minor = "0"
+            patch = "0"
+        }
+        if (isMinor) {
+            minor = (minor.toInt() + 1).toString()
+            patch = "0"
+        }
         if (isPatch) patch = (patch.toInt() + 1).toString()
     }
 }

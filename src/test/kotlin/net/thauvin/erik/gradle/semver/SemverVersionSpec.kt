@@ -61,10 +61,22 @@ object SemverVersionSpec : Spek({
                     assertEquals("2.1.1", version.semver)
                 }
             }
+            on("increment patch") {
+                version.increment(isMinor = true)
+                it("should return 2.1.0") {
+                    assertEquals("2.1.0", version.semver)
+                }
+            }
+            on("increment patch") {
+                version.increment(isMajor = true)
+                it("should return 3.0.0") {
+                    assertEquals("3.0.0", version.semver)
+                }
+            }
             on("increment all") {
                 version.increment(true, true, true)
-                it("should rerturn 3.2.2") {
-                    assertEquals("3.2.2", version.semver)
+                it("should return 3.1.1") {
+                    assertEquals("3.1.1", version.semver)
                 }
             }
             on("reset version") {
