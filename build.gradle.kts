@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
     `kotlin-dsl`
@@ -6,10 +7,10 @@ plugins {
     `maven-publish`
     id("com.gradle.plugin-publish") version "0.9.10"
     id("com.github.ben-manes.versions") version "0.20.0"
-    id("org.jmailen.kotlinter") version "1.14.0"
+    id("org.jlleitschuh.gradle.ktlint") version "4.1.0"
 }
 
-version = "0.9.1"
+version = "0.9.1-beta"
 group = "net.thauvin.erik.gradle"
 
 var github = "https://github.com/ethauvin/semver-gradle"
@@ -54,6 +55,10 @@ tasks {
             includeEngines("spek")
         }
     }
+
+    val test by getting {
+        dependsOn("ktlintCheck")
+    }
 }
 
 gradlePlugin {
@@ -82,4 +87,9 @@ pluginBundle {
         groupId = project.group.toString()
         artifactId = project.name
     }
+}
+
+configure<KtlintExtension> {
+    verbose = true
+    outputToConsole = true
 }
