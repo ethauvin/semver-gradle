@@ -59,12 +59,12 @@ class Version {
     fun increment(isMajor: Boolean = false, isMinor: Boolean = false, isPatch: Boolean = false) {
         if (isMajor) {
             major = (major.toInt() + 1).toString()
-            minor = "0"
-            patch = "0"
+            minor = DEFAULT_MINOR
+            patch = DEFAULT_PATCH
         }
         if (isMinor) {
             minor = (minor.toInt() + 1).toString()
-            patch = "0"
+            patch = DEFAULT_PATCH
         }
         if (isPatch) patch = (patch.toInt() + 1).toString()
     }

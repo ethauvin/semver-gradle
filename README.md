@@ -4,6 +4,8 @@
 
 A [Semantic Version](https://semver.org) Plugin for [Gradle](https://gradle.org) that manages a project version via a properties file, and provide tasks to __automatically increment__ major, minor and patch build numbers.
 
+The plugin can be used in conjunction with the [Semantic Version Annotation Processor](https://github.com/ethauvin/semver).
+
 ## Using the plugin
 
 The plugin is published to the Plugin Portal; see instructions there: [net.thauvin.erik.gradle.semver](https://plugins.gradle.org/plugin/net.thauvin.erik.gradle.semver)
@@ -27,7 +29,7 @@ If you need to change some of the property file or name of the properties key to
 
 ## Increment Version Tasks
 
-The `incrementMajor`, `incrementMinor` and `incrementPatch` are available to automatically increment their respective and reset lower counterpart version numbers.
+The `incrementMajor`, `incrementMinor` and `incrementPatch` tasks are available to automatically increment their respective and reset lower counterpart version numbers.
 
 - `incrementMajor` will increment the `major` and set the `minor` and `patch` versions to `0`.
 - `incrementMinor` will increment the `minor` and set the path version to `0`.
@@ -49,7 +51,7 @@ someTask {
 
 ## Configuration
 
-### Version Properties
+### Version File Properties
 
 The following default properties are recognized:
 
@@ -83,9 +85,9 @@ version.buildMeta=exp.sha.5114f85
 `projet.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
 
 
-### Semver Task
+### Semver
 
-The `semver` task is used to configure how the plugin will read/write the version properties file. It most cases it is not needed.
+In a Gradle build file, the `semver` block is used to configure how the plugin will read/write the version properties file. In most cases it is not needed.
 
 But, for example, if you wanted to save the version properties in a different file:
 
@@ -99,10 +101,11 @@ or using different property keys for the version data:
 
 ```gradle
 semver {
-    majorKey = "major" // instead of the default version.major
+    keysPrefix = "" // no prefix
+    majorKey = "major"
     minorKey = "minor"
     patchKey = "patch"
-    preReleaseKey = "release"
+    preReleaseKey = "prerelease"
     buildMetaKey = "metadata"
 }
 ```
@@ -113,24 +116,43 @@ which would match the data in `my.version`:
 major=1
 minor=0
 patch=0
-release=beta
+prerelease=beta
 metadata=
 ```
 
-The following task properties are available:
+The following `semver` properties are available:
 
-Properties            | Description                             | Default
-:---------------------|:----------------------------------------|:-------------------------
+Property              | Description                             | Default
+:---------------------|:----------------------------------------|:------------------------
 `properties`          | The properties file.                    | `version.properties`
-`majorKey`            | The major property key.                 | `version.major`
-`minorKey`            | The minor property key.                 | `version.minor`
-`patchKey`            | The patch property key.                 | `version.patch`
-`preReleaseKey`       | The pre-release property key.           | `version.preRelease`
-`preReleasePrefixKey` | The build pre-release prefix key.       | `version.preReleasePrefix`
-`buildMetaKey`        | The build metadata property key.        | `version.buildMeta`
-`buildMetaPrefixKey`  | The build metadata prefix property key. | `version.buildMetaPrefix`
-`separatorKey`        | The separator property key.             | `version.separator`
+`majorKey`            | The major property key.                 | `major`
+`minorKey`            | The minor property key.                 | `minor`
+`patchKey`            | The patch property key.                 | `patch`
+`preReleaseKey`       | The pre-release property key.           | `preRelease`
+`preReleasePrefixKey` | The build pre-release prefix key.       | `preReleasePrefix`
+`buildMetaKey`        | The build metadata property key.        | `buildMeta`
+`buildMetaPrefixKey`  | The build metadata prefix property key. | `buildMetaPrefix`
+`separatorKey`        | The separator property key.             | `separator`
+`keysPrefix`          | The prefix for all property keys.       | `version.`
+
+In order to quickly support multiple projects. The `keysPrefix` property is available to set all properties keys prefixes at once:
+
+```gradle
+semver {
+    properties = "test.properties"
+    keysPrefix = "test."
+}
+```
+
+```ini
+#test.properties
+test.major=1
+test.minor=0
+test.patch=0
+test.preRelease=
+test.buildMeta=
+```
 
 ## Source Code Generation
 
-If you'd like to incorporate the version number data into your source code, please have a look at my [Semantic Version Annotation Processor](https://github.com/ethauvin/semver).
+If you'd like to incorporate the version number data into your source code, please have a look at the [Semantic Version Annotation Processor](https://github.com/ethauvin/semver).

@@ -33,39 +33,34 @@ package net.thauvin.erik.gradle.semver
 
 open class SemverConfig {
     companion object {
-        const val DEFAULT_KEY_PREFIX = "version."
-        const val DEFAULT_PROPERTIES = "${DEFAULT_KEY_PREFIX}properties"
-        const val DEFAULT_MAJOR_KEY = "${DEFAULT_KEY_PREFIX}major"
-        const val DEFAULT_MINOR_KEY = "${DEFAULT_KEY_PREFIX}minor"
-        const val DEFAULT_PATCH_KEY = "${DEFAULT_KEY_PREFIX}patch"
-        const val DEFAULT_PRERELEASE_KEY = "${DEFAULT_KEY_PREFIX}prerelease"
-        const val DEFAULT_PRERELEASE_PREFIX_KEY = "${DEFAULT_KEY_PREFIX}prerelease.prefix"
-        const val DEFAULT_BUILDMETA_KEY = "${DEFAULT_KEY_PREFIX}buildmeta"
-        const val DEFAULT_BUILDMETA_PREFIX_KEY = "${DEFAULT_KEY_PREFIX}buildmeta.prefix"
-        const val DEFAULT_SEPARATOR = "${DEFAULT_KEY_PREFIX}separator"
+        const val DEFAULT_KEYS_PREFIX = "version."
+        const val DEFAULT_PROPERTIES = "properties"
+        const val DEFAULT_MAJOR_KEY = "major"
+        const val DEFAULT_MINOR_KEY = "minor"
+        const val DEFAULT_PATCH_KEY = "patch"
+        const val DEFAULT_PRERELEASE_KEY = "prerelease"
+        const val DEFAULT_PRERELEASE_PREFIX_KEY = "prerelease.prefix"
+        const val DEFAULT_BUILDMETA_KEY = "buildmeta"
+        const val DEFAULT_BUILDMETA_PREFIX_KEY = "buildmeta.prefix"
+        const val DEFAULT_SEPARATOR = "separator"
     }
 
     var properties = DEFAULT_PROPERTIES
     var majorKey = DEFAULT_MAJOR_KEY
+        get() = "$keysPrefix$field"
     var minorKey = DEFAULT_MINOR_KEY
+        get() = "$keysPrefix$field"
     var patchKey = DEFAULT_PATCH_KEY
+        get() = "$keysPrefix$field"
     var preReleaseKey = DEFAULT_PRERELEASE_KEY
+        get() = "$keysPrefix$field"
     var preReleasePrefixKey = DEFAULT_PRERELEASE_PREFIX_KEY
+        get() = "$keysPrefix$field"
     var buildMetaKey = DEFAULT_BUILDMETA_KEY
+        get() = "$keysPrefix$field"
     var buildMetaPrefixKey = DEFAULT_BUILDMETA_PREFIX_KEY
+        get() = "$keysPrefix$field"
     var separatorKey = DEFAULT_SEPARATOR
-
-    @Suppress("unused")
-    fun setKeysPrefix(keyPrefix: String) {
-        if (keyPrefix.isNotBlank()) {
-            majorKey = keyPrefix + majorKey.removePrefix(DEFAULT_KEY_PREFIX)
-            minorKey = keyPrefix + minorKey.removePrefix(DEFAULT_KEY_PREFIX)
-            patchKey = keyPrefix + patchKey.removePrefix(DEFAULT_KEY_PREFIX)
-            preReleaseKey = keyPrefix + preReleaseKey.removePrefix(DEFAULT_KEY_PREFIX)
-            preReleasePrefixKey = keyPrefix + preReleasePrefixKey.removePrefix(DEFAULT_KEY_PREFIX)
-            buildMetaKey = keyPrefix + buildMetaKey.removePrefix(DEFAULT_KEY_PREFIX)
-            buildMetaPrefixKey = keyPrefix + buildMetaPrefixKey.removePrefix(DEFAULT_KEY_PREFIX)
-            separatorKey = keyPrefix + separatorKey.removePrefix(DEFAULT_KEY_PREFIX)
-        }
-    }
+        get() = "$keysPrefix$field"
+    var keysPrefix = DEFAULT_KEYS_PREFIX
 }
