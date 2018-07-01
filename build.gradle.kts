@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
 
 plugins {
     `kotlin-dsl`
@@ -56,7 +55,7 @@ tasks {
         }
     }
 
-    val test by getting {
+    val check by getting {
         dependsOn("ktlintCheck")
     }
 }
@@ -87,9 +86,4 @@ pluginBundle {
         groupId = project.group.toString()
         artifactId = project.name
     }
-}
-
-configure<KtlintExtension> {
-    verbose = true
-    outputToConsole = true
 }
