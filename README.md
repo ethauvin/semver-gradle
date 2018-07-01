@@ -19,8 +19,8 @@ By default, a `version.properties` file will be created when Gradle is run:
 version.major=1
 version.minor=0
 version.patch=0
-version.preRelease=
-version.buildMeta=
+version.prerelease=
+version.buildmeta=
 ```
 
 To change the version of your project, remove the version from your `build.gradle` and simply edit your the version properties file to match your version number.
@@ -55,21 +55,21 @@ someTask {
 
 The following default properties are recognized:
 
-Property                   | Description                 | Default
-:--------------------------|:----------------------------|:---
-`version.major`            | The major version.          | `1`
-`version.minor`            | The minor version.          | `0`
-`version.patch`            | The patch version.          | `0`
-`version.preRelease`       | The pre-release version     |
-`version.buildMeta `       | The build metatdata version |
-`version.preReleasePrefix` | The pre-release prefix      | `-`
-`version.buildMetaPrefix ` | The build metadata prefix   | `+`
-`version.separator`        | The version separator.      | `.`
+Property                    | Description                 | Default
+:-------------------------- |:----------------------------|:---
+`version.major`             | The major version.          | `1`
+`version.minor`             | The minor version.          | `0`
+`version.patch`             | The patch version.          | `0`
+`version.prerelease`        | The pre-release version     |
+`version.buildmeta`         | The build metatdata version |
+`version.prerelease.prefix` | The pre-release prefix      | `-`
+`version.buildmeta.prefix`  | The build metadata prefix   | `+`
+`version.separator`         | The version separator.      | `.`
 
 The version number is built as follows:
 
 
-`version.major` `version.separtor` `version.minor` `version.separator` `version.preReleasePrefix` `version.preRelease` `version.buildMetaPrefix` `version.buildMeta`
+`version.major` `version.separtor` `version.minor` `version.separator` [`version.prerelease.prefix` `version.prerelease`] [`version.prerelease.prefix` `version.buildmeta`]
 
 for example:
 
@@ -78,8 +78,8 @@ for example:
 version.major=1
 version.minor=0
 version.patch=0
-version.preRelease=beta
-version.buildMeta=exp.sha.5114f85
+version.prerelease=beta
+version.buildmeta=exp.sha.5114f85
 ```
 
 `projet.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
@@ -102,22 +102,22 @@ or using different property keys for the version data:
 ```gradle
 semver {
     keysPrefix = "" // no prefix
-    majorKey = "major"
-    minorKey = "minor"
-    patchKey = "patch"
-    preReleaseKey = "prerelease"
-    buildMetaKey = "metadata"
+    majorKey = "maj"
+    minorKey = "min"
+    patchKey = "build"
+    preReleaseKey = "rel"
+    buildMetaKey = "meta"
 }
 ```
 which would match the data in `my.version`:
 
 ```ini
 #my.version
-major=1
-minor=0
-patch=0
-prerelease=beta
-metadata=
+maj=1
+min=0
+build=0
+rel=beta
+meta=
 ```
 
 The following `semver` properties are available:
@@ -149,8 +149,8 @@ semver {
 test.major=1
 test.minor=0
 test.patch=0
-test.preRelease=
-test.buildMeta=
+test.prerelease=
+test.buildmeta=
 ```
 
 ## Source Code Generation
