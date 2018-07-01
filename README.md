@@ -12,7 +12,7 @@ The plugin is published to the Plugin Portal; see instructions there: [net.thauv
 
 ## Version Properties File
 
-By default, a `version.properties` file will be created when Gradle is run:
+By default, a [properties](https://docs.oracle.com/javase/tutorial/essential/environment/properties.html) file named `version.properties` will be created when Gradle is run:
 
 ```ini
 #version.properties
@@ -25,7 +25,7 @@ version.buildmeta=
 
 To change the version of your project, remove the version from your `build.gradle` and simply edit your the version properties file to match your version number.
 
-If you need to change some of the property file or name of the properties key to match your own build environment. Please see the [Configuration](#configuration) section.
+If you need to change the properties file or name of the properties keys to match your own build environment. Please see the [Configuration](#configuration) section.
 
 ## Increment Version Tasks
 
@@ -69,7 +69,7 @@ Property                    | Description                 | Default
 The version number is built as follows:
 
 
-`version.major` `version.separtor` `version.minor` `version.separator` [`version.prerelease.prefix` `version.prerelease`] [`version.prerelease.prefix` `version.buildmeta`]
+`version.major` `version.separtor` `version.minor` `version.separator` `[` `version.prerelease.prefix` `version.prerelease` `]` `[` `version.prerelease.prefix` `version.buildmeta` `]`
 
 for example:
 
