@@ -2,6 +2,20 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="annotation-processor-java_main" target="1.10" />
+      <module name="annotation-processor-java_test" target="1.10" />
+      <module name="annotation-processor-kotlin_main" target="1.10" />
+      <module name="annotation-processor-kotlin_test" target="1.10" />
+      <module name="ap-examples-java_main" target="1.10" />
+      <module name="ap-examples-java_test" target="1.10" />
+      <module name="ap-examples-kotlin_main" target="1.10" />
+      <module name="ap-examples-kotlin_test" target="1.10" />
+      <module name="examples-java_main" target="1.10" />
+      <module name="examples-java_main~1" target="1.10" />
+      <module name="examples-java_test" target="1.10" />
+      <module name="examples-java_test~1" target="1.10" />
+      <module name="examples-kotlin_main" target="1.10" />
+      <module name="examples-kotlin_test" target="1.10" />
       <module name="semver-gradle_main" target="1.10" />
       <module name="semver-gradle_test" target="1.10" />
       <module name="semver_main" target="1.10" />

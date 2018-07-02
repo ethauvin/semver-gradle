@@ -1,0 +1,7 @@
+task clean(type: Delete) {
+	doFirst {
+		delete fileTree(".") {
+			include "*.properties"
+		}
+	}
+}

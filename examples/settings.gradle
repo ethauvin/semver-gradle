@@ -1,0 +1,2 @@
+include 'java', 'kotlin', 'annotation-processor:java', 'annotation-processor:kotlin'
+rootProject.name = 'examples'

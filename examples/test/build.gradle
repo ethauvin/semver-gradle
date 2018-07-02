@@ -23,6 +23,12 @@ repositories {
     jcenter()
 }
 
+task cleanVersion {
+	delete "test.properties"
+}
+
+clean.dependsOn("cleanVersion")
+
 run {
 	//dependsOn("incrementPatch")
     doFirst {
