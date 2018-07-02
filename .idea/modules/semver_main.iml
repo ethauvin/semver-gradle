@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="semver:main" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="net.thauvin.erik.gradle" external.system.module.type="sourceSet" external.system.module.version="0.9.2-beta" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="semver:main" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="net.thauvin.erik.gradle" external.system.module.type="sourceSet" external.system.module.version="0.9.3-beta" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="kotlin-language" name="Kotlin">
       <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
@@ -28,7 +28,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_10">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../src/main">
@@ -39,7 +39,40 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-reflect-1.2.41.jar!/" />
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-tooling-models-0.17.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/gradle/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-provider-spi-0.17.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/gradle/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-0.17.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/gradle/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk7-1.2.41.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -48,7 +81,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-stdlib-jdk8-1.2.41.jar!/" />
+          <root url="jar://C:/gradle/lib/groovy-all-2.4.12.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -57,7 +90,18 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/gradle-kotlin-dsl-tooling-models-0.17.5.jar!/" />
+          <root url="jar://C:/gradle/lib/gradle-installation-beacon-4.8.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/gradle/src/installation-beacon" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-1.2.41.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -66,25 +110,87 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-stdlib-jdk7-1.2.41.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/4.8.1/generated-gradle-jars/gradle-api-4.8.1.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://C:/gradle/src/announce" />
+          <root url="file://C:/gradle/src/antlr" />
+          <root url="file://C:/gradle/src/base-services" />
+          <root url="file://C:/gradle/src/base-services-groovy" />
+          <root url="file://C:/gradle/src/build-cache" />
+          <root url="file://C:/gradle/src/build-cache-http" />
+          <root url="file://C:/gradle/src/build-comparison" />
+          <root url="file://C:/gradle/src/build-init" />
+          <root url="file://C:/gradle/src/build-option" />
+          <root url="file://C:/gradle/src/cli" />
+          <root url="file://C:/gradle/src/code-quality" />
+          <root url="file://C:/gradle/src/composite-builds" />
+          <root url="file://C:/gradle/src/core" />
+          <root url="file://C:/gradle/src/core-api" />
+          <root url="file://C:/gradle/src/dependency-management" />
+          <root url="file://C:/gradle/src/diagnostics" />
+          <root url="file://C:/gradle/src/ear" />
+          <root url="file://C:/gradle/src/ide" />
+          <root url="file://C:/gradle/src/ide-native" />
+          <root url="file://C:/gradle/src/ide-play" />
+          <root url="file://C:/gradle/src/installation-beacon" />
+          <root url="file://C:/gradle/src/internal-android-performance-testing" />
+          <root url="file://C:/gradle/src/internal-integ-testing" />
+          <root url="file://C:/gradle/src/internal-performance-testing" />
+          <root url="file://C:/gradle/src/internal-testing" />
+          <root url="file://C:/gradle/src/ivy" />
+          <root url="file://C:/gradle/src/jacoco" />
+          <root url="file://C:/gradle/src/javascript" />
+          <root url="file://C:/gradle/src/jvm-services" />
+          <root url="file://C:/gradle/src/language-groovy" />
+          <root url="file://C:/gradle/src/language-java" />
+          <root url="file://C:/gradle/src/language-jvm" />
+          <root url="file://C:/gradle/src/language-native" />
+          <root url="file://C:/gradle/src/language-scala" />
+          <root url="file://C:/gradle/src/launcher" />
+          <root url="file://C:/gradle/src/logging" />
+          <root url="file://C:/gradle/src/maven" />
+          <root url="file://C:/gradle/src/messaging" />
+          <root url="file://C:/gradle/src/model-core" />
+          <root url="file://C:/gradle/src/model-groovy" />
+          <root url="file://C:/gradle/src/native" />
+          <root url="file://C:/gradle/src/osgi" />
+          <root url="file://C:/gradle/src/persistent-cache" />
+          <root url="file://C:/gradle/src/platform-base" />
+          <root url="file://C:/gradle/src/platform-jvm" />
+          <root url="file://C:/gradle/src/platform-native" />
+          <root url="file://C:/gradle/src/platform-play" />
+          <root url="file://C:/gradle/src/plugin-development" />
+          <root url="file://C:/gradle/src/plugin-use" />
+          <root url="file://C:/gradle/src/plugins" />
+          <root url="file://C:/gradle/src/process-services" />
+          <root url="file://C:/gradle/src/publish" />
+          <root url="file://C:/gradle/src/reporting" />
+          <root url="file://C:/gradle/src/resources" />
+          <root url="file://C:/gradle/src/resources-gcs" />
+          <root url="file://C:/gradle/src/resources-http" />
+          <root url="file://C:/gradle/src/resources-s3" />
+          <root url="file://C:/gradle/src/resources-sftp" />
+          <root url="file://C:/gradle/src/scala" />
+          <root url="file://C:/gradle/src/signing" />
+          <root url="file://C:/gradle/src/test-kit" />
+          <root url="file://C:/gradle/src/testing-base" />
+          <root url="file://C:/gradle/src/testing-junit-platform" />
+          <root url="file://C:/gradle/src/testing-jvm" />
+          <root url="file://C:/gradle/src/testing-native" />
+          <root url="file://C:/gradle/src/tooling-api" />
+          <root url="file://C:/gradle/src/tooling-api-builders" />
+          <root url="file://C:/gradle/src/version-control" />
+          <root url="file://C:/gradle/src/workers" />
+          <root url="file://C:/gradle/src/wrapper" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-stdlib-1.2.41.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/groovy-all-2.4.12.jar!/" />
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk8-1.2.41.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -102,61 +208,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-reflect-1.2.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
           <root url="jar://$USER_HOME$/.gradle/caches/4.8.1/generated-gradle-jars/gradle-api-4.8.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/gradle-kotlin-dsl-provider-spi-0.17.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/gradle-kotlin-dsl-0.17.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/gradle-installation-beacon-4.8.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-stdlib-jdk8-1.2.41.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-stdlib-jdk7-1.2.41.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/gradle-kotlin-dsl-provider-spi-0.17.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -164,10 +225,11 @@
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.41" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="module-library" scope="PROVIDED">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/gradle-kotlin-dsl-0.17.5.jar!/" />
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-provider-spi-0.17.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -184,20 +246,10 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.41" level="project" />
-    <orderEntry type="module-library" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/gradle-kotlin-dsl-tooling-models-0.17.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-stdlib-1.2.41.jar!/" />
+          <root url="jar://C:/gradle/lib/gradle-installation-beacon-4.8.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -206,7 +258,52 @@
     <orderEntry type="module-library" scope="PROVIDED">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/kotlin-reflect-1.2.41.jar!/" />
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-0.17.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-tooling-models-0.17.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-reflect-1.2.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-1.2.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk7-1.2.41.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk8-1.2.41.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

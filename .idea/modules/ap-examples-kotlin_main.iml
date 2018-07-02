@@ -23,7 +23,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_10">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../examples/annotation-processor/kotlin/out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../examples/annotation-processor/kotlin/build/generated/source/kapt/main">
@@ -49,8 +49,8 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.50" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.thauvin.erik:semver:1.1.0-beta+2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.github.spullara.mustache.java:compiler:0.9.5" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.thauvin.erik:semver:1.1.0-beta" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
   </component>
 </module>

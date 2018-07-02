@@ -1,23 +1,13 @@
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath "net.thauvin.erik.gradle:semver:0.9.2-beta"
-    }
+plugins {
+    id 'java'
+    id 'application'
+    id "net.thauvin.erik.gradle.semver" version "0.9.3-beta"
 }
 
 // ./gradlew
 // ./gradlew incrementPatch run
 // ./gradlew incrementMinor run
 // ./gradlew incrementMajor run
-
-plugins {
-    id 'java'
-    id 'application'
-}
-
-apply plugin: 'net.thauvin.erik.gradle.semver'
 
 mainClassName = 'App'
 

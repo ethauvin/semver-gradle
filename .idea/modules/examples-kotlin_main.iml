@@ -23,7 +23,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_10">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../examples/kotlin/out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../examples/kotlin/src/main">

@@ -1,21 +1,9 @@
 import net.thauvin.erik.gradle.semver.SemverConfig
 
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath("net.thauvin.erik.gradle:semver:0.9.2-beta")
-    }
-}
-
 plugins {
     kotlin("jvm") version "1.2.50"
     application
-}
-
-apply {
-    plugin("net.thauvin.erik.gradle.semver")
+    id("net.thauvin.erik.gradle.semver") version "0.9.3-beta"
 }
 
 // ./gradlew
