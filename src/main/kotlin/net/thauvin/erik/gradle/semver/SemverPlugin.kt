@@ -112,12 +112,12 @@ class SemverPlugin : Plugin<Project> {
                         version.buildMeta = getProperty(config.buildMetaKey, Version.DEFAULT_EMPTY)
                         version.buildMetaPrefix = getProperty(config.buildMetaPrefixKey, Version.DEFAULT_BUILDMETA_PREFIX)
                         version.separator = getProperty(config.separatorKey, Version.DEFAULT_SEPARATOR)
-                        project.version = version.semver
                     }
                 }
             } else if (exists()) {
                 throw GradleException("Unable to read version from ${config.properties}")
             }
+            project.version = version.semver
             saveProperties(config, version)
         }
     }
