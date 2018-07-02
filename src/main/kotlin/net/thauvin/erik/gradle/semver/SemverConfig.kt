@@ -34,7 +34,7 @@ package net.thauvin.erik.gradle.semver
 open class SemverConfig {
     companion object {
         const val DEFAULT_KEYS_PREFIX = "version."
-        const val DEFAULT_PROPERTIES = "properties"
+        const val DEFAULT_PROPERTIES = "${DEFAULT_KEYS_PREFIX}properties"
         const val DEFAULT_MAJOR_KEY = "major"
         const val DEFAULT_MINOR_KEY = "minor"
         const val DEFAULT_PATCH_KEY = "patch"
