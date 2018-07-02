@@ -25,7 +25,7 @@ defaultTasks 'run'
 
 compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated")
 
-def semverProcessor = "net.thauvin.erik:semver:1.1.0-beta+2"
+def semverProcessor = "net.thauvin.erik:semver:1.1.0-beta"
 
 dependencies {
     annotationProcessor semverProcessor

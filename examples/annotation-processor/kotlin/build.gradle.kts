@@ -26,7 +26,7 @@ apply {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-var semverProcessor = "net.thauvin.erik:semver:1.1.0-beta+2"
+var semverProcessor = "net.thauvin.erik:semver:1.1.0-beta"
 
 dependencies {
     kapt(semverProcessor)
@@ -45,8 +45,8 @@ application {
 }
 
 configure<SemverConfig> {
-    properties = "example.properties"
-    keysPrefix = "example."
-    preReleaseKey = "release"
-    buildMetaKey = "meta"
+    //properties = "example.properties"
+    //keysPrefix = "example."
+    //preReleaseKey = "release"
+    //buildMetaKey = "meta"
 }
