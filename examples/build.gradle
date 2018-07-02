@@ -1,7 +1,36 @@
 task clean(type: Delete) {
-	doFirst {
-		delete fileTree(".") {
-			include "*.properties"
-		}
-	}
+    doFirst {
+        delete fileTree(".") {
+            include "*.properties"
+        }
+    }
+}
+
+task incrementPatch {
+    dependsOn(
+            "java:clean", "java:incrementPatch",
+            "kotlin:clean", "kotlin:incrementPatch",
+            "annotation-processor:java:clean", "annotation-processor:java:incrementPatch",
+            "annotation-processor:kotlin:clean", "annotation-processor:kotlin:incrementPatch")
+}
+
+task incrementMinor {
+    dependsOn(
+            "java:clean", "java:incrementMinor",
+            "kotlin:clean", "kotlin:incrementMinor",
+            "annotation-processor:java:clean", "annotation-processor:java:incrementMinor",
+            "annotation-processor:kotlin:clean", "annotation-processor:kotlin:incrementMinor")
+}
+
+task incrementMajor {
+    dependsOn(
+            "java:clean", "java:incrementMajor",
+            "kotlin:clean", "kotlin:incrementMajor",
+            "annotation-processor:java:clean", "annotation-processor:java:incrementMajor",
+            "annotation-processor:kotlin:clean", "annotation-processor:kotlin:incrementMajor")
+}
+
+task run {
+    dependsOn(
+            "java:run", "kotlin:run", "annotation-processor:java:run", "annotation-processor:kotlin:run")
 }
