@@ -44,24 +44,24 @@ object SemverConfigSpec : Spek({
         given("a config") {
             val config = SemverConfig()
             val vars = listOf(
-                    config.majorKey,
-                    config.minorKey,
-                    config.patchKey,
-                    config.preReleaseKey,
-                    config.preReleasePrefixKey,
-                    config.buildMetaKey,
-                    config.buildMetaPrefixKey,
-                    config.separatorKey
+                config.majorKey,
+                config.minorKey,
+                config.patchKey,
+                config.preReleaseKey,
+                config.preReleasePrefixKey,
+                config.buildMetaKey,
+                config.buildMetaPrefixKey,
+                config.separatorKey
             )
             val defaults = listOf(
-                    SemverConfig.DEFAULT_MAJOR_KEY,
-                    SemverConfig.DEFAULT_MINOR_KEY,
-                    SemverConfig.DEFAULT_PATCH_KEY,
-                    SemverConfig.DEFAULT_PRERELEASE_KEY,
-                    SemverConfig.DEFAULT_PRERELEASE_PREFIX_KEY,
-                    SemverConfig.DEFAULT_BUILDMETA_KEY,
-                    SemverConfig.DEFAULT_BUILDMETA_PREFIX_KEY,
-                    SemverConfig.DEFAULT_SEPARATOR
+                SemverConfig.DEFAULT_MAJOR_KEY,
+                SemverConfig.DEFAULT_MINOR_KEY,
+                SemverConfig.DEFAULT_PATCH_KEY,
+                SemverConfig.DEFAULT_PRERELEASE_KEY,
+                SemverConfig.DEFAULT_PRERELEASE_PREFIX_KEY,
+                SemverConfig.DEFAULT_BUILDMETA_KEY,
+                SemverConfig.DEFAULT_BUILDMETA_PREFIX_KEY,
+                SemverConfig.DEFAULT_SEPARATOR
             )
             on("defaults") {
                 defaults.forEachIndexed { i, d ->
@@ -73,14 +73,14 @@ object SemverConfigSpec : Spek({
             on("set keys to test.xxx") {
                 config.keysPrefix = "test."
                 val keys = listOf(
-                        config.majorKey,
-                        config.minorKey,
-                        config.patchKey,
-                        config.preReleaseKey,
-                        config.preReleasePrefixKey,
-                        config.buildMetaKey,
-                        config.buildMetaPrefixKey,
-                        config.separatorKey)
+                    config.majorKey,
+                    config.minorKey,
+                    config.patchKey,
+                    config.preReleaseKey,
+                    config.preReleasePrefixKey,
+                    config.buildMetaKey,
+                    config.buildMetaPrefixKey,
+                    config.separatorKey)
 
                 keys.forEach { k ->
                     it("should all start with test.xxx: $k") {
