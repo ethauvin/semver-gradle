@@ -4,11 +4,11 @@
 
 A [Semantic Version](https://semver.org) Plugin for [Gradle](https://gradle.org) that manages a project version via a properties file, and provide tasks to __automatically increment__ major, minor and patch build numbers.
 
-The plugin can be used in conjunction with the [Semantic Version Annotation Processor](https://github.com/ethauvin/semver).
+The plugin can be used in conjunction with the [__Semantic Version Annotation Processor__](https://github.com/ethauvin/semver).
 
 ## Using the plugin
 
-The plugin is published to the Plugin Portal; see instructions there: [net.thauvin.erik.gradle.semver](https://plugins.gradle.org/plugin/net.thauvin.erik.gradle.semver)
+The plugin is published to the Plugin Portal; see instructions there: [__net.thauvin.erik.gradle.semver__](https://plugins.gradle.org/plugin/net.thauvin.erik.gradle.semver)
 
 ## Version Properties File
 
@@ -24,6 +24,8 @@ version.buildmeta=
 ```
 
 To change the version of your project, remove the version from your `build.gradle` and simply edit your the version properties file to match your version number.
+
+- __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
 
 If you need to change the properties file or name of the properties keys to match your own build environment. Please see the [Configuration](#configuration) section.
 
@@ -48,6 +50,8 @@ someTask {
     ...
 }
 ```
+
+- __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
 
 ## Configuration
 
@@ -84,6 +88,8 @@ version.buildmeta=exp.sha.5114f85
 
 `projet.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
 
+
+- __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
 
 ### Semver
 
@@ -153,6 +159,10 @@ test.prerelease=
 test.buildmeta=
 ```
 
+- __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
+
 ## Source Code Generation
 
-If you'd like to incorporate the version number data into your source code, please have a look at the [Semantic Version Annotation Processor](https://github.com/ethauvin/semver).
+If you'd like to incorporate the version number data into your source code, please have a look at the [__Semantic Version Annotation Processor__](https://github.com/ethauvin/semver).
+
+There are also full [examples](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) in both [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java) and [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) showing how to use both the plugin and annotation processor concurrently.
