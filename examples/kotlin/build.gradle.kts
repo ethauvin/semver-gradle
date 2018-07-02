@@ -46,7 +46,7 @@ configure<SemverConfig> {
 }
 
 tasks {
-    withType(Test::class.java).all {
+    withType<Test> {
         useTestNG()
     }
 
