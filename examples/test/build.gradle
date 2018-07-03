@@ -3,7 +3,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-       classpath "net.thauvin.erik.gradle:semver:0.9.3-beta"
+       classpath "net.thauvin.erik.gradle:semver:0.9.4-beta"
     }
 }
 
@@ -37,7 +37,7 @@ run {
 }
 
 semver {
-    properties = "test.properties"
-    keysPrefix = "test."
+    properties = "example.properties"
+    keysPrefix = "example."
     buildMetaKey = "meta"
 }
