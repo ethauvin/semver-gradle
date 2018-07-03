@@ -73,7 +73,7 @@ Property                    | Description                 | Default
 The version number is built as follows:
 
 
-`version.major` `version.separtor` `version.minor` `version.separator` `[` `version.prerelease.prefix` `version.prerelease` `]` `[` `version.prerelease.prefix` `version.buildmeta` `]`
+`version.major` `version.separtor` `version.minor` `version.separator` `version.patch` `[` `version.prerelease.prefix` `version.prerelease` `]` `[` `version.prerelease.prefix` `version.buildmeta` `]`
 
 for example:
 
