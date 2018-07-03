@@ -32,9 +32,11 @@
 package net.thauvin.erik.gradle.semver
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.TaskAction
 import javax.inject.Inject
 
+@CacheableTask
 open class SemverIncrementTask @Inject constructor(
     private val config: SemverConfig,
     private val version: Version,
