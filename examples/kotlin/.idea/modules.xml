@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin_main.iml" group="examples-kotlin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin_test.iml" group="examples-kotlin" />
+    </modules>
+  </component>
+</project>

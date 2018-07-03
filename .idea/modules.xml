@@ -16,12 +16,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_main.iml" group="ap-examples-kotlin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_test.iml" group="ap-examples-kotlin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples.iml" filepath="$PROJECT_DIR$/.idea/modules/examples.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-java.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-java.iml" group="java" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-java_main.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-java_main.iml" group="java" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-java_test.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-java_test.iml" group="java" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin.iml" group="kotlin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin_main.iml" group="kotlin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin_test.iml" group="kotlin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-java.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-java_main.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-java_main.iml" group="examples-java" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-java_test.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-java_test.iml" group="examples-java" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin_main.iml" group="examples-kotlin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/examples-kotlin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/examples-kotlin_test.iml" group="examples-kotlin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/semver.iml" filepath="$PROJECT_DIR$/.idea/modules/semver.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/semver_main.iml" filepath="$PROJECT_DIR$/.idea/modules/semver_main.iml" group="semver" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/semver_test.iml" filepath="$PROJECT_DIR$/.idea/modules/semver_test.iml" group="semver" />
