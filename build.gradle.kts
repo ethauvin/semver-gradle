@@ -9,7 +9,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "4.1.0"
 }
 
-version = "0.9.3-beta"
+version = "0.9.4-beta"
 group = "net.thauvin.erik.gradle"
 
 var github = "https://github.com/ethauvin/semver-gradle"

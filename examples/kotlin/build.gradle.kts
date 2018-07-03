@@ -3,7 +3,7 @@ import net.thauvin.erik.gradle.semver.SemverConfig
 plugins {
     kotlin("jvm") version "1.2.50"
     application
-    id("net.thauvin.erik.gradle.semver") version "0.9.3-beta"
+    id("net.thauvin.erik.gradle.semver") version "0.9.4-beta"
 }
 
 // ./gradlew
