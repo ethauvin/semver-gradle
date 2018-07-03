@@ -38,8 +38,8 @@ import javax.inject.Inject
 open class SemverIncrementTask @Inject constructor(
     private val config: SemverConfig,
     private val version: Version,
-    private val type: String)
-    : DefaultTask() {
+    private val type: String
+) : DefaultTask() {
     init {
         group = "version"
         description = "Increments ${type.capitalize()} version number."

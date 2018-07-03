@@ -43,7 +43,6 @@ class SemverPlugin : Plugin<Project> {
     private var version = Version()
     private lateinit var config: SemverConfig
 
-
     companion object {
         fun saveProperties(config: SemverConfig, version: Version) {
             Properties().apply {
