@@ -70,6 +70,9 @@ object SemverConfigSpec : Spek({
                     }
                 }
             }
+            on("should be version.properties") {
+                assertTrue(config.properties.equals("version.properties"))
+            }
             on("set keys to test.xxx") {
                 config.keysPrefix = "test."
                 val keys = listOf(
