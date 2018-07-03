@@ -31,31 +31,29 @@
  */
 package net.thauvin.erik.gradle.semver
 
-import net.thauvin.erik.gradle.semver.SemverPlugin.Types
 import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
+import javax.inject.Inject
 
-open class SemverIncrementTask : DefaultTask() {
+open class SemverIncrementTask @Inject constructor(
+    private val config: SemverConfig,
+    private val version: Version,
+    private val type: String)
+    : DefaultTask() {
     init {
         group = "version"
+        description = "Increments ${type.capitalize()} version number."
     }
-
-    @Input
-    lateinit var config: SemverConfig
-
-    @Input
-    lateinit var version: Version
-
-    @Input
-    lateinit var type: Types
 
     @Suppress("unused")
     @TaskAction
     fun increment() {
-        version.increment(isMajor = type == Types.MAJOR, isMinor = type == Types.MINOR, isPatch = type == Types.PATCH)
+        version.increment(
+            isMajor = type == SemverConfig.DEFAULT_MAJOR_KEY,
+            isMinor = type == SemverConfig.DEFAULT_MINOR_KEY,
+            isPatch = type == SemverConfig.DEFAULT_PATCH_KEY)
         project.version = version.semver
-        logger.warn("Version: ${project.version}")
+        logger.lifecycle("Version: ${project.version}")
         SemverPlugin.saveProperties(config, version)
     }
 }

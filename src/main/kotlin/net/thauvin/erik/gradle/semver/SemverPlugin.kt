@@ -43,9 +43,6 @@ class SemverPlugin : Plugin<Project> {
     private var version = Version()
     private lateinit var config: SemverConfig
 
-    enum class Types {
-        MAJOR, MINOR, PATCH
-    }
 
     companion object {
         fun saveProperties(config: SemverConfig, version: Version) {
@@ -72,25 +69,10 @@ class SemverPlugin : Plugin<Project> {
         project!!.afterEvaluate(this::afterEvaluate)
         config = project.extensions.create("semver", SemverConfig::class.java)
 
-        project.tasks.create("incrementMajor", SemverIncrementTask::class.java) {
-            description = "Increments Major version number."
-            config = this@SemverPlugin.config
-            version = this@SemverPlugin.version
-            type = Types.MAJOR
-        }
-
-        project.tasks.create("incrementMinor", SemverIncrementTask::class.java) {
-            description = "Increments Minor version number."
-            config = this@SemverPlugin.config
-            version = this@SemverPlugin.version
-            type = Types.MINOR
-        }
-
-        project.tasks.create("incrementPatch", SemverIncrementTask::class.java) {
-            description = "Increments Patch version number."
-            config = this@SemverPlugin.config
-            version = this@SemverPlugin.version
-            type = Types.PATCH
+        project.tasks.apply {
+            create("incrementMajor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MAJOR_KEY)
+            create("incrementMinor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MINOR_KEY)
+            create("incrementPatch", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_PATCH_KEY)
         }
     }
 
@@ -99,7 +81,7 @@ class SemverPlugin : Plugin<Project> {
             project.logger.warn("Please specify the version in ${config.properties} and remove it from ${project.buildFile.name}")
         }
         File(config.properties).apply {
-
+            project.logger.info("[${SemverPlugin::class.simpleName}] Attempting to read properties from: `${this.absoluteFile}`.")
             if (canRead()) {
                 FileInputStream(this).use { fis ->
                     Properties().apply {
