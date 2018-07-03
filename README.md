@@ -86,7 +86,7 @@ version.prerelease=beta
 version.buildmeta=exp.sha.5114f85
 ```
 
-`projet.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
+`project.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
 
 
 - __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
