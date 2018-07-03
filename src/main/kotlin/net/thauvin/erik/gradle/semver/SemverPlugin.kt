@@ -76,11 +76,14 @@ class SemverPlugin : Plugin<Project> {
     }
 
     private fun afterEvaluate(project: Project) {
+        val propsFile = File(config.properties)
         if (project.version != "unspecified") {
-            project.logger.warn("Please specify the version in ${config.properties} and remove it from ${project.buildFile.name}")
+            project.logger.warn(
+                "Please specify the version in ${propsFile.name} and remove it from ${project.buildFile.name}")
         }
-        File(config.properties).apply {
-            project.logger.info("[${SemverPlugin::class.simpleName}] Attempting to read properties from: `${this.absoluteFile}`.")
+        propsFile.apply {
+            project.logger.info(
+                "[${SemverPlugin::class.simpleName}] Attempting to read properties from: `$absoluteFile`.")
             if (canRead()) {
                 FileInputStream(this).use { fis ->
                     Properties().apply {
@@ -89,14 +92,16 @@ class SemverPlugin : Plugin<Project> {
                         version.minor = getProperty(config.minorKey, Version.DEFAULT_MINOR)
                         version.patch = getProperty(config.patchKey, Version.DEFAULT_PATCH)
                         version.preRelease = getProperty(config.preReleaseKey, Version.DEFAULT_EMPTY)
-                        version.preReleasePrefix = getProperty(config.preReleasePrefixKey, Version.DEFAULT_PRERELEASE_PREFIX)
+                        version.preReleasePrefix =
+                            getProperty(config.preReleasePrefixKey, Version.DEFAULT_PRERELEASE_PREFIX)
                         version.buildMeta = getProperty(config.buildMetaKey, Version.DEFAULT_EMPTY)
-                        version.buildMetaPrefix = getProperty(config.buildMetaPrefixKey, Version.DEFAULT_BUILDMETA_PREFIX)
+                        version.buildMetaPrefix =
+                            getProperty(config.buildMetaPrefixKey, Version.DEFAULT_BUILDMETA_PREFIX)
                         version.separator = getProperty(config.separatorKey, Version.DEFAULT_SEPARATOR)
                     }
                 }
             } else if (exists()) {
-                throw GradleException("Unable to read version from ${config.properties}")
+                throw GradleException("Unable to read version from: `$absoluteFile`")
             }
             project.version = version.semver
             saveProperties(config, version)
