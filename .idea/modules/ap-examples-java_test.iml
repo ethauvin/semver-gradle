@@ -3,9 +3,7 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output-test url="file://$MODULE_DIR$/../../examples/annotation-processor/java/out/test/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../examples/annotation-processor/java/src/test">
-      <sourceFolder url="file://$MODULE_DIR$/../../examples/annotation-processor/java/src/test/java" isTestSource="true" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../examples/annotation-processor/java/src/test" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ap-examples-java_main" />
