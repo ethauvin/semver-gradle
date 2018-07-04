@@ -3,6 +3,7 @@
 **/.idea/libraries
 **/.idea/tasks.xml
 **/.idea/workspace.xml
+**/src/*.class
 *.iws
 *.properties
 *.sublime-*

@@ -11,8 +11,6 @@ plugins {
 
 mainClassName = 'App'
 
-compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated")
-
 defaultTasks 'run'
 
 dependencies {
