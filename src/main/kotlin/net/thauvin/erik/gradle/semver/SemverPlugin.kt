@@ -83,7 +83,7 @@ class SemverPlugin : Plugin<Project> {
         }
         propsFile.apply {
             project.logger.info(
-                "[${SemverPlugin::class.simpleName}] Attempting to read properties from: `$absoluteFile`.")
+                "[${SemverPlugin::class.simpleName}] Attempting to read properties from: `$absoluteFile`. [exists: ${exists()}, canRead: ${canRead()}]")
             if (canRead()) {
                 FileInputStream(this).use { fis ->
                     Properties().apply {
