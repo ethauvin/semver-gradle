@@ -38,9 +38,12 @@ tasks {
         useTestNG()
     }
 
-    val run by getting {
+    val run by getting(JavaExec::class) {
         doFirst {
             println("Version: $version")
         }
+
+        // args = listof("example.properties")
+        args = listOf("version.properties")
     }
 }

@@ -11,8 +11,9 @@ public class App {
     public void cat(String name) {
         try {
             final List<String> content = Files.readAllLines(Paths.get(name));
+            System.out.println("> cat " + name);
             for (String line : content) {
-                if (!line.startsWith("#")) System.out.println(line);
+                System.out.println(line);
             }
         } catch (IOException e) {
             System.out.println(e);
