@@ -104,6 +104,7 @@ class SemverPlugin : Plugin<Project> {
                 throw GradleException("Unable to read version from: `$absoluteFile`")
             }
             project.version = version.semver
+            project.logger.info("[${SemverPlugin::class.simpleName}] Project version set to: ${project.version}")
             saveProperties(config, version)
         }
     }
