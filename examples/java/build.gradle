@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id "net.thauvin.erik.gradle.semver" version "0.9.4-beta"
+    id "net.thauvin.erik.gradle.semver" version "0.9.5-beta"
 }
 
 // ./gradlew
@@ -31,10 +31,10 @@ test {
 }
 
 semver {
-    // properties = "example.properties"
-    // keysPrefix = "example."
-    // preReleaseKey = "release"
-    // buildMetaKey = "meta"
+//     properties = "example.properties"
+//     keysPrefix = "example."
+//     preReleaseKey = "release"
+//     buildMetaKey = "meta"
 }
 
 run {
@@ -42,6 +42,6 @@ run {
         println "Version: $version"
     }
 
-    // args = ['example.properties']
+//    args = ['example.properties']
     args = ['version.properties']
 }

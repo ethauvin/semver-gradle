@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.2.50"
     application
     id("org.jetbrains.kotlin.kapt") version "1.2.50"
-    id("net.thauvin.erik.gradle.semver") version "0.9.4-beta"
+    id("net.thauvin.erik.gradle.semver") version "0.9.5-beta"
 }
 
 // ./gradlew
@@ -33,8 +33,8 @@ application {
 }
 
 configure<SemverConfig> {
-    //properties = "example.properties"
-    //keysPrefix = "example."
-    //preReleaseKey = "release"
-    //buildMetaKey = "meta"
+//    properties = "example.properties"
+//    keysPrefix = "example."
+//    preReleaseKey = "release"
+//    buildMetaKey = "meta"
 }

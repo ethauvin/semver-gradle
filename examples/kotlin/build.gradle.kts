@@ -3,7 +3,7 @@ import net.thauvin.erik.gradle.semver.SemverConfig
 plugins {
     kotlin("jvm") version "1.2.50"
     application
-    id("net.thauvin.erik.gradle.semver") version "0.9.4-beta"
+    id("net.thauvin.erik.gradle.semver") version "0.9.5-beta"
 }
 
 // ./gradlew
@@ -27,10 +27,10 @@ application {
 }
 
 configure<SemverConfig> {
-    //properties = "example.properties"
-    //keysPrefix = "example."
-    //preReleaseKey = "release"
-    //buildMetaKey = "meta"
+//    properties = "example.properties"
+//    keysPrefix = "example."
+//    preReleaseKey = "release"
+//    buildMetaKey = "meta"
 }
 
 tasks {
@@ -43,7 +43,7 @@ tasks {
             println("Version: $version")
         }
 
-        // args = listof("example.properties")
+//        args = listOf("example.properties")
         args = listOf("version.properties")
     }
 }
