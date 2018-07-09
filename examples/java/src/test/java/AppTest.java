@@ -1,11 +1,12 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class AppTest {
     @Test
-    void testAppHasAGreeting() {
+    void testAppHasMain() {
         final App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+        assertAll("app should have a main method.",
+            () -> classUnderTest.getClass().getMethod("main", String[].class));
     }
 }
