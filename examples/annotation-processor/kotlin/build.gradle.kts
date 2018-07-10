@@ -4,7 +4,7 @@ plugins {
     kotlin("jvm") version "1.2.50"
     application
     id("org.jetbrains.kotlin.kapt") version "1.2.50"
-    id("net.thauvin.erik.gradle.semver") version "0.9.5-beta"
+    id("net.thauvin.erik.gradle.semver") version "0.9.6-beta"
 }
 
 // ./gradlew
