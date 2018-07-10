@@ -45,7 +45,7 @@ class SemverPlugin : Plugin<Project> {
 
     companion object {
         fun saveProperties(config: SemverConfig, version: Version) {
-            Properties().apply {
+            SortedProperties().apply {
                 put(config.majorKey, version.major)
                 put(config.minorKey, version.minor)
                 put(config.patchKey, version.patch)
