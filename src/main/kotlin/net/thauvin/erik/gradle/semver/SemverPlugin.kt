@@ -34,12 +34,14 @@ package net.thauvin.erik.gradle.semver
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.util.GradleVersion
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.util.Properties
 
 class SemverPlugin : Plugin<Project> {
+    private val simpleName = SemverPlugin::class.simpleName
     private var version = Version()
     private lateinit var config: SemverConfig
 
@@ -65,6 +67,9 @@ class SemverPlugin : Plugin<Project> {
     }
 
     override fun apply(project: Project?) {
+        if (GradleVersion.current() < GradleVersion.version("4.8.1")) {
+            throw GradleException("The $simpleName plugin requires Gradle version 4.8.1 or greater.")
+        }
         project!!.afterEvaluate(this::afterEvaluate)
         config = project.extensions.create("semver", SemverConfig::class.java)
 
@@ -83,9 +88,9 @@ class SemverPlugin : Plugin<Project> {
         }
         propsFile.apply {
             project.logger.info(
-                "[${SemverPlugin::class.simpleName}] Attempting to read properties from: `$absoluteFile`. [exists: ${exists()}, canRead: ${canRead()}]")
             if (canRead()) {
                 FileInputStream(this).use { fis ->
+                "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: ${exists()}, isFile: $isFile, canRead: ${canRead()}]")
                     Properties().apply {
                         load(fis)
                         version.major = getProperty(config.majorKey, Version.DEFAULT_MAJOR)
@@ -104,7 +109,7 @@ class SemverPlugin : Plugin<Project> {
                 throw GradleException("Unable to read version from: `$absoluteFile`")
             }
             project.version = version.semver
-            project.logger.info("[${SemverPlugin::class.simpleName}] Project version set to: ${project.version}")
+            project.logger.info("[$simpleName] Project version set to: ${project.version}")
             saveProperties(config, version)
         }
     }
