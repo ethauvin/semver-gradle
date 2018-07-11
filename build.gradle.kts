@@ -7,6 +7,7 @@ plugins {
     id("com.gradle.plugin-publish") version "0.9.10"
     id("com.github.ben-manes.versions") version "0.20.0"
     id("org.jlleitschuh.gradle.ktlint") version "4.1.0"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7"
 }
 
 version = "0.9.6-beta"
@@ -58,6 +59,13 @@ tasks {
     val check by getting {
         dependsOn("ktlintCheck")
     }
+}
+
+detekt {
+    profile("main", Action {
+        input = "src/main/kotlin"
+        filters = ".*/resources/.*"
+    })
 }
 
 gradlePlugin {
