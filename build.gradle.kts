@@ -64,7 +64,10 @@ tasks {
 detekt {
     profile("main", Action {
         input = "src/main/kotlin"
-        filters = ".*/resources/.*"
+        filters = ".*/resources/.*,.*/build/.*"
+        output = "$buildDir/reports/detekt-reports"
+        outputName = "detekt-report"
+        baseline = "detekt-baseline.xml"
     })
 }
 

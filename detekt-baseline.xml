@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <Blacklist timestamp="1531335731933"></Blacklist>
+  <Whitelist timestamp="1531335731933">
+    <ID>MaxLineLength:SemverPlugin.kt$net.thauvin.erik.gradle.semver.SemverPlugin.kt</ID>
+    <ID>NestedBlockDepth:SemverPlugin.kt$SemverPlugin$private fun afterEvaluate(project: Project)</ID>
+  </Whitelist>
+</SmellBaseline>
