@@ -77,6 +77,7 @@ class SemverPlugin : Plugin<Project> {
             create("incrementMajor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MAJOR_KEY)
             create("incrementMinor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MINOR_KEY)
             create("incrementPatch", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_PATCH_KEY)
+            create("incrementBuildMeta", SemverIncrementBuildMetaTask::class.java, config, version)
         }
     }
 
@@ -93,6 +94,7 @@ class SemverPlugin : Plugin<Project> {
                 FileInputStream(this).reader().use { reader ->
                     Properties().apply {
                         load(reader)
+
                         version.major = getProperty(config.majorKey, Version.DEFAULT_MAJOR)
                         version.minor = getProperty(config.minorKey, Version.DEFAULT_MINOR)
                         version.patch = getProperty(config.patchKey, Version.DEFAULT_PATCH)
@@ -103,6 +105,10 @@ class SemverPlugin : Plugin<Project> {
                         version.buildMetaPrefix =
                             getProperty(config.buildMetaPrefixKey, Version.DEFAULT_BUILDMETA_PREFIX)
                         version.separator = getProperty(config.separatorKey, Version.DEFAULT_SEPARATOR)
+
+                        project.tasks.withType(SemverIncrementBuildMetaTask::class.java) {
+                            buildMeta = version.buildMeta
+                        }
                     }
                 }
             } else if (exists()) {

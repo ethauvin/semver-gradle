@@ -31,6 +31,8 @@ If you need to change the properties file or name of the properties keys to matc
 
 ## Increment Version Tasks
 
+### incrementMajor, incrementMinor and incrementPatch
+
 The `incrementMajor`, `incrementMinor` and `incrementPatch` tasks are available to automatically increment their respective and reset lower counterpart version numbers.
 
 - `incrementMajor` will increment the `major` and set the `minor` and `patch` versions to `0`.
@@ -52,6 +54,52 @@ someTask {
 ```
 
 - __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
+
+### incrementBuildMeta
+
+The `incrementBuildMeta` task is available to set the build metadata version to a custom calculated value.
+
+#### Examples:
+
+To set the build metadata to a custom formatted date:
+
+```gradle
+incrementBuildMeta {
+    doFirst {
+        buildMeta = new Date().format("yyyyMMddHHmmss")
+    }
+}
+```
+
+```bash
+./gradlew incrementBuildMeta
+
+...
+
+> Task :incrementBuildMeta
+Version: 1.0.16-beta+20180713143416
+```
+
+Or to set the build metadata to a custom formatted number with increment:
+
+
+```gradle
+incrementBuildMeta {
+    doFirst {
+        buildMeta = sprintf("%03d", (buildMeta as Integer) + 1)
+    }
+}
+```
+
+```bash
+./gradlew incrementBuildMeta
+
+...
+
+> Task :incrementBuildMeta
+Version: 1.0.16-beta+002
+```
+
 
 ## Configuration
 
