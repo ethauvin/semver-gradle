@@ -1,9 +1,13 @@
 import net.thauvin.erik.gradle.semver.SemverConfig
+import net.thauvin.erik.gradle.semver.SemverIncrementBuildMetaTask
+import java.lang.String.format
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 plugins {
     kotlin("jvm") version "1.2.50"
     application
-    id("net.thauvin.erik.gradle.semver") version "0.9.6-beta"
+    id("net.thauvin.erik.gradle.semver") version "0.9.7-beta"
 }
 
 // ./gradlew
@@ -36,6 +40,13 @@ configure<SemverConfig> {
 tasks {
     withType<Test> {
         useTestNG()
+    }
+
+    val incrementBuildMeta by getting(SemverIncrementBuildMetaTask::class) {
+        doFirst {
+//            buildMeta = format("%03d", buildMeta.toInt() + 1)
+            buildMeta = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))
+        }
     }
 
     val run by getting(JavaExec::class) {

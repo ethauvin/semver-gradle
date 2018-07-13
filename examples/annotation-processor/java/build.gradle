@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id "net.thauvin.erik.gradle.semver" version "0.9.6-beta"
+    id "net.thauvin.erik.gradle.semver" version "0.9.7-beta"
 }
 
 // ./gradlew
@@ -13,7 +13,7 @@ mainClassName = 'com.example.Example'
 
 defaultTasks 'run'
 
-compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated")
+compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
 
 def semverProcessor = "net.thauvin.erik:semver:1.1.0-beta"
 

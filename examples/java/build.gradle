@@ -1,13 +1,14 @@
 plugins {
     id 'java'
     id 'application'
-    id "net.thauvin.erik.gradle.semver" version "0.9.6-beta"
+    id "net.thauvin.erik.gradle.semver" version "0.9.7-beta"
 }
 
 // ./gradlew
 // ./gradlew incrementPatch run
 // ./gradlew incrementMinor run
 // ./gradlew incrementMajor run
+// ./gradlew incrementBuildMeta run
 
 mainClassName = 'App'
 
@@ -35,6 +36,13 @@ semver {
 //     keysPrefix = "example."
 //     preReleaseKey = "release"
 //     buildMetaKey = "meta"
+}
+
+incrementBuildMeta {
+    doFirst {
+//        buildMeta = sprintf("%03d", (buildMeta as Integer) + 1)
+        buildMeta = new Date().format("yyyyMMddHHmmss")
+    }
 }
 
 run {
