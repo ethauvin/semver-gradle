@@ -14,6 +14,7 @@ plugins {
 // ./gradlew incrementPatch run
 // ./gradlew incrementMinor run
 // ./gradlew incrementMajor run
+// ./gradlew incrementBuildMeta run
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
