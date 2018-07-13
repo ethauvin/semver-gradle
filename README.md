@@ -2,7 +2,7 @@
 
 # Semantic Version Plugin for Gradle
 
-A [Semantic Version](https://semver.org) Plugin for [Gradle](https://gradle.org) that manages a project version via a properties file, and provide tasks to __automatically increment__ major, minor and patch build numbers.
+A [Semantic Version](https://semver.org) Plugin for [Gradle](https://gradle.org) that manages a project version via a properties file, and provide tasks to __automatically increment__ major, minor, patch and build version numbers.
 
 The plugin can be used in conjunction with the [__Semantic Version Annotation Processor__](https://github.com/ethauvin/semver).
 
