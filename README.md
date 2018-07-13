@@ -100,6 +100,7 @@ incrementBuildMeta {
 Version: 1.0.16-beta+002
 ```
 
+- __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
 
 ## Configuration
 
