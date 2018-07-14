@@ -10,7 +10,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7"
 }
 
-version = "0.9.7-beta"
+version = "0.9.8-beta"
 group = "net.thauvin.erik.gradle"
 
 var github = "https://github.com/ethauvin/semver-gradle"

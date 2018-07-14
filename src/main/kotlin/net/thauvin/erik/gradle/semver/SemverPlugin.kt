@@ -60,11 +60,11 @@ class SemverPlugin : Plugin<Project> {
                 put(config.patchKey, version.patch)
                 put(config.preReleaseKey, version.preRelease)
                 put(config.buildMetaKey, version.buildMeta)
-                if (version.buildMetaPrefix != Version.DEFAULT_BUILDMETA_PREFIX
-                    || containsKey(config.buildMetaPrefixKey))
+                if (version.buildMetaPrefix != Version.DEFAULT_BUILDMETA_PREFIX ||
+                    containsKey(config.buildMetaPrefixKey))
                     put(config.buildMetaPrefixKey, version.buildMetaPrefix)
-                if (version.preReleasePrefix != Version.DEFAULT_PRERELEASE_PREFIX
-                    || containsKey(config.preReleasePrefixKey))
+                if (version.preReleasePrefix != Version.DEFAULT_PRERELEASE_PREFIX ||
+                    containsKey(config.preReleasePrefixKey))
                     put(config.preReleasePrefixKey, version.preReleasePrefix)
                 if (version.separator != Version.DEFAULT_SEPARATOR || containsKey(config.separatorKey))
                     put(config.separatorKey, version.separator)

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 plugins {
     kotlin("jvm") version "1.2.50"
     application
-    id("net.thauvin.erik.gradle.semver") version "0.9.7-beta"
+    id("net.thauvin.erik.gradle.semver") version "0.9.8-beta"
 }
 
 // ./gradlew
