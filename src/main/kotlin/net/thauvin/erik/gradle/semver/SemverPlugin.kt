@@ -82,11 +82,11 @@ class SemverPlugin : Plugin<Project> {
         }
     }
 
-    override fun apply(project: Project?) {
+    override fun apply(project: Project) {
         if (GradleVersion.current() < GradleVersion.version("4.8.1")) {
             throw GradleException("The $simpleName plugin requires Gradle version 4.8.1 or greater.")
         }
-        project!!.afterEvaluate(this::afterEvaluate)
+        project.afterEvaluate(this::afterEvaluate)
         config = project.extensions.create("semver", SemverConfig::class.java)
 
         project.tasks.apply {

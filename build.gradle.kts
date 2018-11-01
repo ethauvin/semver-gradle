@@ -4,10 +4,10 @@ plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
     `maven-publish`
-    id("com.gradle.plugin-publish") version "0.9.10"
+    id("com.gradle.plugin-publish") version "0.10.0"
     id("com.github.ben-manes.versions") version "0.20.0"
-    id("org.jlleitschuh.gradle.ktlint") version "4.1.0"
-    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7"
+    id("org.jlleitschuh.gradle.ktlint") version "6.2.1"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC9.2"
 }
 
 version = "0.9.8-beta"
@@ -16,7 +16,7 @@ group = "net.thauvin.erik.gradle"
 var github = "https://github.com/ethauvin/semver-gradle"
 var packageName = "net.thauvin.erik.gradle.semver"
 
-var spekVersion = "1.1.5"
+var spekVersion = "1.2.1"
 
 repositories {
     jcenter()
@@ -38,7 +38,7 @@ dependencies {
         exclude(group = "org.junit.platform")
     }
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.2.0") {
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.3.1") {
         because("Needed to run tests IDEs that bundle an older version")
     }
 }
@@ -62,19 +62,17 @@ tasks {
 }
 
 detekt {
-    profile("main", Action {
-        input = "src/main/kotlin"
-        filters = ".*/resources/.*,.*/build/.*"
-        output = "$buildDir/reports/detekt-reports"
-        outputName = "detekt-report"
-        baseline = "detekt-baseline.xml"
-    })
+    input = files("src/main/kotlin")
+    filters = ".*/resources/.*,.*/build/.*"
+    baseline = project.rootDir.resolve("detekt-baseline.xml")
 }
 
 gradlePlugin {
-    (plugins) {
-        project.name {
+    plugins {
+        create(project.name) {
             id = packageName
+            displayName = "SemVer Plugin"
+            description = "Semantic Version Plugin for Gradle"
             implementationClass = "$packageName.SemverPlugin"
         }
     }
@@ -83,16 +81,7 @@ gradlePlugin {
 pluginBundle {
     website = github
     vcsUrl = github
-    description = "Semantic Version Plugin for Gradle"
     tags = listOf("semver", "semantic", "version", "versioning", "auto-increment", "kotlin", "java")
-
-    (plugins) {
-        project.name {
-            id = packageName
-            displayName = project.name
-        }
-    }
-
     mavenCoordinates {
         groupId = project.group.toString()
         artifactId = project.name
