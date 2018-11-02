@@ -1,5 +1,3 @@
-import net.thauvin.erik.gradle.semver.SemverConfig
-
 plugins {
     kotlin("jvm") version "1.2.50"
     application
@@ -32,7 +30,7 @@ application {
     mainClassName = "com.example.Main"
 }
 
-configure<SemverConfig> {
+semver {
 //    properties = "example.properties"
 //    keysPrefix = "example."
 //    preReleaseKey = "release"

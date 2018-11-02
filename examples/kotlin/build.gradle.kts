@@ -1,4 +1,3 @@
-import net.thauvin.erik.gradle.semver.SemverConfig
 import net.thauvin.erik.gradle.semver.SemverIncrementBuildMetaTask
 import java.lang.String.format
 import java.time.LocalDateTime
@@ -31,7 +30,7 @@ application {
     mainClassName = "com.example.MainKt"
 }
 
-configure<SemverConfig> {
+semver {
 //    properties = "example.properties"
 //    keysPrefix = "example."
 //    preReleaseKey = "release"
@@ -43,14 +42,14 @@ tasks {
         useTestNG()
     }
 
-    val incrementBuildMeta by getting(SemverIncrementBuildMetaTask::class) {
+    "incrementBuildMeta"(SemverIncrementBuildMetaTask::class) {
         doFirst {
 //            buildMeta = format("%03d", buildMeta.toInt() + 1)
             buildMeta = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))
         }
     }
 
-    val run by getting(JavaExec::class) {
+    "run"(JavaExec::class) {
         doFirst {
             println("Version: $version")
         }

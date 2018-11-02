@@ -56,7 +56,7 @@ tasks {
         }
     }
 
-    val check by getting {
+    "check" {
         dependsOn("ktlintCheck")
     }
 }
