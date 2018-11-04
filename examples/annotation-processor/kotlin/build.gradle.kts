@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") version "1.2.50"
+    kotlin("jvm") version "1.3.0"
     application
-    id("org.jetbrains.kotlin.kapt") version "1.2.50"
+    id("org.jetbrains.kotlin.kapt") version "1.3.0"
     id("net.thauvin.erik.gradle.semver") version "0.9.8-beta"
 }
 
