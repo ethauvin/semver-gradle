@@ -6,8 +6,8 @@ plugins {
     `maven-publish`
     id("com.gradle.plugin-publish") version "0.10.0"
     id("com.github.ben-manes.versions") version "0.20.0"
-    id("org.jlleitschuh.gradle.ktlint") version "6.2.1"
-    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC9.2"
+    id("org.jlleitschuh.gradle.ktlint") version "6.3.1"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0-RC11"
 }
 
 version = "0.9.8-beta"
@@ -38,7 +38,7 @@ dependencies {
         exclude(group = "org.junit.platform")
     }
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.3.1") {
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.3.2") {
         because("Needed to run tests IDEs that bundle an older version")
     }
 }
