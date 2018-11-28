@@ -25,7 +25,7 @@ jobs:
           command: ./gradlew dependencies
 
       - save_cache:
-          paths: ~/.m2
+          paths: ~/.gradle
           key: gradle-dependencies-{{ checksum "build.gradle" }}
 
       - run:
@@ -40,6 +40,6 @@ jobs:
 
 workflows:
   version: 2
-  build_gradle_and_kobalt:
+  build_gradle:
     jobs:
       - build_gradle
