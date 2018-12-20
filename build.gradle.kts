@@ -4,10 +4,10 @@ plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
     `maven-publish`
-    id("com.gradle.plugin-publish") version "0.10.0"
-    id("com.github.ben-manes.versions") version "0.20.0"
-    id("org.jlleitschuh.gradle.ktlint") version "6.3.1"
-    id("io.gitlab.arturbosch.detekt") version "1.0.0-RC11"
+    id("com.gradle.plugin-publish").version("0.10.0")
+    id("com.github.ben-manes.versions").version("0.20.0")
+    id("org.jlleitschuh.gradle.ktlint").version("6.3.1")
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC12")
 }
 
 version = "0.9.8-beta"
@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compile(gradleApi())
+    implementation(gradleApi())
 
     testImplementation(kotlin("reflect"))
     testImplementation(kotlin("test"))

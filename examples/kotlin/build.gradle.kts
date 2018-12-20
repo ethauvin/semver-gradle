@@ -4,9 +4,9 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 plugins {
-    kotlin("jvm") version "1.3.0"
+    kotlin("jvm").version("1.3.0")
     application
-    id("net.thauvin.erik.gradle.semver") version "0.9.8-beta"
+    id("net.thauvin.erik.gradle.semver").version("0.9.8-beta")
 }
 
 // ./gradlew
@@ -18,8 +18,8 @@ plugins {
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
 dependencies {
-    compile(kotlin("stdlib"))
-    testCompile("org.testng:testng:6.14.3")
+    implementation(kotlin("stdlib"))
+    testImplementation("org.testng:testng:6.14.3")
 }
 
 repositories {

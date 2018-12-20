@@ -8,13 +8,20 @@
         </compilerSettings>
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../build/classes/kotlin/test" />
+          <option name="classpath" value="$MODULE_DIR$/../../build/classes/kotlin/main;K:/kotlin/semver-gradle/build/resources/main;C:/Users/erik/.gradle/caches/5.0/generated-gradle-jars/gradle-api-5.0.jar;C:/gradle/lib/groovy-all-1.0-2.5.4.jar;C:/gradle/lib/gradle-installation-beacon-5.0.jar;C:/Users/erik/.gradle/caches/5.0/generated-gradle-jars/gradle-test-kit-5.0.jar;C:/Users/erik/.gradle/caches/5.0/generated-gradle-jars/gradle-kotlin-dsl-extensions-1.0.4-5.0.jar;C:/gradle/lib/gradle-kotlin-dsl-1.0.4.jar;C:/gradle/lib/gradle-kotlin-dsl-tooling-models-1.0.4.jar;C:/gradle/lib/kotlin-reflect-1.3.10.jar;C:/gradle/lib/kotlin-stdlib-1.3.10.jar;C:/gradle/lib/kotlin-stdlib-common-1.3.10.jar;C:/gradle/lib/kotlin-stdlib-jdk7-1.3.10.jar;C:/gradle/lib/kotlin-stdlib-jdk8-1.3.10.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.3.10/71d0fa967493eb76648b575edf1762cb2d0c7f10/kotlin-stdlib-jdk8-1.3.10.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.3.10/dd02865be0351707554b16a896b766b2396cdafa/kotlin-reflect-1.3.10.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test/1.3.10/7368899d8ac7ee456562cbd73cc823b093937f9f/kotlin-test-1.3.10.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.spek/spek-api/1.2.1/83fb8b60aa496b6a488238bf185bd1c66feb9fcd/spek-api-1.2.1.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.3.10/4d147bf43060dc43d61b096e24da1e67dfe0c032/kotlin-stdlib-jdk7-1.3.10.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.10/b178c1501609c6e4ee8be635513cb023a466457d/kotlin-stdlib-1.3.10.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-common/1.3.10/332c0a35ba6948a03ea2e8a1d34b1906cf30b7cf/kotlin-test-common-1.3.10.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.10/1b19d99229dcedad7caf50534dce38fe82845269/kotlin-stdlib-common-1.3.10.jar" />
           <option name="noStdlib" value="true" />
           <option name="noReflect" value="true" />
           <option name="moduleName" value="semver" />
           <option name="jvmTarget" value="1.8" />
           <option name="addCompilerBuiltIns" value="true" />
           <option name="loadBuiltInsFromDependencies" value="true" />
-          <option name="languageVersion" value="1.2" />
+          <option name="friendPaths">
+            <array>
+              <option value="$MODULE_DIR$/../../build/classes/java/main" />
+              <option value="$MODULE_DIR$/../../build/classes/kotlin/main" />
+            </array>
+          </option>
+          <option name="languageVersion" value="1.3" />
           <option name="apiVersion" value="1.2" />
           <option name="pluginOptions">
             <array>
@@ -23,10 +30,14 @@
           </option>
           <option name="pluginClasspaths">
             <array>
+              <option value="$USER_HOME$/.gradle/caches/5.0/generated-gradle-jars/gradle-api-5.0.jar" />
+              <option value="C:/gradle/lib/gradle-installation-beacon-5.0.jar" />
+              <option value="C:/gradle/lib/gradle-kotlin-dsl-1.0.4.jar" />
+              <option value="C:/gradle/lib/gradle-kotlin-dsl-tooling-models-1.0.4.jar" />
+              <option value="C:/gradle/lib/groovy-all-1.0-2.5.4.jar" />
               <option value="$KOTLIN_BUNDLED$/lib/sam-with-receiver-compiler-plugin.jar" />
             </array>
           </option>
-          <option name="coroutinesState" value="warn" />
         </compilerArguments>
       </configuration>
     </facet>
@@ -43,7 +54,133 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/4.10.2/generated-gradle-jars/gradle-api-4.10.2.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/5.0/generated-gradle-jars/gradle-api-5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.3.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test:1.3.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.spek:spek-api:1.2.1" level="project" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../build/pluginUnderTestMetadata" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.10" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/groovy-all-1.0-2.5.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/gradle-installation-beacon-5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/5.0/generated-gradle-jars/gradle-test-kit-5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/5.0/generated-gradle-jars/gradle-kotlin-dsl-extensions-1.0.4-5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-tooling-models-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-reflect-1.3.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-1.3.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-common-1.3.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk7-1.3.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk8-1.3.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.3.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-common:1.3.10" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.spek:spek-junit-platform-engine:1.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/5.0/generated-gradle-jars/gradle-api-5.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
@@ -65,6 +202,7 @@
           <root url="file://C:/gradle/src/diagnostics" />
           <root url="file://C:/gradle/src/docs" />
           <root url="file://C:/gradle/src/ear" />
+          <root url="file://C:/gradle/src/files" />
           <root url="file://C:/gradle/src/ide" />
           <root url="file://C:/gradle/src/ide-native" />
           <root url="file://C:/gradle/src/ide-play" />
@@ -108,6 +246,7 @@
           <root url="file://C:/gradle/src/resources-sftp" />
           <root url="file://C:/gradle/src/scala" />
           <root url="file://C:/gradle/src/signing" />
+          <root url="file://C:/gradle/src/snapshots" />
           <root url="file://C:/gradle/src/test-kit" />
           <root url="file://C:/gradle/src/testing-base" />
           <root url="file://C:/gradle/src/testing-junit-platform" />
@@ -125,101 +264,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk7-1.2.61.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/4.10.2/generated-gradle-jars/gradle-test-kit-4.10.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-tooling-models-1.0-rc-6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://C:/gradle/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/kotlin-stdlib-jdk8-1.2.61.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/kotlin-stdlib-common-1.2.61.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/4.10.2/generated-gradle-jars/gradle-kotlin-dsl-extensions-1.0-rc-6-4.10.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/kotlin-reflect-1.2.61.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/kotlin-stdlib-1.2.61.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-1.0-rc-6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://C:/gradle/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/groovy-all-2.4.15.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/gradle-installation-beacon-4.10.2.jar!/" />
+          <root url="jar://C:/gradle/lib/gradle-installation-beacon-5.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
@@ -230,63 +275,31 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/4.10.2/generated-gradle-jars/gradle-api-4.10.2.jar!/" />
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-1.0.4.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://C:/gradle/src" />
+        </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.61" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.61" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test:1.2.61" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.spek:spek-api:1.2.1" level="project" />
-    <orderEntry type="module-library" scope="RUNTIME">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../build/pluginUnderTestMetadata" />
+          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-tooling-models-1.0.4.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://C:/gradle/src" />
+        </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.61" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.61" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-common:1.2.61" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.spek:spek-junit-platform-engine:1.2.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.61" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-launcher:1.3.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.3.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-commons:1.3.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.10" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-launcher:1.3.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.3.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-commons:1.3.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apiguardian:apiguardian-api:1.0.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.opentest4j:opentest4j:1.1.1" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/gradle-installation-beacon-4.10.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-1.0-rc-6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/gradle/lib/gradle-kotlin-dsl-tooling-models-1.0-rc-6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
   <component name="TestModuleProperties" production-module="semver_main" />
 </module>

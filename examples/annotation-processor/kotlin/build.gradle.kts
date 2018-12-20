@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm") version "1.3.0"
+    kotlin("jvm").version("1.3.0")
     application
-    id("org.jetbrains.kotlin.kapt") version "1.3.0"
-    id("net.thauvin.erik.gradle.semver") version "0.9.8-beta"
+    id("org.jetbrains.kotlin.kapt").version("1.3.0")
+    id("net.thauvin.erik.gradle.semver").version("0.9.8-beta")
 }
 
 // ./gradlew
@@ -18,7 +18,7 @@ dependencies {
     kapt(semverProcessor)
     compileOnly(semverProcessor)
 
-    compile(kotlin("stdlib"))
+    implementation(kotlin("stdlib"))
 }
 
 repositories {
