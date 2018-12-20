@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm").version("1.3.0")
     application
     id("org.jetbrains.kotlin.kapt").version("1.3.0")
-    id("net.thauvin.erik.gradle.semver").version("0.9.8-beta")
+    id("net.thauvin.erik.gradle.semver").version("0.9.9-beta")
 }
 
 // ./gradlew
