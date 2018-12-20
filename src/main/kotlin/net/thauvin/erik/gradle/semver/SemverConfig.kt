@@ -43,7 +43,6 @@ open class SemverConfig {
         const val DEFAULT_BUILDMETA_KEY = "buildmeta"
         const val DEFAULT_BUILDMETA_PREFIX_KEY = "buildmeta.prefix"
         const val DEFAULT_SEPARATOR = "separator"
-        const val DEFAULT_SAVE_AFTER_PROJECT_EVALUATE = true
     }
 
     var properties = DEFAULT_PROPERTIES
@@ -64,5 +63,4 @@ open class SemverConfig {
     var separatorKey = DEFAULT_SEPARATOR
         get() = "$keysPrefix$field"
     var keysPrefix = DEFAULT_KEYS_PREFIX
-    var saveAfterProjectEvaluate = DEFAULT_SAVE_AFTER_PROJECT_EVALUATE
 }

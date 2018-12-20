@@ -110,10 +110,14 @@ class SemverPlugin : Plugin<Project> {
         propsFile.apply {
             project.logger.info(
                 "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: ${exists()}, isFile: $isFile, canRead: ${canRead()}]")
+            var hasReqProps = false
             if (canRead() && isFile) {
                 FileInputStream(this).reader().use { reader ->
                     Properties().apply {
                         load(reader)
+
+                        hasReqProps = stringPropertyNames().containsAll(setOf(config.majorKey, config.minorKey,
+                            config.patchKey, config.preReleaseKey, config.buildMetaKey))
 
                         version.major = getProperty(config.majorKey, Version.DEFAULT_MAJOR)
                         version.minor = getProperty(config.minorKey, Version.DEFAULT_MINOR)
@@ -136,8 +140,9 @@ class SemverPlugin : Plugin<Project> {
             }
             project.version = version.semver
             project.logger.info("[$simpleName] Project version set to: ${project.version}")
-            // If first time running and there is no props file, and saveAfterEvaluate is false, then version props would never have been saved before
-            if (config.saveAfterProjectEvaluate || !isFile) {
+            if (!hasReqProps || !isFile) {
+                // If first time running and there is no props file, and the required version properties are missing,
+                // then version props would never have been saved before
                 saveProperties(config, version)
             }
         }
