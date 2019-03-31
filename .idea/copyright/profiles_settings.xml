@@ -1,5 +1,8 @@
 <component name="CopyrightManager">
   <settings default="Erik's Copyright Notice">
+    <module2copyright>
+      <element module="Copyright" copyright="Erik's Copyright Notice" />
+    </module2copyright>
     <LanguageOptions name="Kotlin">
       <option name="fileTypeOverride" value="3" />
       <option name="addBlankAfter" value="false" />
