@@ -74,7 +74,7 @@ object SemverVersionSpec : Spek({
                 }
             }
             on("increment all") {
-                version.increment(true, true, true)
+                version.increment(isMajor = true, isMinor = true, isPatch = true)
                 it("should return 3.1.1") {
                     assertEquals("3.1.1", version.semver)
                 }
