@@ -1,4 +1,4 @@
-[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) [![CircleCI](https://circleci.com/gh/ethauvin/semver-gradle/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver-gradle/tree/master)
+[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) [![CircleCI](https://circleci.com/gh/ethauvin/semver-gradle/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver-gradle/tree/master) [![Gradle](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/net/thauvin/erik/gradle/semver/maven-metadata.xml.svg?label=gradle&color=blue)](https://plugins.gradle.org/plugin/net.thauvin.erik.gradle.semver)
 
 # Semantic Version Plugin for Gradle
 
