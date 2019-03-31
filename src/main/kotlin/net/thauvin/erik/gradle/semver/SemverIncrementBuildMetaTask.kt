@@ -44,7 +44,7 @@ open class SemverIncrementBuildMetaTask @Inject constructor(
 ) : DefaultTask() {
     init {
         group = "version"
-        description = "Increments Build Metadata version number."
+        description = "Increments Build version metadata."
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
