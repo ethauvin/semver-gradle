@@ -36,6 +36,7 @@ import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @Suppress("unused")
@@ -66,12 +67,12 @@ object SemverConfigSpec : Spek({
             on("defaults") {
                 defaults.forEachIndexed { i, d ->
                     it("should be the same: ${vars[i]}, ${config.keysPrefix}$d") {
-                        assertTrue(vars[i] == "${config.keysPrefix}$d")
+                        assertEquals(vars[i], "${config.keysPrefix}$d")
                     }
                 }
             }
             on("should be version.properties") {
-                assertTrue(config.properties == "version.properties")
+                assertEquals(config.properties, "version.properties")
             }
             on("set keys to test.xxx") {
                 config.keysPrefix = "test."
