@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ap-examples-kotlin.iml" filepath="$PROJECT_DIR$/.idea/modules/ap-examples-kotlin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_main.iml" group="ap-examples-kotlin" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ap-examples-kotlin_test.iml" group="ap-examples-kotlin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ap-examples-kotlin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ap-examples-kotlin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ap-examples-kotlin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ap-examples-kotlin.test.iml" />
     </modules>
   </component>
 </project>

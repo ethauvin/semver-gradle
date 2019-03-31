@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="examples-kotlin_main" target="1.10" />
-      <module name="examples-kotlin_test" target="1.10" />
+      <module name="examples-kotlin.main" target="12" />
+      <module name="examples-kotlin.test" target="12" />
     </bytecodeTargetLevel>
   </component>
 </project>
