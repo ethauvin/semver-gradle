@@ -4,10 +4,10 @@ plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
     `maven-publish`
-    id("com.gradle.plugin-publish").version("0.10.0")
-    id("com.github.ben-manes.versions").version("0.20.0")
-    id("org.jlleitschuh.gradle.ktlint").version("6.3.1")
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC12")
+    id("com.gradle.plugin-publish").version("0.10.1")
+    id("com.github.ben-manes.versions").version("0.21.0")
+    id("org.jlleitschuh.gradle.ktlint").version("7.2.1")
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC14")
 }
 
 version = "0.9.9-beta"
@@ -38,7 +38,7 @@ dependencies {
         exclude(group = "org.junit.platform")
     }
 
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.3.2") {
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.5.0-M1") {
         because("Needed to run tests IDEs that bundle an older version")
     }
 }

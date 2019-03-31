@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'net.thauvin.erik.gradle.semver' version '0.9.9-beta'
+    id 'com.github.ben-manes.versions' version '0.21.0'
 }
 
 // ./gradlew
@@ -15,7 +16,7 @@ defaultTasks 'run'
 
 compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
 
-def semverProcessor = "net.thauvin.erik:semver:1.1.0-beta"
+def semverProcessor = "net.thauvin.erik:semver:1.1.1"
 
 dependencies {
     annotationProcessor semverProcessor

@@ -1,8 +1,9 @@
 plugins {
-    kotlin("jvm").version("1.3.0")
+    kotlin("jvm").version("1.3.21")
     application
-    id("org.jetbrains.kotlin.kapt").version("1.3.0")
+    id("org.jetbrains.kotlin.kapt").version("1.3.21")
     id("net.thauvin.erik.gradle.semver").version("0.9.9-beta")
+    id("com.github.ben-manes.versions").version("0.21.0")
 }
 
 // ./gradlew
@@ -12,7 +13,7 @@ plugins {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-var semverProcessor = "net.thauvin.erik:semver:1.1.0-beta"
+var semverProcessor = "net.thauvin.erik:semver:1.1.1"
 
 dependencies {
     kapt(semverProcessor)
