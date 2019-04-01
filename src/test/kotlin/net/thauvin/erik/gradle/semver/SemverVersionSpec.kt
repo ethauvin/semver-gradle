@@ -61,13 +61,13 @@ object SemverVersionSpec : Spek({
                     assertEquals("2.1.1", version.semver)
                 }
             }
-            on("increment patch") {
+            on("increment minor again") {
                 version.increment(isMinor = true)
-                it("should return 2.1.0") {
-                    assertEquals("2.1.0", version.semver)
+                it("should return 2.2.0") {
+                    assertEquals("2.2.0", version.semver)
                 }
             }
-            on("increment patch") {
+            on("increment major again") {
                 version.increment(isMajor = true)
                 it("should return 3.0.0") {
                     assertEquals("3.0.0", version.semver)
@@ -75,8 +75,20 @@ object SemverVersionSpec : Spek({
             }
             on("increment all") {
                 version.increment(isMajor = true, isMinor = true, isPatch = true)
-                it("should return 3.1.1") {
-                    assertEquals("3.1.1", version.semver)
+                it("should return 4.1.1") {
+                    assertEquals("4.1.1", version.semver)
+                }
+            }
+            on("increment major and minor") {
+                version.increment(isMajor = true, isMinor = true)
+                it("should return 5.1.0") {
+                    assertEquals("5.1.0", version.semver)
+                }
+            }
+            on("increment minor and patch") {
+                version.increment(isMinor = true, isPatch = true)
+                it("should return 5.2.1") {
+                    assertEquals("5.2.1", version.semver)
                 }
             }
             on("reset version") {
@@ -105,16 +117,16 @@ object SemverVersionSpec : Spek({
                     assertEquals("1.0.0--beta+007", version.semver)
                 }
             }
-            on("change prerelease prefix") {
+            on("change meta prefix") {
                 version.buildMetaPrefix = "++"
-                it("should return 1.0.0--beta+=007") {
+                it("should return 1.0.0--beta++007") {
                     assertEquals("1.0.0--beta++007", version.semver)
                 }
             }
             on("change sperator") {
                 version.separator = "-"
-                it("should return 1-0-0--beta+007") {
-                    assertEquals("1-0-0--beta+007", version.semver)
+                it("should return 1-0-0--beta++007") {
+                    assertEquals("1-0-0--beta++007", version.semver)
                 }
             }
         }
