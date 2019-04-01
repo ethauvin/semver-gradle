@@ -114,8 +114,8 @@ Property                    | Description                 | Default
 `version.minor`             | The minor version.          | `0`
 `version.patch`             | The patch version.          | `0`
 `version.prerelease`        | The pre-release version     |
-`version.buildmeta`         | The build metatdata version |
 `version.prerelease.prefix` | The pre-release prefix      | `-`
+`version.buildmeta`         | The build metatdata version |
 `version.buildmeta.prefix`  | The build metadata prefix   | `+`
 `version.separator`         | The version separator.      | `.`
 
@@ -178,16 +178,16 @@ meta=
 The following `semver` properties are available:
 
 Property              | Description                             | Default
-:---------------------|:----------------------------------------|:------------------------
+:---------------------|:----------------------------------------|:---------------------------
 `properties`          | The properties file.                    | `version.properties`
-`majorKey`            | The major property key.                 | `major`
-`minorKey`            | The minor property key.                 | `minor`
-`patchKey`            | The patch property key.                 | `patch`
-`preReleaseKey`       | The pre-release property key.           | `preRelease`
-`preReleasePrefixKey` | The build pre-release prefix key.       | `preReleasePrefix`
-`buildMetaKey`        | The build metadata property key.        | `buildMeta`
-`buildMetaPrefixKey`  | The build metadata prefix property key. | `buildMetaPrefix`
-`separatorKey`        | The separator property key.             | `separator`
+`majorKey`            | The major property key.                 | `version.major`
+`minorKey`            | The minor property key.                 | `version.minor`
+`patchKey`            | The patch property key.                 | `version.patch`
+`preReleaseKey`       | The pre-release property key.           | `version.prerelease`
+`preReleasePrefixKey` | The build pre-release prefix key.       | `version.prerelease.prefix`
+`buildMetaKey`        | The build metadata property key.        | `version.buildmeta`
+`buildMetaPrefixKey`  | The build metadata prefix property key. | `version.buildmeta.prefix`
+`separatorKey`        | The separator property key.             | `version.separator`
 `keysPrefix`          | The prefix for all property keys.       | `version.`
 
 In order to quickly support multiple projects. The `keysPrefix` property is available to set all properties keys prefixes at once:
