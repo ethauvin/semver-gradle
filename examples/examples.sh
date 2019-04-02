@@ -12,6 +12,6 @@ normal=$(tput sgr0)
 for ex in "java" "kotlin" "annotation-processor/java" "annotation-processor/kotlin"; do
     cd "$dir/$ex" || exit 1
     echo "> Project: ${color}${ex}${normal}"
-    gradle clean "$@" --console=plain --no-build-cache || exit 1
+    ./gradlew clean "$@" --console=plain --no-build-cache || exit 1
     echo
 done
