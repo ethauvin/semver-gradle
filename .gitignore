@@ -5,6 +5,7 @@
 .classpath
 .DS_Store
 .gradle
+.history
 .kobalt
 .nb-gradle
 .project
