@@ -1,0 +1,29 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+addons:
+  sonarcloud:
+    organization: "ethauvin-github"
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+before_install:
+  - chmod +x gradlew
+
+script:
+  - ./gradlew check
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+after_success:
+  - |
+      if [ "${TRAVIS_TEST_RESULT}" == 0 ]; then
+        ./gradlew sonarqube
+      fi
