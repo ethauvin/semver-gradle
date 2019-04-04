@@ -1,16 +1,25 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.junit.platform.gradle.plugin.JUnitPlatformExtension
 
-plugins {
-    `kotlin-dsl`
-    `java-gradle-plugin`
-    `maven-publish`
-    id("com.gradle.plugin-publish").version("0.10.1")
-    id("com.github.ben-manes.versions").version("0.21.0")
-    id("org.jlleitschuh.gradle.ktlint").version("7.2.1")
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC14")
+buildscript {
+    dependencies {
+        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.0")
+    }
 }
 
-version = "0.9.9-beta"
+plugins {
+    `java-gradle-plugin`
+    `kotlin-dsl`
+    `maven-publish`
+    jacoco
+    id("com.github.ben-manes.versions").version("0.21.0")
+    id("com.gradle.plugin-publish").version("0.10.1")
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC14")
+    id("org.jlleitschuh.gradle.ktlint").version("7.2.1")
+    id("org.sonarqube") version "2.7"
+}
+
+version = "1.0.0"
 group = "net.thauvin.erik.gradle"
 
 var github = "https://github.com/ethauvin/semver-gradle"
@@ -20,6 +29,10 @@ var spekVersion = "1.2.1"
 
 repositories {
     jcenter()
+}
+
+apply {
+    plugin("org.junit.platform.gradle.plugin")
 }
 
 dependencies {
@@ -43,6 +56,10 @@ dependencies {
     }
 }
 
+configure<JUnitPlatformExtension> {
+    enableStandardTestTask = true
+}
+
 tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
@@ -56,8 +73,19 @@ tasks {
         }
     }
 
+    withType<JacocoReport> {
+        reports {
+            html.isEnabled = true
+            xml.isEnabled = true
+        }
+    }
+
     "check" {
         dependsOn("ktlintCheck")
+    }
+
+    "sonarqube" {
+        dependsOn("jacocoTestReport")
     }
 }
 
@@ -65,6 +93,14 @@ detekt {
     input = files("src/main/kotlin")
     filters = ".*/resources/.*,.*/build/.*"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectName", "semver-gradle")
+        property("sonar.projectKey", "ethauvin_semver-gradle")
+        property("sonar.sourceEncoding", "UTF-8")
+    }
 }
 
 gradlePlugin {
