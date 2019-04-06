@@ -1,11 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.junit.platform.gradle.plugin.JUnitPlatformExtension
-
-buildscript {
-    dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.0")
-    }
-}
 
 plugins {
     `java-gradle-plugin`
@@ -25,14 +18,10 @@ group = "net.thauvin.erik.gradle"
 var github = "https://github.com/ethauvin/semver-gradle"
 var packageName = "net.thauvin.erik.gradle.semver"
 
-var spekVersion = "1.2.1"
+var spek_version = "2.0.1"
 
 repositories {
     jcenter()
-}
-
-apply {
-    plugin("org.junit.platform.gradle.plugin")
 }
 
 dependencies {
@@ -42,22 +31,8 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(gradleTestKit())
 
-    testImplementation("org.jetbrains.spek:spek-api:$spekVersion") {
-        exclude(group = "org.jetbrains.kotlin")
-    }
-
-    testRuntimeOnly("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
-        exclude(group = "org.jetbrains.kotlin")
-        exclude(group = "org.junit.platform")
-    }
-
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.5.0-M1") {
-        because("Needed to run tests IDEs that bundle an older version")
-    }
-}
-
-configure<JUnitPlatformExtension> {
-    enableStandardTestTask = true
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spek_version")
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spek_version")
 }
 
 tasks {
@@ -69,7 +44,7 @@ tasks {
 
     withType<Test> {
         useJUnitPlatform {
-            includeEngines("spek")
+            includeEngines("spek2")
         }
     }
 
@@ -90,7 +65,7 @@ tasks {
 }
 
 detekt {
-    input = files("src/main/kotlin")
+    input = files("src/main/kotlin", "src/test/kotlin")
     filters = ".*/resources/.*,.*/build/.*"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
 }
