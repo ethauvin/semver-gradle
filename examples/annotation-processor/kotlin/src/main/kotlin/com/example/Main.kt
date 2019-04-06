@@ -1,6 +1,7 @@
 package com.example
 
 import net.thauvin.erik.semver.Version
+import java.io.File
 import java.text.SimpleDateFormat
 
 @Version(properties = "version.properties", type = "kt")
@@ -28,6 +29,17 @@ class Main {
             println("    BuildMetaData:  ${GeneratedVersion.BUILDMETA}")
 
             println("-----------------------------------------------------")
+
+            if (args.size == 1) {
+                File(args[0]).apply {
+                    if (exists()) {
+                        println("> cat $name")
+                        forEachLine {
+                            println(it)
+                        }
+                    }
+                }
+            }
         }
     }
 }

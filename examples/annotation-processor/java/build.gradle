@@ -28,6 +28,15 @@ repositories {
     jcenter()
 }
 
+run {
+    doFirst {
+        println "Version: $version"
+    }
+
+//    args = ['example.properties']
+    args = ['version.properties']
+}
+
 semver {
 //    properties = "example.properties"
 //    keysPrefix = "example."

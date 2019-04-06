@@ -31,6 +31,17 @@ application {
     mainClassName = "com.example.Main"
 }
 
+tasks {
+    "run"(JavaExec::class) {
+        doFirst {
+            println("Verion: $version")
+        }
+
+//        args = listOf("example.properties")
+        args = listOf("version.properties")
+    }
+}
+
 semver {
 //    properties = "example.properties"
 //    keysPrefix = "example."

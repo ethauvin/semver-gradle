@@ -12,45 +12,27 @@ import java.util.Date;
  * @author <a href="https://github.com/ethauvin/semver">Semantic Version Annotation Processor</a>
  */
 public final class GeneratedVersion {
-    public final static String PRERELEASE_PREFIX = "-";
-    public final static String BUILDMETA_PREFIX = "+";
-
-    public final static String PROJECT = "";
-    public final static Date BUILDDATE = new Date(1554010641988L);
+    public final static String PROJECT = "Java Annotation Example";
+    public final static Date BUILDDATE = new Date(1554530172611L);
     public final static int MAJOR = 2;
-    public final static int MINOR = 1;
-    public final static int PATCH = 2;
+    public final static int MINOR = 4;
+    public final static int PATCH = 0;
     public final static String PRERELEASE = "";
+    public final static String PRERELEASE_PREFIX = "-";
     public final static String BUILDMETA = "";
+    public final static String BUILDMETA_PREFIX = "+";
+    public final static String SEPARATOR = ".";
 
     /**
-     * The full version string.
-     * <p>
-     * Formatted as:
-     * <blockquote>
-     * <code>MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]</code>
-     * </blockquote>
-     * <p>
-     * For example:
-     * <ul>
-     * <li><code>1.0.0</code></li>
-     * <li><code>1.0.0-beta</code></li>
-     * <li><code>1.0.0+20160124144700</code></li>
-     * <li><code>1.0.0-alpha+001</code></li>
-     * </ul>
+     * The full semantic version string.
      */
-    public final static String VERSION = Integer.toString(MAJOR) + '.'
-            + Integer.toString(MINOR) + '.'
-            + Integer.toString(PATCH)
-            + preReleaseWithPrefix() + buildMetaWithPrefix();
+    public final static String VERSION = Integer.toString(MAJOR) + SEPARATOR + Integer.toString(MINOR) + SEPARATOR
+        + Integer.toString(PATCH) + preReleaseWithPrefix() + buildMetaWithPrefix();
 
     /**
      * Disables the default constructor.
-     *
-     * @throws UnsupportedOperationException If the constructor is called.
      */
-    private GeneratedVersion()
-            throws UnsupportedOperationException {
+    private GeneratedVersion() {
         throw new UnsupportedOperationException("Illegal constructor call.");
     }
 
@@ -70,7 +52,7 @@ public final class GeneratedVersion {
      * @return The build metadata, if any.
      */
     public static String buildMetaWithPrefix(final String prefix) {
-        if (BUILDMETA.length() > 0 && prefix.length() > 0) {
+        if (BUILDMETA.length() > 0) {
             return prefix + BUILDMETA;
         } else {
             return BUILDMETA;
@@ -93,7 +75,7 @@ public final class GeneratedVersion {
      * @return The pre-release version, if any.
      */
     public static String preReleaseWithPrefix(final String prefix) {
-        if (PRERELEASE.length() > 0 && prefix.length() > 0) {
+        if (PRERELEASE.length() > 0) {
             return prefix + PRERELEASE;
         } else {
             return PRERELEASE;
