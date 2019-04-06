@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# Version: 1.0
+#
+
 # set source and test locations
 src="src/main/kotlin/net/thauvin/erik/gradle/semver/"
 test="src/main/kotlin/net/thauvin/erik/gradle/semver/"

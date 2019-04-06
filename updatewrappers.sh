@@ -1,7 +1,9 @@
 #!/bin/bash
 
-export JAVA_HOME="$JAVA8_HOME"
-export PATH="$(cygpath "$JAVA_HOME")/bin:$PATH"
+
+#
+# Version: 1.0
+#
 
 # set the examples directories
 declare -a dirs=(
@@ -10,12 +12,21 @@ declare -a dirs=(
     "examples/kotlin"
     "annotation-processor/java"
     "annotation-processor/kotlin")
+java8=true
+
+###
 
 pwd=$PWD
 cyan=$(tput setaf 6)
 green=$(tput setaf 2)
 red=$(tput setaf 1)
 std=$(tput sgr0)
+
+if [ "$java8" = true ]
+then
+    export JAVA_HOME="$JAVA8_HOME"
+    export PATH="$(cygpath "$JAVA_HOME")/bin:$PATH"
+fi
 
 kVer=$(kobaltw --version | awk '{print substr($2, 1, length($2)-1)}')
 updateWrappers() {
