@@ -2,7 +2,7 @@
 
 
 #
-# Version: 1.0
+# Version: 1.0.1
 #
 
 # set the examples directories
@@ -45,7 +45,7 @@ updateWrappers() {
         then
             echo -e "        Kobalt $kw UP-TO-DATE"
         else
-            echo "kobalt.version=$kVer" > kobalt/wrapper/kobalt-wrapper.properties
+            echo -e "kobalt.version=$kVer" > kobalt/wrapper/kobalt-wrapper.properties
             echo -e "        Kobalt $kVer ${green}UPDATED${std}"
         fi
     fi
