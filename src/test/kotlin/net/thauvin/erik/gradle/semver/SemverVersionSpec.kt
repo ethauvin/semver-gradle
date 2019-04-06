@@ -37,9 +37,9 @@ import kotlin.test.assertEquals
 
 @Suppress("unused")
 object SemverVersionSpec : Spek({
-    describe("a version") {
+    describe("test version") {
         val version = Version()
-        describe("valdiate default version") {
+        describe("validate default version") {
             it("major should be 1") {
                 assertEquals("1", version.major)
             }
@@ -68,7 +68,7 @@ object SemverVersionSpec : Spek({
                 assertEquals("1.0.0", version.semver)
             }
         }
-        describe("increment major") {
+        describe("increment") {
             it("should return 2.0.0") {
                 version.increment(isMajor = true)
                 assertEquals("2.0.0", version.semver)
