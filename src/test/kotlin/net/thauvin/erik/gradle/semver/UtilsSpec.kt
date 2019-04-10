@@ -37,35 +37,38 @@ import java.io.File
 import java.nio.file.Files
 import java.util.Properties
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @Suppress("unused")
-object SemverPluginSpec : Spek({
+object UtilsSpec : Spek({
     describe("a config and version") {
         val version by memoized { Version() }
         val config by memoized { SemverConfig() }
         val configFile = File("test.properties")
+        lateinit var props: Properties
 
         before {
             config.properties = configFile.name
         }
 
-        describe("test save properties") {
+        describe("save properties") {
             it("should save properties") {
                 Utils.saveProperties(config, version)
                 assertTrue(configFile.exists())
             }
-        }
-        describe("validate the properties file") {
-            it("verion should be the same") {
-                val props = Properties().apply {
+            it("load the properties") {
+                props = Properties().apply {
                     Files.newInputStream(configFile.toPath()).use { nis ->
                         load(nis)
                     }
                     configFile.delete()
                 }
-
+            }
+        }
+        describe("validate the properties file") {
+            it("version should be the same") {
                 assertEquals(props.getProperty(config.majorKey), version.major, "Major")
                 assertEquals(props.getProperty(config.minorKey), version.minor, "Minor")
                 assertEquals(props.getProperty(config.patchKey), version.patch, "Patch")
@@ -74,6 +77,24 @@ object SemverPluginSpec : Spek({
                 assertEquals(props.getProperty(config.buildMetaKey), version.buildMeta, "Build Meta")
                 assertNull(props.getProperty(config.buildMetaPrefixKey), "Build Meta Prefix")
                 assertNull(props.getProperty(config.separatorKey), "Separator")
+            }
+        }
+        describe("setting system properties") {
+            val newVersion = arrayOf(
+                Pair(config.majorKey, "2"),
+                Pair(config.minorKey, "1"),
+                Pair(config.patchKey, "1"),
+                Pair(config.preReleaseKey, "beta"),
+                Pair(config.buildMetaKey, "007"))
+            it("should have none of our properties") {
+                assertFalse(Utils.hasEnv(setOf(config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
+                    config.buildMetaKey)))
+            }
+            it("version should match system properties") {
+                newVersion.forEach {
+                    System.getProperties().setProperty(it.first, it.second)
+                    assertEquals(Utils.loadProperty(props, it.first, ""), it.second)
+                }
             }
         }
     }
