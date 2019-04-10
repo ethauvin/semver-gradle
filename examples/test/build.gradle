@@ -8,7 +8,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath "net.thauvin.erik.gradle:semver:0.9.9-beta"
+        classpath "net.thauvin.erik.gradle:semver:1.0.0"
     }
 }
 
@@ -20,7 +20,7 @@ mainClassName = 'App'
 
 version = 1.0
 
-def f = new File("test.properties")
+def f = new File("version.properties")
 
 dependencies {
 
@@ -30,15 +30,6 @@ repositories {
     jcenter()
 }
 
-clean {
-    delete fileTree(dir: "$projectDir", include: "*.properties")
-}
-
-incrementPatch {
-    doFirst {
-        println("[Gradle] exists: " + f.exists() + ", canRead: " + f.canRead())
-    }
-}
 
 incrementBuildMeta {
     doFirst {
@@ -48,7 +39,6 @@ incrementBuildMeta {
 }
 
 run {
-    //dependsOn("incrementPatch")
     doFirst {
         println("Version: $version")
         args = [f.name]

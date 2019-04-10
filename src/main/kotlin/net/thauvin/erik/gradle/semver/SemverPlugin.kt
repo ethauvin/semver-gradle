@@ -116,16 +116,17 @@ class SemverPlugin : Plugin<Project> {
                     Properties().apply {
                         load(reader)
 
-                        hasReqProps = stringPropertyNames().containsAll(setOf(config.majorKey, config.minorKey,
-                            config.patchKey, config.preReleaseKey, config.buildMetaKey))
+                        val requiredProps = setOf(config.majorKey, config.minorKey, config.patchKey,
+                            config.preReleaseKey, config.buildMetaKey)
+                        hasReqProps = stringPropertyNames().containsAll(requiredProps) && !hasEnv(requiredProps)
 
-                        version.major = getProperty(config.majorKey, Version.DEFAULT_MAJOR)
-                        version.minor = getProperty(config.minorKey, Version.DEFAULT_MINOR)
-                        version.patch = getProperty(config.patchKey, Version.DEFAULT_PATCH)
-                        version.preRelease = getProperty(config.preReleaseKey, Version.DEFAULT_EMPTY)
+                        version.major = loadProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
+                        version.minor = loadProperty(this, config.minorKey, Version.DEFAULT_MINOR)
+                        version.patch = loadProperty(this, config.patchKey, Version.DEFAULT_PATCH)
+                        version.preRelease = loadProperty(this, config.preReleaseKey, Version.DEFAULT_EMPTY)
                         version.preReleasePrefix =
                             getProperty(config.preReleasePrefixKey, Version.DEFAULT_PRERELEASE_PREFIX)
-                        version.buildMeta = getProperty(config.buildMetaKey, Version.DEFAULT_EMPTY)
+                        version.buildMeta = loadProperty(this, config.buildMetaKey, Version.DEFAULT_EMPTY)
                         version.buildMetaPrefix =
                             getProperty(config.buildMetaPrefixKey, Version.DEFAULT_BUILDMETA_PREFIX)
                         version.separator = getProperty(config.separatorKey, Version.DEFAULT_SEPARATOR)
@@ -146,5 +147,16 @@ class SemverPlugin : Plugin<Project> {
                 saveProperties(config, version)
             }
         }
+    }
+
+    private fun hasEnv(keys: Set<String>): Boolean {
+        keys.forEach {
+            if (System.getProperties().containsKey(it)) return true
+        }
+        return false
+    }
+
+    private fun loadProperty(props: Properties, key: String, default: String): String {
+        return System.getProperty(key, props.getProperty(key, default))
     }
 }
