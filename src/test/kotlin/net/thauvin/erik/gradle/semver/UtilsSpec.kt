@@ -47,11 +47,13 @@ object SemverPluginSpec : Spek({
         val config by memoized { SemverConfig() }
         val configFile = File("test.properties")
 
-        config.properties = configFile.name
+        before {
+            config.properties = configFile.name
+        }
 
         describe("test save properties") {
             it("should save properties") {
-                SemverPlugin.saveProperties(config, version)
+                Utils.saveProperties(config, version)
                 assertTrue(configFile.exists())
             }
         }
