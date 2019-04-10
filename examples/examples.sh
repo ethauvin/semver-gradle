@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Version 1.0
+
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <arg ...>"
     exit 1
