@@ -37,7 +37,6 @@ import java.io.File
 import java.nio.file.Files
 import java.util.Properties
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -87,7 +86,7 @@ object UtilsSpec : Spek({
                 Pair(config.preReleaseKey, "beta"),
                 Pair(config.buildMetaKey, "007"))
             it("should have none of our properties") {
-                assertFalse(Utils.isNotSystemProperty(setOf(config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
+                assertTrue(Utils.isNotSystemProperty(setOf(config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
                     config.buildMetaKey)))
             }
             it("version should match system properties") {
