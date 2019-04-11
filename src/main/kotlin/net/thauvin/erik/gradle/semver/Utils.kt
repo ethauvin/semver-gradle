@@ -14,9 +14,9 @@ import java.util.Properties
  * @since 1.0
  */
 object Utils {
-    fun hasEnv(keys: Set<String>): Boolean {
+    fun isNotSystemProperty(keys: Set<String>): Boolean {
         keys.forEach {
-            if (System.getProperties().containsKey(it)) return true
+            if (!System.getProperties().containsKey(it)) return true
         }
         return false
     }

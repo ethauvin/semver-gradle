@@ -76,7 +76,8 @@ class SemverPlugin : Plugin<Project> {
 
                         val requiredProps = setOf(config.majorKey, config.minorKey, config.patchKey,
                             config.preReleaseKey, config.buildMetaKey)
-                        hasReqProps = stringPropertyNames().containsAll(requiredProps) && !Utils.hasEnv(requiredProps)
+                        hasReqProps = stringPropertyNames().containsAll(requiredProps) &&
+                            Utils.isNotSystemProperty(requiredProps)
 
                         version.major = Utils.loadProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
                         version.minor = Utils.loadProperty(this, config.minorKey, Version.DEFAULT_MINOR)
