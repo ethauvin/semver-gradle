@@ -77,10 +77,6 @@ class SemverPlugin : Plugin<Project> {
             val hasReqProps = !isNew && props.stringPropertyNames().containsAll(requiredProps) &&
                 Utils.isNotSystemProperty(requiredProps)
 
-            println(isNew)
-            println(props.stringPropertyNames().containsAll(requiredProps))
-            println(Utils.isNotSystemProperty(requiredProps))
-
             Utils.loadVersion(config, version, props)
 
             project.tasks.withType(SemverIncrementBuildMetaTask::class.java) {
