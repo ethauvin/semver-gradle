@@ -87,6 +87,7 @@ object Utils {
                     createNewFile()
                 }
 
+                put(config.semverKey, version.semver)
                 put(config.majorKey, version.major)
                 put(config.minorKey, version.minor)
                 put(config.patchKey, version.patch)

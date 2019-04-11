@@ -35,6 +35,7 @@ open class SemverConfig {
     companion object {
         const val DEFAULT_KEYS_PREFIX = "version."
         const val DEFAULT_PROPERTIES = "${DEFAULT_KEYS_PREFIX}properties"
+        const val DEFAULT_SEMVER_KEY = "semver"
         const val DEFAULT_MAJOR_KEY = "major"
         const val DEFAULT_MINOR_KEY = "minor"
         const val DEFAULT_PATCH_KEY = "patch"
@@ -46,6 +47,8 @@ open class SemverConfig {
     }
 
     var properties = DEFAULT_PROPERTIES
+    var semverKey = DEFAULT_SEMVER_KEY
+        get() = "$keysPrefix$field"
     var majorKey = DEFAULT_MAJOR_KEY
         get() = "$keysPrefix$field"
     var minorKey = DEFAULT_MINOR_KEY
