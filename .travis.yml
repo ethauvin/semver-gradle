@@ -1,5 +1,9 @@
 language: java
 
+env:
+  global:
+    - CI=true
+
 jdk:
   - oraclejdk8
 
@@ -15,7 +19,7 @@ before_install:
   - chmod +x gradlew
 
 script:
-  - ./gradlew check
+  - ./gradlew check --scan
 
 cache:
   directories:

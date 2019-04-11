@@ -5,10 +5,11 @@ plugins {
     `kotlin-dsl`
     `maven-publish`
     jacoco
-    id("com.github.ben-manes.versions").version("0.21.0")
-    id("com.gradle.plugin-publish").version("0.10.1")
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC14")
-    id("org.jlleitschuh.gradle.ktlint").version("7.2.1")
+    id("com.github.ben-manes.versions") version "0.21.0"
+    id("com.gradle.build-scan") version "2.2.1"
+    id("com.gradle.plugin-publish") version "0.10.1"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0-RC14"
+    id("org.jlleitschuh.gradle.ktlint") version "7.3.0"
     id("org.sonarqube") version "2.7"
 }
 
@@ -18,7 +19,7 @@ group = "net.thauvin.erik.gradle"
 var github = "https://github.com/ethauvin/semver-gradle"
 var packageName = "net.thauvin.erik.gradle.semver"
 
-var spek_version = "2.0.1"
+var spek_version = "2.0.2"
 
 repositories {
     jcenter()
@@ -62,6 +63,16 @@ tasks {
     "sonarqube" {
         dependsOn("jacocoTestReport")
     }
+}
+
+buildScan {
+    link("GitHub", "https://github.com/ethauvin/semver-gradle/tree/master")
+    if ("true" == System.getenv("CI")) {
+        publishOnFailure()
+        tag("CI")
+    }
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "yes"
 }
 
 detekt {
