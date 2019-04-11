@@ -21,6 +21,7 @@ version.minor=0
 version.patch=0
 version.prerelease=
 version.buildmeta=
+version.semver=1.0.0
 ```
 
 To change the version of your project, remove the version from your `build.gradle` and simply edit your the version properties file to match your version number.
@@ -107,7 +108,17 @@ Version: 1.0.16-beta+002
 The `major`, `minor`, `patch`, `prerelease` and `buildmeta` versions can also be set via the command line:
 
 ```bash
-./gradlew -Dversion.prerelease=beta ...
+./gradlew -Dversion.prerelease=beta -Dversion.buildmeta= ...
+```
+
+```ini
+#version.properties
+version.major=1
+version.minor=0
+version.patch=0
+version.prerelease=
+version.buildmeta=beta
+version.semver=1.0.0-beta
 ```
 
 ## Configuration
@@ -132,6 +143,8 @@ The version number is built as follows:
 
 `version.major` `version.separtor` `version.minor` `version.separator` `version.patch` `[` `version.prerelease.prefix` `version.prerelease` `]` `[` `version.prerelease.prefix` `version.buildmeta` `]`
 
+For reference, it is automatically included in the `version.semver` property.
+
 for example:
 
 ```ini
@@ -141,6 +154,7 @@ version.minor=0
 version.patch=0
 version.prerelease=beta
 version.buildmeta=exp.sha.5114f85
+version.sevmer=1.0.0-beta+exp.sha.5114f85
 ```
 
 `project.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
@@ -181,6 +195,7 @@ min=0
 build=0
 rel=beta
 meta=
+semver=1.0.0-beta
 ```
 
 The following `semver` properties are available:
@@ -214,6 +229,7 @@ test.minor=0
 test.patch=0
 test.prerelease=
 test.buildmeta=
+test.semver=1.0.0
 ```
 
 - __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)

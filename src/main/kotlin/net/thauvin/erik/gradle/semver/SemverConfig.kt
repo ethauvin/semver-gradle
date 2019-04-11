@@ -70,6 +70,7 @@ open class SemverConfig {
     override fun toString(): String {
         return "SemverConfig(" +
             "properties='$properties', " +
+            "semver='$semverKey', " +
             "majorKey='$majorKey', " +
             "minorKey='$minorKey', " +
             "patchKey='$patchKey', " +
@@ -79,6 +80,6 @@ open class SemverConfig {
             "buildMetaPrefixKey='$buildMetaPrefixKey', " +
             "separator='$separatorKey', " +
             "keysPrefix='$keysPrefix')" +
-            ")"
+            ')'
     }
 }

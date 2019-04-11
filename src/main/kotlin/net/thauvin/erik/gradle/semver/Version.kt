@@ -78,7 +78,7 @@ class Version {
             "preReleasePrefix='$preReleasePrefix', " +
             "buildMeta='$buildMeta', " +
             "buildMetaPrefix='$buildMetaPrefix', " +
-            "separator='$separator'" +
-            ")"
+            "separator='$separator', " +
+            ')'
     }
 }

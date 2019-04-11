@@ -93,6 +93,8 @@ object Utils {
                 put(config.patchKey, version.patch)
                 put(config.preReleaseKey, version.preRelease)
                 put(config.buildMetaKey, version.buildMeta)
+                put(config.semverKey, version.semver)
+
                 put(config.buildMetaPrefixKey, version.buildMetaPrefix,
                     version.buildMetaPrefix != Version.DEFAULT_BUILDMETA_PREFIX ||
                         containsKey(config.buildMetaPrefixKey))
