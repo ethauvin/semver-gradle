@@ -31,10 +31,10 @@
  */
 package net.thauvin.erik.gradle.semver
 
+import net.thauvin.erik.gradle.semver.Utils.canReadFile
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 import java.io.File
-import java.nio.file.Files
 import java.util.Properties
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -43,30 +43,23 @@ import kotlin.test.assertTrue
 @Suppress("unused")
 object UtilsSpec : Spek({
     describe("a config and version") {
-        val version by memoized { Version() }
-        val config by memoized { SemverConfig() }
-        val configFile = File("test.properties")
+        val version = Version()
+        val config = SemverConfig()
+        val propsFile = File("test.properties")
         lateinit var props: Properties
 
-        before {
-            config.properties = configFile.name
-        }
-
         describe("save properties") {
-            it("should save properties") {
+            it("save properties") {
+                config.properties = propsFile.name
                 Utils.saveProperties(config, version)
-                assertTrue(configFile.exists())
+                assertTrue(propsFile.canReadFile())
             }
             it("load the properties") {
-                props = Properties().apply {
-                    Files.newInputStream(configFile.toPath()).use { nis ->
-                        load(nis)
-                    }
-                    configFile.delete()
-                }
+                props = Utils.loadProperties(propsFile)
+                propsFile.delete()
             }
         }
-        describe("validate the properties file") {
+        describe("validate the properties") {
             it("version should be the same") {
                 assertEquals(props.getProperty(config.majorKey), version.major, "Major")
                 assertEquals(props.getProperty(config.minorKey), version.minor, "Minor")
@@ -94,6 +87,20 @@ object UtilsSpec : Spek({
                     System.getProperties().setProperty(it.first, it.second)
                     assertEquals(Utils.loadProperty(props, it.first, ""), it.second)
                 }
+            }
+            it("load version") {
+                Utils.loadVersion(config, version, props)
+                assertEquals(version.semver, "2.1.1-beta+007")
+            }
+            it("save new properties") {
+                Utils.saveProperties(config, version)
+            }
+            it("check saved properties") {
+                val newProps = Utils.loadProperties(propsFile)
+                newVersion.forEach {
+                    assertEquals(newProps.getProperty(it.first), it.second, it.second)
+                }
+                propsFile.delete()
             }
         }
     }

@@ -63,4 +63,19 @@ open class SemverConfig {
     var separatorKey = DEFAULT_SEPARATOR
         get() = "$keysPrefix$field"
     var keysPrefix = DEFAULT_KEYS_PREFIX
+
+    override fun toString(): String {
+        return "SemverConfig(" +
+            "properties='$properties', " +
+            "majorKey='$majorKey', " +
+            "minorKey='$minorKey', " +
+            "patchKey='$patchKey', " +
+            "preReleaseKey='$preReleaseKey', " +
+            "preReleasePrefixKey='$preReleasePrefixKey', " +
+            "buildMetaKey='$buildMetaKey', " +
+            "buildMetaPrefixKey='$buildMetaPrefixKey', " +
+            "separator='$separatorKey', " +
+            "keysPrefix='$keysPrefix')" +
+            ")"
+    }
 }

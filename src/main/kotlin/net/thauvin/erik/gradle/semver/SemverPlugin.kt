@@ -36,8 +36,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.util.GradleVersion
 import java.io.File
-import java.io.FileInputStream
-import java.util.Properties
 
 class SemverPlugin : Plugin<Project> {
     private val simpleName = SemverPlugin::class.simpleName
@@ -61,48 +59,39 @@ class SemverPlugin : Plugin<Project> {
 
     private fun afterEvaluate(project: Project) {
         val propsFile = File(config.properties)
+
         if (project.version != "unspecified") {
             project.logger.warn(
                 "Please specify the version in ${propsFile.name} and remove it from ${project.buildFile.name}")
         }
+
         propsFile.apply {
+            val isNew = !exists()
+
             project.logger.info(
-                "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: ${exists()}, isFile: $isFile, canRead: ${canRead()}]")
-            var hasReqProps = false
-            if (canRead() && isFile) {
-                FileInputStream(this).reader().use { reader ->
-                    Properties().apply {
-                        load(reader)
+                "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: $isNew, isFile: $isFile, canRead: ${propsFile.canRead()}]")
 
-                        val requiredProps = setOf(config.majorKey, config.minorKey, config.patchKey,
-                            config.preReleaseKey, config.buildMetaKey)
-                        hasReqProps = stringPropertyNames().containsAll(requiredProps) &&
-                            Utils.isNotSystemProperty(requiredProps)
+            val props = Utils.loadProperties(propsFile)
+            val requiredProps = setOf(config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
+                config.buildMetaKey)
+            val hasReqProps = !isNew && props.stringPropertyNames().containsAll(requiredProps) &&
+                Utils.isNotSystemProperty(requiredProps)
 
-                        version.major = Utils.loadProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
-                        version.minor = Utils.loadProperty(this, config.minorKey, Version.DEFAULT_MINOR)
-                        version.patch = Utils.loadProperty(this, config.patchKey, Version.DEFAULT_PATCH)
-                        version.preRelease = Utils.loadProperty(this, config.preReleaseKey, Version.DEFAULT_EMPTY)
-                        version.preReleasePrefix =
-                            getProperty(config.preReleasePrefixKey, Version.DEFAULT_PRERELEASE_PREFIX)
-                        version.buildMeta = Utils.loadProperty(this, config.buildMetaKey, Version.DEFAULT_EMPTY)
-                        version.buildMetaPrefix =
-                            getProperty(config.buildMetaPrefixKey, Version.DEFAULT_BUILDMETA_PREFIX)
-                        version.separator = getProperty(config.separatorKey, Version.DEFAULT_SEPARATOR)
+            println(isNew)
+            println(props.stringPropertyNames().containsAll(requiredProps))
+            println(Utils.isNotSystemProperty(requiredProps))
 
-                        project.tasks.withType(SemverIncrementBuildMetaTask::class.java) {
-                            buildMeta = version.buildMeta
-                        }
-                    }
-                }
-            } else if (exists()) {
-                throw GradleException("Unable to read version from: `$absoluteFile`")
+            Utils.loadVersion(config, version, props)
+
+            project.tasks.withType(SemverIncrementBuildMetaTask::class.java) {
+                buildMeta = version.buildMeta
             }
+
             project.version = version.semver
             project.logger.info("[$simpleName] Project version set to: ${project.version}")
+
             if (!hasReqProps || !isFile) {
-                // If first time running and there is no props file, and the required version properties are missing,
-                // then version props would never have been saved before
+                project.logger.info("[$simpleName] Saving version properties to `${config.properties}`.")
                 Utils.saveProperties(config, version)
             }
         }

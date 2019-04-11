@@ -68,4 +68,17 @@ class Version {
         }
         if (isPatch) patch = (patch.toInt() + 1).toString()
     }
+
+    override fun toString(): String {
+        return "Version(" +
+            "major='$major', " +
+            "minor='$minor', " +
+            "patch='$patch', " +
+            "preRelease='$preRelease', " +
+            "preReleasePrefix='$preReleasePrefix', " +
+            "buildMeta='$buildMeta', " +
+            "buildMetaPrefix='$buildMetaPrefix', " +
+            "separator='$separator'" +
+            ")"
+    }
 }

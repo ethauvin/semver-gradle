@@ -14,45 +14,94 @@ import java.util.Properties
  * @since 1.0
  */
 object Utils {
+    fun File.canReadFile(): Boolean {
+        return canRead() && isFile
+    }
+
+    private fun Properties.put(key: String, value: String, isValidCondition: Boolean) {
+        if (isValidCondition) put(key, value)
+    }
+
     fun isNotSystemProperty(keys: Set<String>): Boolean {
         keys.forEach {
-            if (!System.getProperties().containsKey(it)) return true
+            if (System.getProperties().containsKey(it)) return false
         }
-        return false
+        return true
+    }
+
+    fun loadProperties(file: File): Properties {
+        var isNew = false
+        val props = Properties()
+        file.apply {
+            if (!exists()) {
+                if (!createNewFile()) {
+                    throw GradleException("Unable to create: `$absoluteFile`")
+                } else {
+                    isNew = true
+                }
+            }
+            if (canReadFile()) {
+                FileInputStream(this).reader().use { reader ->
+                    props.apply {
+                        if (!isNew) {
+                            load(reader)
+                        }
+                    }
+                }
+            } else {
+                throw GradleException("Unable to read version from: `$absoluteFile`")
+            }
+        }
+        return props
     }
 
     fun loadProperty(props: Properties, key: String, default: String): String {
-        return System.getProperty(key, props.getProperty(key, default))
+        return System.getProperty(key, if (props.isNotEmpty()) props.getProperty(key, default) else default)
+    }
+
+    fun loadVersion(config: SemverConfig, version: Version, props: Properties) {
+        props.apply {
+            version.major = loadProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
+            version.minor = loadProperty(this, config.minorKey, Version.DEFAULT_MINOR)
+            version.patch = loadProperty(this, config.patchKey, Version.DEFAULT_PATCH)
+            version.preRelease = loadProperty(this, config.preReleaseKey, Version.DEFAULT_EMPTY)
+            version.buildMeta = loadProperty(this, config.buildMetaKey, Version.DEFAULT_EMPTY)
+
+            if (!isEmpty) {
+                version.preReleasePrefix =
+                    getProperty(config.preReleasePrefixKey, Version.DEFAULT_PRERELEASE_PREFIX)
+                version.buildMetaPrefix =
+                    getProperty(config.buildMetaPrefixKey, Version.DEFAULT_BUILDMETA_PREFIX)
+                version.separator = getProperty(config.separatorKey, Version.DEFAULT_SEPARATOR)
+            }
+        }
     }
 
     fun saveProperties(config: SemverConfig, version: Version) {
         val propsFile = File(config.properties)
         SortedProperties().apply {
             propsFile.apply {
-                if (canRead() && isFile) {
+                if (canReadFile()) {
                     FileInputStream(this).reader().use { load(it) }
-                }
-            }
-
-            put(config.majorKey, version.major)
-            put(config.minorKey, version.minor)
-            put(config.patchKey, version.patch)
-            put(config.preReleaseKey, version.preRelease)
-            put(config.buildMetaKey, version.buildMeta)
-            if (version.buildMetaPrefix != Version.DEFAULT_BUILDMETA_PREFIX ||
-                containsKey(config.buildMetaPrefixKey))
-                put(config.buildMetaPrefixKey, version.buildMetaPrefix)
-            if (version.preReleasePrefix != Version.DEFAULT_PRERELEASE_PREFIX ||
-                containsKey(config.preReleasePrefixKey))
-                put(config.preReleasePrefixKey, version.preReleasePrefix)
-            if (version.separator != Version.DEFAULT_SEPARATOR || containsKey(config.separatorKey))
-                put(config.separatorKey, version.separator)
-
-            propsFile.apply {
-                if (!exists()) {
-                    // Need to create the file as canWrite() will not work unless the file exists
+                } else {
                     createNewFile()
                 }
+
+                put(config.majorKey, version.major)
+                put(config.minorKey, version.minor)
+                put(config.patchKey, version.patch)
+                put(config.preReleaseKey, version.preRelease)
+                put(config.buildMetaKey, version.buildMeta)
+                put(config.buildMetaPrefixKey, version.buildMetaPrefix,
+                    version.buildMetaPrefix != Version.DEFAULT_BUILDMETA_PREFIX ||
+                        containsKey(config.buildMetaPrefixKey))
+                put(config.preReleasePrefixKey, version.preReleasePrefix,
+                    version.preReleasePrefix != Version.DEFAULT_PRERELEASE_PREFIX ||
+                        containsKey(config.preReleasePrefixKey))
+                put(config.separatorKey, version.separator,
+                    version.separator != Version.DEFAULT_SEPARATOR ||
+                        containsKey(config.separatorKey))
+
                 if (canWrite()) {
                     FileOutputStream(this).writer().use {
                         store(it, "Generated by the Semver Plugin for Gradle")
