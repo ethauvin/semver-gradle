@@ -41,6 +41,7 @@ object SemverConfigSpec : Spek({
     describe("a config") {
         val config by memoized { SemverConfig() }
         val vars = listOf(
+            config.semverKey,
             config.majorKey,
             config.minorKey,
             config.patchKey,
@@ -51,6 +52,7 @@ object SemverConfigSpec : Spek({
             config.separatorKey
         )
         val defaults = listOf(
+            SemverConfig.DEFAULT_SEMVER_KEY,
             SemverConfig.DEFAULT_MAJOR_KEY,
             SemverConfig.DEFAULT_MINOR_KEY,
             SemverConfig.DEFAULT_PATCH_KEY,
@@ -77,6 +79,7 @@ object SemverConfigSpec : Spek({
             it("should all start with test.xxx") {
                 config.keysPrefix = "test."
                 val keys = listOf(
+                    config.semverKey,
                     config.majorKey,
                     config.minorKey,
                     config.patchKey,

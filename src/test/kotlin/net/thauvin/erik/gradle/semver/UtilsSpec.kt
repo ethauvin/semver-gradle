@@ -61,6 +61,7 @@ object UtilsSpec : Spek({
         }
         describe("validate the properties") {
             it("version should be the same") {
+                assertEquals(props.getProperty(config.semverKey), version.semver, "Semver")
                 assertEquals(props.getProperty(config.majorKey), version.major, "Major")
                 assertEquals(props.getProperty(config.minorKey), version.minor, "Minor")
                 assertEquals(props.getProperty(config.patchKey), version.patch, "Patch")
