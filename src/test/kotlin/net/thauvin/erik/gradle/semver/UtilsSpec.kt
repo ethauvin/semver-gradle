@@ -33,7 +33,7 @@ package net.thauvin.erik.gradle.semver
 
 import net.thauvin.erik.gradle.semver.Utils.canReadFile
 import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
+import org.spekframework.spek2.style.gherkin.Feature
 import java.io.File
 import java.util.Properties
 import kotlin.test.assertEquals
@@ -42,25 +42,28 @@ import kotlin.test.assertTrue
 
 @Suppress("unused")
 object UtilsSpec : Spek({
-    describe("a config and version") {
+    Feature("Utils") {
         val version = Version()
         val config = SemverConfig()
         val propsFile = File("test.properties")
         lateinit var props: Properties
 
-        describe("save properties") {
-            it("save properties") {
+        Scenario("Save/Load Properties") {
+            When("saving the property") {
                 config.properties = propsFile.name
                 Utils.saveProperties(config, version)
-                assertTrue(propsFile.canReadFile())
             }
-            it("load the properties") {
+
+            Then("properties file should exists and be readable") {
+                assertEquals(propsFile.canReadFile(), propsFile.canRead() && propsFile.isFile)
+            }
+
+            When("loading the properties file") {
                 props = Utils.loadProperties(propsFile)
                 propsFile.delete()
             }
-        }
-        describe("validate the properties") {
-            it("version should be the same") {
+
+            Then("version and properties should be the same.") {
                 assertEquals(props.getProperty(config.majorKey), version.major, "Major")
                 assertEquals(props.getProperty(config.minorKey), version.minor, "Minor")
                 assertEquals(props.getProperty(config.patchKey), version.patch, "Patch")
@@ -69,38 +72,96 @@ object UtilsSpec : Spek({
                 assertEquals(props.getProperty(config.buildMetaKey), version.buildMeta, "Build Meta")
                 assertNull(props.getProperty(config.buildMetaPrefixKey), "Build Meta Prefix")
                 assertNull(props.getProperty(config.separatorKey), "Separator")
+                assertEquals(props.getProperty(config.semverKey), version.semver, "semver")
             }
         }
-        describe("setting system properties") {
-            val newVersion = arrayOf(
-                Pair(config.majorKey, "2"),
-                Pair(config.minorKey, "1"),
-                Pair(config.patchKey, "1"),
-                Pair(config.preReleaseKey, "beta"),
-                Pair(config.buildMetaKey, "007"))
-            it("should have none of our properties") {
+
+        Scenario("System Properties") {
+            lateinit var sysProps: Array<Pair<String, String>>
+
+            Given("new system properties") {
+                sysProps = arrayOf(
+                    Pair(config.majorKey, "2"),
+                    Pair(config.minorKey, "1"),
+                    Pair(config.patchKey, "1"),
+                    Pair(config.preReleaseKey, "beta"),
+                    Pair(config.buildMetaKey, "007"))
+            }
+
+            Then("none should already exists") {
                 assertTrue(Utils.isNotSystemProperty(setOf(config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
                     config.buildMetaKey)))
             }
-            it("version should match system properties") {
-                newVersion.forEach {
+
+            Then("version should match system properties") {
+                sysProps.forEach {
                     System.getProperties().setProperty(it.first, it.second)
                     assertEquals(Utils.loadProperty(props, it.first, ""), it.second)
                 }
             }
-            it("load version") {
+
+            When("loading version") {
                 Utils.loadVersion(config, version, props)
+
+            }
+
+            Then("version should be identical") {
                 assertEquals(version.semver, "2.1.1-beta+007")
             }
-            it("save new properties") {
+
+            When("saving properties") {
                 Utils.saveProperties(config, version)
             }
-            it("check saved properties") {
-                val newProps = Utils.loadProperties(propsFile)
-                newVersion.forEach {
+
+            lateinit var newProps: Properties
+
+            And("loading properties file") {
+                newProps = Utils.loadProperties(propsFile)
+            }
+
+            Then("new properties should validate") {
+                sysProps.forEach {
                     assertEquals(newProps.getProperty(it.first), it.second, it.second)
                 }
                 propsFile.delete()
+            }
+
+            When("setting the version as system property") {
+                System.getProperties().setProperty(config.semverKey, "3.2.2")
+            }
+
+            And("loading the properties") {
+                Utils.loadVersion(config, version, props)
+            }
+
+            Then("versions should match") {
+                assertEquals(version.semver, System.getProperty(config.semverKey))
+            }
+        }
+
+        Scenario("Testing Version Parsing") {
+            When("validating version parsing") {
+                listOf("1.0.0", "2.1.0-beta", "3.2.1-beta+007", "4.3.2+007").forEach {
+                    assertTrue(Utils.parseSemVer(it, version), "parsing semver: $it")
+                    assertEquals(it, version.semver, it)
+                }
+            }
+
+            Given("new prefixes") {
+                version.preReleasePrefix = "."
+                version.buildMetaPrefix = "."
+            }
+
+            Then("validating prefixes parsing") {
+                listOf("2.1.0.beta.1", "2.1.1.1", "3.2.1.beta.1.007").forEach {
+                    assertTrue(Utils.parseSemVer(it, version), "parsing semver: $it")
+                    assertEquals(it, version.semver, it)
+                }
+            }
+
+            Then("verifying pre-release and meta") {
+                assertEquals(version.preRelease, "beta.1")
+                assertEquals(version.buildMeta, "007")
             }
         }
     }

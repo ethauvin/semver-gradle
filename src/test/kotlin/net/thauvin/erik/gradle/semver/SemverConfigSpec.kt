@@ -32,51 +32,53 @@
 package net.thauvin.erik.gradle.semver
 
 import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
+import org.spekframework.spek2.style.gherkin.Feature
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @Suppress("unused")
 object SemverConfigSpec : Spek({
-    describe("a config") {
-        val config by memoized { SemverConfig() }
-        val vars = listOf(
-            config.majorKey,
-            config.minorKey,
-            config.patchKey,
-            config.preReleaseKey,
-            config.preReleasePrefixKey,
-            config.buildMetaKey,
-            config.buildMetaPrefixKey,
-            config.separatorKey
-        )
-        val defaults = listOf(
-            SemverConfig.DEFAULT_MAJOR_KEY,
-            SemverConfig.DEFAULT_MINOR_KEY,
-            SemverConfig.DEFAULT_PATCH_KEY,
-            SemverConfig.DEFAULT_PRERELEASE_KEY,
-            SemverConfig.DEFAULT_PRERELEASE_PREFIX_KEY,
-            SemverConfig.DEFAULT_BUILDMETA_KEY,
-            SemverConfig.DEFAULT_BUILDMETA_PREFIX_KEY,
-            SemverConfig.DEFAULT_SEPARATOR
-        )
+    Feature("SemverConfig") {
+        Scenario("Testing configs") {
+            val config by memoized { SemverConfig() }
+            val vars = listOf(
+                config.majorKey,
+                config.minorKey,
+                config.patchKey,
+                config.preReleaseKey,
+                config.preReleasePrefixKey,
+                config.buildMetaKey,
+                config.buildMetaPrefixKey,
+                config.separatorKey
+            )
+            val defaults = listOf(
+                SemverConfig.DEFAULT_MAJOR_KEY,
+                SemverConfig.DEFAULT_MINOR_KEY,
+                SemverConfig.DEFAULT_PATCH_KEY,
+                SemverConfig.DEFAULT_PRERELEASE_KEY,
+                SemverConfig.DEFAULT_PRERELEASE_PREFIX_KEY,
+                SemverConfig.DEFAULT_BUILDMETA_KEY,
+                SemverConfig.DEFAULT_BUILDMETA_PREFIX_KEY,
+                SemverConfig.DEFAULT_SEPARATOR
+            )
 
-        describe("check defaults") {
+            When("checking defaults") {}
+
             defaults.forEachIndexed { i, d ->
-                it("should be the same: ${vars[i]}, ${config.keysPrefix}$d") {
+                Then(" ${vars[i]} should be the same: ${config.keysPrefix}$d") {
                     assertEquals(vars[i], "${config.keysPrefix}$d")
                 }
             }
-        }
-        describe("check version.properties") {
-            it("should be version.properties") {
+
+            Then("config.properties should be version.properties") {
                 assertEquals(config.properties, "version.properties")
             }
-        }
-        describe("set keys to test.xxx") {
-            it("should all start with test.xxx") {
+
+            lateinit var newKeys: List<String>
+
+            When("setting keyPrefix to test.") {
                 config.keysPrefix = "test."
-                val keys = listOf(
+                newKeys = listOf(
                     config.majorKey,
                     config.minorKey,
                     config.patchKey,
@@ -85,9 +87,11 @@ object SemverConfigSpec : Spek({
                     config.buildMetaKey,
                     config.buildMetaPrefixKey,
                     config.separatorKey)
+            }
 
-                keys.forEach { k ->
-                    assertTrue(k.startsWith("test."), "Should be test.$k")
+            Then("all config keys should start with test.xxxx") {
+                newKeys.forEach { k ->
+                    assertTrue(k.startsWith("test."), k)
                 }
             }
         }
