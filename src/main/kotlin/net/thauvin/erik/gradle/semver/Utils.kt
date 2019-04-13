@@ -61,11 +61,13 @@ object Utils {
 
     fun loadVersion(config: SemverConfig, version: Version, props: Properties) {
         props.apply {
-            version.major = loadProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
-            version.minor = loadProperty(this, config.minorKey, Version.DEFAULT_MINOR)
-            version.patch = loadProperty(this, config.patchKey, Version.DEFAULT_PATCH)
-            version.preRelease = loadProperty(this, config.preReleaseKey, Version.DEFAULT_EMPTY)
-            version.buildMeta = loadProperty(this, config.buildMetaKey, Version.DEFAULT_EMPTY)
+            if (!parseSemVer(System.getProperty(config.semverKey), version)) {
+                version.major = loadProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
+                version.minor = loadProperty(this, config.minorKey, Version.DEFAULT_MINOR)
+                version.patch = loadProperty(this, config.patchKey, Version.DEFAULT_PATCH)
+                version.preRelease = loadProperty(this, config.preReleaseKey, Version.DEFAULT_EMPTY)
+                version.buildMeta = loadProperty(this, config.buildMetaKey, Version.DEFAULT_EMPTY)
+            }
 
             if (!isEmpty) {
                 version.preReleasePrefix =
@@ -75,6 +77,66 @@ object Utils {
                 version.separator = getProperty(config.separatorKey, Version.DEFAULT_SEPARATOR)
             }
         }
+    }
+
+    fun parseSemVer(input: String?, version: Version): Boolean {
+        if (input == null) return false
+
+        var semver = StringBuilder(input)
+        var start = semver.indexOf(version.separator)
+        var minor = ""
+        var major = ""
+        var patch = ""
+        var preRelease = ""
+        var buildMeta = ""
+
+        // major
+        if (start != -1) {
+            major = semver.substring(0, start)
+            semver.delete(0, start + major.length)
+            start = semver.indexOf(version.separator)
+            // minor
+            if (start != -1) {
+                minor = semver.substring(0, start)
+                semver = semver.delete(0, start + minor.length)
+                start = semver.indexOf(version.preReleasePrefix)
+                // patch
+                if (start != -1) {
+                    patch = semver.substring(0, start)
+                    semver.delete(0, start + minor.length)
+                    start = semver.lastIndexOf(version.buildMetaPrefix)
+                    // pre-release
+                    if (start != -1) {
+                        preRelease = semver.substring(0, start)
+                        semver.delete(0, preRelease.length)
+                        start = semver.indexOf(version.buildMetaPrefix)
+                        // build meta
+                        if (start != -1) {
+                            buildMeta = semver.substring(version.preReleasePrefix.length)
+                            semver.clear()
+                        }
+                    } else {
+                        // no build meta
+                        preRelease = semver.toString()
+                        semver.clear()
+                    }
+                } else if (semver.isNotEmpty()) {
+                    // no pre-release
+                    patch = semver.toString()
+                    semver.clear()
+                }
+            }
+        }
+
+        if (semver.isNotEmpty()) throw GradleException("Unable to parse version: `$input`.")
+
+        version.major = major
+        version.minor = minor
+        version.patch = patch
+        version.preRelease = preRelease
+        version.buildMeta = buildMeta
+
+        return true
     }
 
     fun saveProperties(config: SemverConfig, version: Version) {
