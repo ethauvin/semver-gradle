@@ -121,7 +121,7 @@ object SemverVersionSpec : Spek({
             When("incrementing all") {
                 version.increment(isMajor = true, isMinor = true, isPatch = true)
             }
-            
+
             Then("should return 4.1.1") {
                 assertEquals("4.1.1", version.semver)
             }
@@ -129,7 +129,7 @@ object SemverVersionSpec : Spek({
             When("incrementing major and minor") {
                 version.increment(isMajor = true, isMinor = true)
             }
-            
+
             Then("should return 5.1.0") {
                 assertEquals("5.1.0", version.semver)
             }
@@ -161,7 +161,7 @@ object SemverVersionSpec : Spek({
             When("adding prerelease") {
                 version.preRelease = "beta"
             }
-            
+
             Then("should return 1.0.0-beta") {
                 assertEquals("1.0.0-beta", version.semver)
             }
@@ -169,7 +169,7 @@ object SemverVersionSpec : Spek({
             When("adding metadata") {
                 version.buildMeta = "007"
             }
-            
+
             Then("should return 1.0.0-beta+007") {
                 assertEquals("1.0.0-beta+007", version.semver)
             }

@@ -102,7 +102,6 @@ object UtilsSpec : Spek({
 
             When("loading version") {
                 Utils.loadVersion(config, version, props)
-
             }
 
             Then("version should be identical") {
