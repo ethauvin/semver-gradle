@@ -123,7 +123,7 @@ version.semver=1.0.0-beta
 
 The full semantic version can also be specified via the `semver` property:
 
-```ini
+```sh
 ./gradlew -Dversion.semver=1.0.0-beta ...
 ```
 
