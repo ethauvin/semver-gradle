@@ -43,15 +43,15 @@ object SemverVersionSpec : Spek({
             When("validating default version") {}
 
             Then("major should be 1") {
-                assertEquals("1", version.major)
+                assertEquals(1, version.major)
             }
 
             Then("minor should be 1") {
-                assertEquals("0", version.minor)
+                assertEquals(0, version.minor)
             }
 
             Then("patch should be 0") {
-                assertEquals("0", version.patch)
+                assertEquals(0, version.patch)
             }
 
             Then("prerelease should be empty") {
@@ -149,9 +149,9 @@ object SemverVersionSpec : Spek({
             }
 
             When("resetting version") {
-                version.major = "1"
-                version.minor = "0"
-                version.patch = "0"
+                version.major = 1
+                version.minor = 0
+                version.patch = 0
             }
 
             Then("should return 1.0.0") {

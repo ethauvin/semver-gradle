@@ -71,9 +71,9 @@ class SemverPlugin : Plugin<Project> {
             project.logger.info(
                 "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: $isNew, isFile: $isFile, canRead: ${propsFile.canRead()}]")
 
-            val props = Utils.loadProperties(propsFile)
-            val requiredProps = setOf(config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
-                config.buildMetaKey)
+            val props = Utils.loadProperties(this)
+            val requiredProps = setOf(config.semverKey, config.majorKey, config.minorKey, config.patchKey,
+                config.preReleaseKey, config.buildMetaKey)
             val hasReqProps = !isNew && props.stringPropertyNames().containsAll(requiredProps) &&
                 Utils.isNotSystemProperty(requiredProps)
 
@@ -87,7 +87,7 @@ class SemverPlugin : Plugin<Project> {
             project.logger.info("[$simpleName] Project version set to: ${project.version}")
 
             if (!hasReqProps || !isFile) {
-                project.logger.info("[$simpleName] Saving version properties to `${config.properties}`.")
+                project.logger.info("[$simpleName] Saving version properties to `$absoluteFile`.")
                 Utils.saveProperties(config, version)
             }
         }

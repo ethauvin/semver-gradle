@@ -64,9 +64,9 @@ object UtilsSpec : Spek({
             }
 
             Then("version and properties should be the same.") {
-                assertEquals(props.getProperty(config.majorKey), version.major, "Major")
-                assertEquals(props.getProperty(config.minorKey), version.minor, "Minor")
-                assertEquals(props.getProperty(config.patchKey), version.patch, "Patch")
+                assertEquals(props.getProperty(config.majorKey), version.major.toString(), "Major")
+                assertEquals(props.getProperty(config.minorKey), version.minor.toString(), "Minor")
+                assertEquals(props.getProperty(config.patchKey), version.patch.toString(), "Patch")
                 assertEquals(props.getProperty(config.preReleaseKey), version.preRelease, "PreRelease")
                 assertNull(props.getProperty(config.preReleasePrefixKey), "PreRelease Prefix")
                 assertEquals(props.getProperty(config.buildMetaKey), version.buildMeta, "Build Meta")
@@ -96,7 +96,11 @@ object UtilsSpec : Spek({
             Then("version should match system properties") {
                 sysProps.forEach {
                     System.getProperties().setProperty(it.first, it.second)
-                    assertEquals(Utils.loadProperty(props, it.first, ""), it.second)
+                    if (it.first == config.majorKey || it.first == config.minorKey || it.first == config.patchKey) {
+                        assertEquals(Utils.loadIntProperty(props, it.first, -1), it.second.toInt())
+                    } else {
+                        assertEquals(Utils.loadProperty(props, it.first, ""), it.second)
+                    }
                 }
             }
 

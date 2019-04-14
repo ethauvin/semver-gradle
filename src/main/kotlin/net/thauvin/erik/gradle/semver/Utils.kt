@@ -18,6 +18,11 @@ object Utils {
         return canRead() && isFile
     }
 
+    private fun Int.length() = when (this) {
+        0 -> 1
+        else -> Math.log10(Math.abs(toDouble())).toInt() + 1
+    }
+
     private fun Properties.put(key: String, value: String, isValidCondition: Boolean) {
         if (isValidCondition) put(key, value)
     }
@@ -55,6 +60,14 @@ object Utils {
         return props
     }
 
+    fun loadIntProperty(props: Properties, key: String, default: Int): Int {
+        try {
+            return loadProperty(props, key, default.toString()).toInt()
+        } catch (e: java.lang.NumberFormatException) {
+            throw GradleException("Unable to parse $key property. (${e.message})", e)
+        }
+    }
+
     fun loadProperty(props: Properties, key: String, default: String): String {
         return System.getProperty(key, if (props.isNotEmpty()) props.getProperty(key, default) else default)
     }
@@ -62,9 +75,9 @@ object Utils {
     fun loadVersion(config: SemverConfig, version: Version, props: Properties) {
         props.apply {
             if (!parseSemVer(System.getProperty(config.semverKey), version)) {
-                version.major = loadProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
-                version.minor = loadProperty(this, config.minorKey, Version.DEFAULT_MINOR)
-                version.patch = loadProperty(this, config.patchKey, Version.DEFAULT_PATCH)
+                version.major = loadIntProperty(this, config.majorKey, Version.DEFAULT_MAJOR)
+                version.minor = loadIntProperty(this, config.minorKey, Version.DEFAULT_MINOR)
+                version.patch = loadIntProperty(this, config.patchKey, Version.DEFAULT_PATCH)
                 version.preRelease = loadProperty(this, config.preReleaseKey, Version.DEFAULT_EMPTY)
                 version.buildMeta = loadProperty(this, config.buildMetaKey, Version.DEFAULT_EMPTY)
             }
@@ -84,51 +97,62 @@ object Utils {
 
         var semver = StringBuilder(input)
         var start = semver.indexOf(version.separator)
-        var minor = ""
-        var major = ""
-        var patch = ""
+        var minor = -1
+        var major = -1
+        var patch = -1
         var preRelease = ""
         var buildMeta = ""
 
-        // major
-        if (start != -1) {
-            major = semver.substring(0, start)
-            semver.delete(0, start + major.length)
-            start = semver.indexOf(version.separator)
-            // minor
+        try {
+            // major
             if (start != -1) {
-                minor = semver.substring(0, start)
-                semver = semver.delete(0, start + minor.length)
-                start = semver.indexOf(version.preReleasePrefix)
-                // patch
+                major = semver.substring(0, start).toInt()
+                semver.delete(0, start + major.length())
+                start = semver.indexOf(version.separator)
+                // minor
                 if (start != -1) {
-                    patch = semver.substring(0, start)
-                    semver.delete(0, start + minor.length)
-                    start = semver.lastIndexOf(version.buildMetaPrefix)
-                    // pre-release
+                    minor = semver.substring(0, start).toInt()
+                    semver = semver.delete(0, start + minor.length())
+                    start = semver.indexOf(version.preReleasePrefix)
+                    // patch
                     if (start != -1) {
-                        preRelease = semver.substring(0, start)
-                        semver.delete(0, preRelease.length)
-                        start = semver.indexOf(version.buildMetaPrefix)
-                        // build meta
+                        patch = semver.substring(0, start).toInt()
+                        semver.delete(0, start + minor.length())
+                        start = semver.lastIndexOf(version.buildMetaPrefix)
+                        // pre-release
                         if (start != -1) {
-                            buildMeta = semver.substring(version.preReleasePrefix.length)
+                            preRelease = semver.substring(0, start)
+                            semver.delete(0, preRelease.length)
+                            start = semver.indexOf(version.buildMetaPrefix)
+                            // build meta
+                            if (start != -1) {
+                                buildMeta = semver.substring(version.preReleasePrefix.length)
+                                semver.clear()
+                            }
+                        } else {
+                            // no build meta
+                            preRelease = semver.toString()
                             semver.clear()
                         }
-                    } else {
-                        // no build meta
-                        preRelease = semver.toString()
+                    } else if (semver.isNotEmpty()) {
+                        // no pre-release
+                        start = semver.lastIndexOf(version.buildMetaPrefix)
+                        if (start != -1) {
+                            patch = semver.substring(0, start).toInt()
+                            semver.delete(0, start + minor.length())
+                            buildMeta = semver.toString()
+                        } else {
+                            patch = semver.toString().toInt()
+                        }
                         semver.clear()
                     }
-                } else if (semver.isNotEmpty()) {
-                    // no pre-release
-                    patch = semver.toString()
-                    semver.clear()
                 }
             }
+        } catch (e: NumberFormatException) {
+            throw GradleException("Unable to parse version: \"$input\" (${e.message})", e)
         }
 
-        if (semver.isNotEmpty()) throw GradleException("Unable to parse version: `$input`.")
+        if (semver.isNotEmpty()) throw GradleException("Unable to parse version: \"$input\".")
 
         version.major = major
         version.minor = minor
@@ -150,9 +174,9 @@ object Utils {
                 }
 
                 put(config.semverKey, version.semver)
-                put(config.majorKey, version.major)
-                put(config.minorKey, version.minor)
-                put(config.patchKey, version.patch)
+                put(config.majorKey, version.major.toString())
+                put(config.minorKey, version.minor.toString())
+                put(config.patchKey, version.patch.toString())
                 put(config.preReleaseKey, version.preRelease)
                 put(config.buildMetaKey, version.buildMeta)
                 put(config.semverKey, version.semver)
