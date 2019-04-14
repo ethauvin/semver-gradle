@@ -121,6 +121,14 @@ version.buildmeta=beta
 version.semver=1.0.0-beta
 ```
 
+The full semantic version can also be specified via the `semver` property:
+
+```ini
+./gradlew -Dversion.semver=1.0.0-beta ...
+```
+
+If a version cannot be parsed your build will **fail**.
+
 ## Configuration
 
 ### Version File Properties
