@@ -93,7 +93,7 @@ object Utils {
     }
 
     fun parseSemVer(input: String?, version: Version): Boolean {
-        if (input == null) return false
+        if (input.isNullOrBlank()) return false
 
         var semver = StringBuilder(input)
         var start = semver.indexOf(version.separator)
