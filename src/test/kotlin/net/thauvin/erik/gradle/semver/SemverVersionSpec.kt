@@ -32,131 +32,169 @@
 package net.thauvin.erik.gradle.semver
 
 import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.specification.describe
+import org.spekframework.spek2.style.gherkin.Feature
 import kotlin.test.assertEquals
 
 @Suppress("unused")
 object SemverVersionSpec : Spek({
-    describe("test version") {
+    Feature("SemverVersion") {
         val version = Version()
-        describe("validate default version") {
-            it("major should be 1") {
-                assertEquals("1", version.major)
+        Scenario("Testing Versions") {
+            When("validating default version") {}
+
+            Then("major should be 1") {
+                assertEquals(1, version.major)
             }
-            it("minor should be 1") {
-                assertEquals("0", version.minor)
+
+            Then("minor should be 1") {
+                assertEquals(0, version.minor)
             }
-            it("patch should be 0") {
-                assertEquals("0", version.patch)
+
+            Then("patch should be 0") {
+                assertEquals(0, version.patch)
             }
-            it("prerelease should be empty") {
+
+            Then("prerelease should be empty") {
                 assertEquals("", version.preRelease)
             }
-            it("meta should be empty") {
+
+            Then("meta should be empty") {
                 assertEquals("", version.buildMeta)
             }
-            it("preRelease prefix should be -") {
+
+            Then("preRelease prefix should be -") {
                 assertEquals("-", version.preReleasePrefix)
             }
-            it("meta prefix should be +") {
+
+            Then("meta prefix should be +") {
                 assertEquals("+", version.buildMetaPrefix)
             }
-            it("separator should be .") {
+
+            Then("separator should be .") {
                 assertEquals(".", version.separator)
             }
-            it("version should be 1.0.0") {
+
+            Then("version should be 1.0.0") {
                 assertEquals("1.0.0", version.semver)
             }
-        }
-        describe("increment") {
-            it("should return 2.0.0") {
+
+            When("incrementing major") {
                 version.increment(isMajor = true)
+            }
+
+            Then("should return 2.0.0") {
                 assertEquals("2.0.0", version.semver)
             }
-        }
-        describe("increment minor") {
-            it("should return 2.1.0") {
+
+            When("incrementing minor") {
                 version.increment(isMinor = true)
+            }
+
+            Then("should return 2.1.0") {
                 assertEquals("2.1.0", version.semver)
             }
-        }
-        describe("increment patch") {
-            it("should return 2.1.1") {
+
+            When("incrementing patch") {
                 version.increment(isPatch = true)
+            }
+
+            Then("should return 2.1.1") {
                 assertEquals("2.1.1", version.semver)
             }
-        }
-        describe("increment minor again") {
-            it("should return 2.2.0") {
+
+            When("incrementing minor again") {
                 version.increment(isMinor = true)
+            }
+
+            Then("should return 2.2.0") {
                 assertEquals("2.2.0", version.semver)
             }
-        }
-        describe("increment major again") {
-            it("should return 3.0.0") {
+
+            When("incrementing major again") {
                 version.increment(isMajor = true)
+            }
+
+            Then("should return 3.0.0") {
                 assertEquals("3.0.0", version.semver)
             }
-        }
-        describe("increment all") {
-            it("should return 4.1.1") {
+
+            When("incrementing all") {
                 version.increment(isMajor = true, isMinor = true, isPatch = true)
+            }
+
+            Then("should return 4.1.1") {
                 assertEquals("4.1.1", version.semver)
             }
-        }
-        describe("increment major and minor") {
-            it("should return 5.1.0") {
+
+            When("incrementing major and minor") {
                 version.increment(isMajor = true, isMinor = true)
+            }
+
+            Then("should return 5.1.0") {
                 assertEquals("5.1.0", version.semver)
             }
-        }
-        describe("increment minor and patch") {
-            it("should return 5.2.1") {
+
+            When("incrementing minor and patch") {
                 version.increment(isMinor = true, isPatch = true)
+            }
+            Then("should return 5.2.1") {
                 assertEquals("5.2.1", version.semver)
             }
-        }
-        describe("increment nothing") {
-            it("should still return 5.2.1") {
+
+            When("incrementing nothing") {
                 version.increment()
+            }
+            Then("should still return 5.2.1") {
                 assertEquals("5.2.1", version.semver)
             }
-        }
-        describe("reset version") {
-            it("should return 1.0.0") {
-                version.major = "1"
-                version.minor = "0"
-                version.patch = "0"
+
+            When("resetting version") {
+                version.major = 1
+                version.minor = 0
+                version.patch = 0
+            }
+
+            Then("should return 1.0.0") {
                 assertEquals("1.0.0", version.semver)
             }
-        }
-        describe("add prerelease") {
-            it("should return 1.0.0-beta") {
+
+            When("adding prerelease") {
                 version.preRelease = "beta"
+            }
+
+            Then("should return 1.0.0-beta") {
                 assertEquals("1.0.0-beta", version.semver)
             }
-        }
-        describe("add metadata") {
-            it("should return 1.0.0-beta+007") {
+
+            When("adding metadata") {
                 version.buildMeta = "007"
+            }
+
+            Then("should return 1.0.0-beta+007") {
                 assertEquals("1.0.0-beta+007", version.semver)
             }
-        }
-        describe("change prerelease prefix") {
-            it("should return 1.0.0--beta+007") {
+
+            When("changing prerelease prefix") {
                 version.preReleasePrefix = "--"
+            }
+
+            Then("should return 1.0.0--beta+007") {
                 assertEquals("1.0.0--beta+007", version.semver)
             }
-        }
-        describe("change meta prefix") {
-            it("should return 1.0.0--beta++007") {
+
+            When("changing meta prefix") {
                 version.buildMetaPrefix = "++"
+            }
+
+            Then("should return 1.0.0--beta++007") {
                 assertEquals("1.0.0--beta++007", version.semver)
             }
-        }
-        describe("change separator") {
-            it("should return 1-0-0--beta++007") {
+
+            When("changing separator") {
                 version.separator = "-"
+            }
+
+            Then("should return 1-0-0--beta++007") {
                 assertEquals("1-0-0--beta++007", version.semver)
             }
         }

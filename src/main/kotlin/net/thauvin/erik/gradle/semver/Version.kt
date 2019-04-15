@@ -33,9 +33,9 @@ package net.thauvin.erik.gradle.semver
 
 class Version {
     companion object {
-        const val DEFAULT_MAJOR: String = "1"
-        const val DEFAULT_MINOR: String = "0"
-        const val DEFAULT_PATCH: String = "0"
+        const val DEFAULT_MAJOR: Int = 1
+        const val DEFAULT_MINOR: Int = 0
+        const val DEFAULT_PATCH: Int = 0
         const val DEFAULT_EMPTY: String = ""
         const val DEFAULT_PRERELEASE_PREFIX = "-"
         const val DEFAULT_BUILDMETA_PREFIX = "+"
@@ -58,15 +58,15 @@ class Version {
 
     fun increment(isMajor: Boolean = false, isMinor: Boolean = false, isPatch: Boolean = false) {
         if (isMajor) {
-            major = (major.toInt() + 1).toString()
+            major++
             minor = DEFAULT_MINOR
             patch = DEFAULT_PATCH
         }
         if (isMinor) {
-            minor = (minor.toInt() + 1).toString()
+            minor++
             patch = DEFAULT_PATCH
         }
-        if (isPatch) patch = (patch.toInt() + 1).toString()
+        if (isPatch) patch++
     }
 
     override fun toString(): String {
