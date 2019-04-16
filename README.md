@@ -24,7 +24,7 @@ version.buildmeta=
 version.semver=1.0.0
 ```
 
-To change the version of your project, remove the version from your `build.gradle` and simply edit your the version properties file to match your version number.
+To change the version of your project, remove the version from `build.gradle` and simply edit the version properties file to match your version number.
 
 - __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
 
