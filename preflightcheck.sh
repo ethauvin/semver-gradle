@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Version: 1.0
+# Version: 1.1.1
 #
 
 # set source and test locations
@@ -17,12 +17,13 @@ declare -a examples=(
     "examples/annotation-processor/java incrementMinor run"
     "examples/annotation-processor/kotlin incrementMinor run")
 # e.g: empty or javadoc, etc.
-doc=""
+gradle_doc=""
 # e.g. empty or sonarqube
-sonar="sonarqube"
-
-# gradle default command line args
-opts="--console=plain --no-build-cache --no-daemon"
+gradle_sonar="sonarqube"
+# gradle options for examples
+gradle_opts="--console=plain --no-build-cache --no-daemon"
+# maven arguments for examples
+maven_args="compile exec:java"
 
 ###
 
@@ -40,7 +41,6 @@ date=$(date +%Y)
 
 pause() {
   read -p "Press [Enter] key to continue..."
-  clear
 }
 
 checkCopyright() {
@@ -54,9 +54,12 @@ checkCopyright() {
 
 runGradle() {
     cd "$1" || exit 1
+    clear
+    reset
     echo -e "> Project: ${cyan}${1}${std} [Gradle]"
     shift
-    ./gradlew $opts clean $@ || exit 1
+    ./gradlew $@ || exit 1
+    pause
     cd "$pwd"
 }
 
@@ -64,15 +67,26 @@ runKobalt() {
     cd "$1" || exit 1
     if [ -f kobalt/src/Build.kt ]
     then
-        read -p "Run Kobalt Example? [y/n]: " choice
-        case $choice in
-            [Yy] )
-                clear
-                echo -e "> Project: ${cyan}$1${std} [Kobalt]"
-                shift
-                ./kobaltw clean $@ ;;
-            * ) ;;
-        esac
+        clear
+        reset
+        echo -e "> Project: ${cyan}${1}${std} [Kobalt]"
+        shift
+        ./kobaltw $@ || exit 1
+        pause
+    fi
+    cd "$pwd"
+}
+
+runMaven() {
+    cd "$1" || exit 1
+    if [ -f pom.xml ]
+    then
+        clear
+        reset
+        echo -e "> Project: ${cyan}${1}${std} [Maven]"
+        shift
+        mvn $@ || exit 1
+        pause
     fi
     cd "$pwd"
 }
@@ -87,30 +101,67 @@ checkDeps() {
     clear
     echo -e "${cyan}Checking depencencies...${std}"
     gradle --console=plain dU || exit 1
-    pause
+    read -p "Check Examples depencencies? [y/n] " cont
+    clear
+    case $cont in
+        * ) for ex in "${!examples[@]}"
+            do
+                runGradle $(echo "${examples[ex]}" | cut -d " " -f 1) dU
+                runKobalt $(echo "${examples[ex]}" | cut -d " " -f 1) checkVersions
+                runMaven $(echo "${examples[ex]}" | cut -d " " -f 1) versions:display-dependency-updates 
+                if [ "$ex" -eq "${#examples}"]
+                then
+                    read -p "Continue? [y/n]: " cont
+                    clear
+                    case $cont in
+                        * ) continue ;;
+                        [Nn] ) return ;;
+                    esac
+                fi
+            done ;;
+        [Nn] ) return ;;
+    esac
 }
 
 gradleCheck() {
     clear
     echo -e "${cyan}Checking Gradle build....${std}"
-    gradle $opts clean check $doc $sonar || exit 1
+    gradle $gradle_opts clean check $gradle_doc $gradle_sonar || exit 1
     pause
 }
 
-examples() {
-    clear
-    echo -e "Running examples..."
-    for ex in "${examples[@]}"
+runExamples() {
+    for ex in "${!examples[@]}"
     do
-        runGradle $ex
-        runKobalt $ex
-        read -p "Continue? [y/n]: " choice
-        clear
-        case $choice in
-            [Yy] ) continue ;;
-            * ) return ;;
-        esac
+        runGradle ${examples[ex]} clean $gradle_opts
+        runKobalt ${examples[ex]} clean
+        runMaven $(echo "${examples[ex]}" | cut -d " " -f 1) clean $maven_args
     done
+}
+
+examplesMenu() {
+    clear
+    echo -e "${cyan}Examples${std}"
+    for ex in "${!examples[@]}"
+    do
+        printf  '    %d. %s\n' $(($ex + 1)) $(echo "${examples[ex]}" | cut -d " " -f 1)
+    done
+    echo "    $((${#examples[@]} + 1)). Run All Examples"
+    read -p "Enter choice [1-${#examples[@]}]: " choice
+    clear
+    case $choice in
+        [0-9] ) if [ "$choice" -gt "${#examples[@]}" ]
+                then
+                    runExamples
+                    examplesMenu
+                else
+                    runGradle ${examples[$(($choice - 1))]}
+                    runKobalt ${examples[$(($choice - 1))]}
+                    runMaven $(echo "${examples[$(($choice - 1))]}" | cut -d " " -f 1) $maven_args
+                    examplesMenu
+                fi ;;
+        * ) return ;;
+    esac
 }
 
 validateCopyrights() {
@@ -127,11 +178,13 @@ everything() {
     updateWrappers
     checkDeps
     gradleCheck
-    examples
+    runExamples
     validateCopyrights
 }
 
 showMenu() {
+    clear
+    echo "${cyan}Preflight Check${std}"
     echo "    1. Update Wrappers"
     echo "    2. Check Dependencies"
     echo "    3. Check Gradle Build"
@@ -147,7 +200,7 @@ readOptions(){
 		1) updateWrappers ;;
 		2) checkDeps ;;
         3) gradleCheck ;;
-        4) examples ;;
+        4) examplesMenu ;;
         5) validateCopyrights ;;
         6) everything ;;
 		*) exit 0 ;;
