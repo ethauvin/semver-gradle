@@ -138,17 +138,17 @@ object Utils {
         try {
             // major
             if (start != -1) {
-                major = semver.substring(0, start).toInt()
+                major = Math.abs(semver.substring(0, start).toInt())
                 semver.delete(0, start + major.length())
                 start = semver.indexOf(version.separator)
                 // minor
                 if (start != -1) {
-                    minor = semver.substring(0, start).toInt()
+                    minor = Math.abs(semver.substring(0, start).toInt())
                     semver = semver.delete(0, start + minor.length())
                     start = semver.indexOf(version.preReleasePrefix)
                     // patch
                     if (start != -1) {
-                        patch = semver.substring(0, start).toInt()
+                        patch = Math.abs(semver.substring(0, start).toInt())
                         semver.delete(0, start + minor.length())
                         start = semver.lastIndexOf(version.buildMetaPrefix)
                         // pre-release
@@ -169,11 +169,13 @@ object Utils {
                     } else if (semver.isNotEmpty()) {
                         // no pre-release
                         start = semver.lastIndexOf(version.buildMetaPrefix)
+                        // patch & build meta
                         if (start != -1) {
                             patch = semver.substring(0, start).toInt()
                             semver.delete(0, start + minor.length())
                             buildMeta = semver.toString()
                         } else {
+                            // patch
                             patch = semver.toString().toInt()
                         }
                         semver.clear()
