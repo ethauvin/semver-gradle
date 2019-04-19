@@ -116,8 +116,8 @@ The `major`, `minor`, `patch`, `prerelease` and `buildmeta` versions can also be
 version.major=1
 version.minor=0
 version.patch=0
-version.prerelease=
-version.buildmeta=beta
+version.prerelease=beta
+version.buildmeta=
 version.semver=1.0.0-beta
 ```
 
@@ -149,7 +149,7 @@ Property                    | Description                 | Default
 The version number is built as follows:
 
 
-`version.major` `version.separtor` `version.minor` `version.separator` `version.patch` `[` `version.prerelease.prefix` `version.prerelease` `]` `[` `version.prerelease.prefix` `version.buildmeta` `]`
+`version.major` `version.separator` `version.minor` `version.separator` `version.patch` `[` `version.prerelease.prefix` `version.prerelease` `]` `[` `version.prerelease.prefix` `version.buildmeta` `]`
 
 For reference, it is automatically included in the `version.semver` property.
 
@@ -162,7 +162,7 @@ version.minor=0
 version.patch=0
 version.prerelease=beta
 version.buildmeta=exp.sha.5114f85
-version.sevmer=1.0.0-beta+exp.sha.5114f85
+version.semver=1.0.0-beta+exp.sha.5114f85
 ```
 
 `project.version` will be `1.0.0-beta+exp.sha.5114f85` in Gradle.
@@ -187,6 +187,7 @@ or using different property keys for the version data:
 ```gradle
 semver {
     keysPrefix = "" // no prefix
+    semverKey = "version"
     majorKey = "maj"
     minorKey = "min"
     patchKey = "build"
@@ -203,7 +204,7 @@ min=0
 build=0
 rel=beta
 meta=
-semver=1.0.0-beta
+version=1.0.0-beta
 ```
 
 The following `semver` properties are available:
@@ -211,6 +212,7 @@ The following `semver` properties are available:
 Property              | Description                             | Default
 :---------------------|:----------------------------------------|:---------------------------
 `properties`          | The properties file.                    | `version.properties`
+`semverKey`           | The semver property key.                | `version.semver`
 `majorKey`            | The major property key.                 | `version.major`
 `minorKey`            | The minor property key.                 | `version.minor`
 `patchKey`            | The patch property key.                 | `version.patch`
