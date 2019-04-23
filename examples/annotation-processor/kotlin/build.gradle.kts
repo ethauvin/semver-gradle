@@ -13,7 +13,7 @@ plugins {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-var semverProcessor = "net.thauvin.erik:semver:1.1.1"
+var semverProcessor = "net.thauvin.erik:semver:1.2.0"
 
 dependencies {
     kapt(semverProcessor)
@@ -29,6 +29,12 @@ repositories {
 
 application {
     mainClassName = "com.example.Main"
+}
+
+kapt {
+    arguments {
+        arg("semver.project.dir", projectDir)
+    }
 }
 
 tasks {

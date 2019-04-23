@@ -1,8 +1,3 @@
-// plugins {
-//     id 'java'
-//     id 'application'
-//     id "net.thauvin.erik.gradle.semver" version "0.9.4-beta"
-// }
 buildscript {
     repositories {
         mavenLocal()
@@ -22,11 +17,15 @@ version = 1.0
 
 def f = new File("version.properties")
 
-dependencies {
+def semverProcessor = 'net.thauvin.erik:semver:1.2.0'
 
+dependencies {
+    annotationProcessor semverProcessor
+    compileOnly semverProcessor
 }
 
 repositories {
+    mavenLocal()
     jcenter()
 }
 

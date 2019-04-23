@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#
-# Version: 1.1.1
-#
-
 # set source and test locations
 src="src/main/kotlin/net/thauvin/erik/gradle/semver/"
 test="src/main/kotlin/net/thauvin/erik/gradle/semver/"
@@ -25,7 +21,9 @@ gradle_opts="--console=plain --no-build-cache --no-daemon"
 # maven arguments for examples
 maven_args="compile exec:java"
 
-###
+#
+# Version: 1.1.2
+#
 
 if [ "$java8" = true ]
 then
@@ -109,7 +107,7 @@ checkDeps() {
                 runGradle $(echo "${examples[ex]}" | cut -d " " -f 1) dU
                 runKobalt $(echo "${examples[ex]}" | cut -d " " -f 1) checkVersions
                 runMaven $(echo "${examples[ex]}" | cut -d " " -f 1) versions:display-dependency-updates 
-                if [ "$ex" -eq "${#examples}"]
+                if [ "$ex" -eq "${#examples}" ]
                 then
                     read -p "Continue? [y/n]: " cont
                     clear
