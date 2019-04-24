@@ -13,16 +13,16 @@ import java.util.Date;
  */
 public final class GeneratedVersion {
     public final static String PROJECT = "Java Example";
-    public final static Date BUILDDATE = new Date(1556045173358L);
+    public final static Date BUILDDATE = new Date(1556062927242L);
     public final static int MAJOR = 2;
-    public final static int MINOR = 8;
+    public final static int MINOR = 9;
     public final static int PATCH = 0;
     public final static String PRERELEASE = "";
     public final static String PRERELEASE_PREFIX = "-";
     public final static String BUILDMETA = "";
     public final static String BUILDMETA_PREFIX = "+";
     public final static String SEPARATOR = ".";
-    public final static String VERSION = "2.8.0";
+    public final static String VERSION = "2.9.0";
 
     /**
      * Disables the default constructor.
