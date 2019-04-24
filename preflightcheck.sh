@@ -22,7 +22,7 @@ gradle_opts="--console=plain --no-build-cache --no-daemon"
 maven_args="compile exec:java"
 
 #
-# Version: 1.1.2
+# Version: 1.1.3
 #
 
 if [ "$java8" = true ]
@@ -102,6 +102,7 @@ checkDeps() {
     read -p "Check Examples depencencies? [y/n] " cont
     clear
     case $cont in
+        [Nn] ) return ;;
         * ) for ex in "${!examples[@]}"
             do
                 runGradle $(echo "${examples[ex]}" | cut -d " " -f 1) dU
@@ -117,7 +118,6 @@ checkDeps() {
                     esac
                 fi
             done ;;
-        [Nn] ) return ;;
     esac
 }
 
@@ -191,7 +191,7 @@ showMenu() {
     echo "    6. Check Everything"
 }
 
-readOptions(){
+readOptions() {
 	local choice
 	read -p "Enter choice [1-6]: " choice
 	case $choice in
