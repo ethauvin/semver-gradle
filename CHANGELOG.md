@@ -1,11 +1,14 @@
 # Change Log
 
-## [1.0.1](https://github.com/ethauvin/semver-gradle/tree/1.0.1) (2019-05-24)
-[Full Changelog](https://github.com/ethauvin/semver-gradle/compare/1.0.0...1.0.1)
+## [1.0.2](https://github.com/ethauvin/semver-gradle/tree/1.0.2) (2019-05-24)
+[Full Changelog](https://github.com/ethauvin/semver-gradle/compare/1.0.1...1.0.2)
 
 **Implemented enhancements:**
 
 - version.properties write issue when using NetBeans on Windows. [\#6](https://github.com/ethauvin/semver-gradle/issues/6)
+
+## [1.0.1](https://github.com/ethauvin/semver-gradle/tree/1.0.1) (2019-05-24)
+[Full Changelog](https://github.com/ethauvin/semver-gradle/compare/1.0.0...1.0.1)
 
 ## [1.0.0](https://github.com/ethauvin/semver-gradle/tree/1.0.0) (2019-04-23)
 [Full Changelog](https://github.com/ethauvin/semver-gradle/compare/0.9.9-beta...1.0.0)
