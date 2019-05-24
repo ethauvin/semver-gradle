@@ -13,7 +13,7 @@ plugins {
     id("org.sonarqube") version "2.7.1"
 }
 
-version = "1.0.1"
+version = "1.0.2"
 group = "net.thauvin.erik.gradle"
 
 var github = "https://github.com/ethauvin/semver-gradle"
