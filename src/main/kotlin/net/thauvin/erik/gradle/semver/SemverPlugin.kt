@@ -36,7 +36,6 @@ import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.util.GradleVersion
-import java.io.File
 
 class SemverPlugin : Plugin<Project> {
     private val simpleName = SemverPlugin::class.simpleName
@@ -59,11 +58,7 @@ class SemverPlugin : Plugin<Project> {
     }
 
     private fun afterEvaluate(project: Project) {
-        val propsFile = if (File(config.properties).isAbsolute) {
-            File(config.properties)
-        } else {
-            File("${project.projectDir}${File.separator}${config.properties}")
-        }
+        val propsFile = Utils.getPropertiesFile(project.projectDir, config.properties)
 
         if (project.version != "unspecified") {
             project.logger.warn(
@@ -93,7 +88,7 @@ class SemverPlugin : Plugin<Project> {
 
             if (!hasReqProps || !isFile) {
                 project.logger.info("[$simpleName] Saving version properties to `$absoluteFile`.")
-                Utils.saveProperties(config, version)
+                Utils.saveProperties(project.projectDir, config, version)
             }
         }
     }

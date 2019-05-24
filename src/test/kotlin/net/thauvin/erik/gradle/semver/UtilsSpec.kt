@@ -48,12 +48,13 @@ object UtilsSpec : Spek({
         val version = Version()
         val config = SemverConfig()
         val propsFile = File("test.properties")
+        val projectDir = File("./")
         lateinit var props: Properties
 
         Scenario("Save/Load Properties") {
             When("saving the property") {
                 config.properties = propsFile.name
-                Utils.saveProperties(config, version)
+                Utils.saveProperties(projectDir, config, version)
             }
 
             Then("properties file should exists and be readable") {
@@ -115,7 +116,7 @@ object UtilsSpec : Spek({
             }
 
             When("saving properties") {
-                Utils.saveProperties(config, version)
+                Utils.saveProperties(projectDir, config, version)
             }
 
             lateinit var newProps: Properties
@@ -196,9 +197,35 @@ object UtilsSpec : Spek({
 
             Then("saving the locked properties file") {
                 assertFailsWith<GradleException> {
-                    Utils.saveProperties(config, version)
+                    Utils.saveProperties(projectDir, config, version)
                 }
                 propsLocked.delete()
+            }
+        }
+
+        Scenario("Save/Load Properties in foo") {
+            lateinit var fooDir: File
+            lateinit var fooProps: File
+            When("saving the foo property") {
+                fooDir = File("foo")
+                fooDir.mkdir()
+                fooProps = File(fooDir, propsFile.name)
+                config.properties = fooProps.absolutePath
+                Utils.saveProperties(projectDir, config, version)
+            }
+
+            Then("foo properties file should exists and be readable") {
+                assertEquals(fooProps.canReadFile(), fooProps.canRead() && fooProps.isFile)
+            }
+
+            When("loading the foo properties file") {
+                props = Utils.loadProperties(fooProps)
+                fooProps.delete()
+                fooDir.delete()
+            }
+
+            Then("version in foo properties should be the same") {
+                assertEquals(props.getProperty(config.semverKey), version.semver)
             }
         }
     }
