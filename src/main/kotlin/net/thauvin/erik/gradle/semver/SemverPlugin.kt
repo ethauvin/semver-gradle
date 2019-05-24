@@ -59,7 +59,11 @@ class SemverPlugin : Plugin<Project> {
     }
 
     private fun afterEvaluate(project: Project) {
-        val propsFile = File(config.properties)
+        val propsFile = if (File(config.properties).isAbsolute) {
+            File(config.properties)
+        } else {
+            File("${project.projectDir}${File.separator}${config.properties}")
+        }
 
         if (project.version != "unspecified") {
             project.logger.warn(

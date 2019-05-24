@@ -6,20 +6,20 @@ plugins {
     `maven-publish`
     jacoco
     id("com.github.ben-manes.versions") version "0.21.0"
-    id("com.gradle.build-scan") version "2.2.1"
+    id("com.gradle.build-scan") version "2.3"
     id("com.gradle.plugin-publish") version "0.10.1"
     id("io.gitlab.arturbosch.detekt") version "1.0.0-RC14"
-    id("org.jlleitschuh.gradle.ktlint") version "7.3.0"
-    id("org.sonarqube") version "2.7"
+    id("org.jmailen.kotlinter") version "1.25.2"
+    id("org.sonarqube") version "2.7.1"
 }
 
-version = "1.0.0"
+version = "1.0.1"
 group = "net.thauvin.erik.gradle"
 
 var github = "https://github.com/ethauvin/semver-gradle"
 var packageName = "net.thauvin.erik.gradle.semver"
 
-var spek_version = "2.0.2"
+var spek_version = "2.0.5"
 
 repositories {
     jcenter()
@@ -56,10 +56,6 @@ tasks {
         }
     }
 
-    "check" {
-        dependsOn("ktlintCheck")
-    }
-
     "sonarqube" {
         dependsOn("jacocoTestReport")
     }
@@ -79,6 +75,12 @@ detekt {
     input = files("src/main/kotlin", "src/test/kotlin")
     filters = ".*/resources/.*,.*/build/.*"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
+}
+
+kotlinter {
+    ignoreFailures = false
+    reporters = arrayOf("html")
+    experimentalRules = false
 }
 
 sonarqube {

@@ -70,12 +70,12 @@ object Utils {
         var isNew = false
         val props = Properties()
         file.apply {
-            if (!exists()) {
-                if (!createNewFile()) {
-                    throw GradleException("Unable to create: `$absoluteFile`")
-                } else {
+            try {
+                if (!exists() && createNewFile()) {
                     isNew = true
                 }
+            } catch (e: Exception) {
+                throw GradleException("Unable to create: `$absoluteFile`", e)
             }
             if (canReadFile()) {
                 FileInputStream(this).reader().use { reader ->

@@ -32,11 +32,13 @@
 package net.thauvin.erik.gradle.semver
 
 import net.thauvin.erik.gradle.semver.Utils.canReadFile
+import org.gradle.api.GradleException
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import java.io.File
 import java.util.Properties
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -46,6 +48,7 @@ object UtilsSpec : Spek({
         val version = Version()
         val config = SemverConfig()
         val propsFile = File("test.properties")
+        val propsLocked = File("locked.properties")
         lateinit var props: Properties
 
         Scenario("Save/Load Properties") {
@@ -165,6 +168,36 @@ object UtilsSpec : Spek({
             Then("verifying pre-release and meta") {
                 assertEquals(version.preRelease, "beta.1")
                 assertEquals(version.buildMeta, "007")
+            }
+        }
+
+        Scenario("Save to locked properties") {
+            Given("the locked properties") {
+                propsLocked.createNewFile()
+                propsLocked.setReadOnly()
+                config.properties = propsLocked.name
+            }
+
+            Then("saving the locked properties file") {
+                assertFailsWith<GradleException> {
+                    Utils.saveProperties(config, version)
+                }
+                propsLocked.delete()
+            }
+        }
+
+        Scenario("Load locked properties") {
+            lateinit var locked: File
+
+            Given("the locked location") {
+                locked = File("locked")
+            }
+
+            Then("loading locked properties") {
+                assertFailsWith<GradleException> {
+                    Utils.loadProperties(File(locked, propsLocked.name))
+                }
+                locked.delete()
             }
         }
     }
