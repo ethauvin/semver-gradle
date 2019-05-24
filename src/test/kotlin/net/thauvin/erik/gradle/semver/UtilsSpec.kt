@@ -48,7 +48,6 @@ object UtilsSpec : Spek({
         val version = Version()
         val config = SemverConfig()
         val propsFile = File("test.properties")
-        val propsLocked = File("locked.properties")
         lateinit var props: Properties
 
         Scenario("Save/Load Properties") {
@@ -171,8 +170,25 @@ object UtilsSpec : Spek({
             }
         }
 
+        Scenario("Load locked properties") {
+            lateinit var locked: File
+
+            Given("the locked location") {
+                locked = File("locked")
+            }
+
+            Then("loading locked properties") {
+                assertFailsWith<GradleException> {
+                    Utils.loadProperties(File(locked, propsFile.name))
+                }
+                locked.delete()
+            }
+        }
+
         Scenario("Save to locked properties") {
+            lateinit var propsLocked: File
             Given("the locked properties") {
+                propsLocked = File("locked.properties")
                 propsLocked.createNewFile()
                 propsLocked.setReadOnly()
                 config.properties = propsLocked.name
@@ -183,21 +199,6 @@ object UtilsSpec : Spek({
                     Utils.saveProperties(config, version)
                 }
                 propsLocked.delete()
-            }
-        }
-
-        Scenario("Load locked properties") {
-            lateinit var locked: File
-
-            Given("the locked location") {
-                locked = File("locked")
-            }
-
-            Then("loading locked properties") {
-                assertFailsWith<GradleException> {
-                    Utils.loadProperties(File(locked, propsLocked.name))
-                }
-                locked.delete()
             }
         }
     }

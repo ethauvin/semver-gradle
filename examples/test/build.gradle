@@ -3,7 +3,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath "net.thauvin.erik.gradle:semver:1.0.0"
+        classpath "net.thauvin.erik.gradle:semver:1.0.1"
     }
 }
 
@@ -45,7 +45,7 @@ run {
 }
 
 semver {
-    properties = "$projectDir/${f.name}"
+    properties = "${f.name}"
     keysPrefix = f.name.substring(0, f.name.indexOf(".") + 1)
     buildMetaKey = "meta"
     semverKey = "fullversion"
