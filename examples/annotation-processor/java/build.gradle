@@ -20,7 +20,7 @@ def semverProcessor = "net.thauvin.erik:semver:1.2.0"
 
 dependencies {
     annotationProcessor semverProcessor
-    compileOnly semverProcessor
+    implementation semverProcessor
 }
 
 repositories {
