@@ -23,6 +23,11 @@ dependencies {
     implementation semverProcessor
 }
 
+// For Java 12+
+tasks.withType(JavaCompile) {
+  options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
+}
+
 repositories {
     mavenLocal()
     jcenter()
