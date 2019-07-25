@@ -1,9 +1,10 @@
 buildscript {
     repositories {
         mavenLocal()
+        mavenCentral()
     }
     dependencies {
-        classpath "net.thauvin.erik.gradle:semver:1.0.2"
+        classpath "net.thauvin.erik.gradle:semver:1.0.3-beta"
     }
 }
 
@@ -39,7 +40,7 @@ incrementBuildMeta {
 
 run {
     doFirst {
-        println("Version: $version")
+        println("Version: $semver.major$semver.separator$semver.minor$semver.separator$semver.patch$semver.preReleasePrefix$semver.preRelease$semver.buildMetaPrefix$semver.buildMeta")
         args = [f.name]
     }
 }
