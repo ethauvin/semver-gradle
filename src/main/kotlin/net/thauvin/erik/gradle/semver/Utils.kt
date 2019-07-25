@@ -50,11 +50,6 @@ object Utils {
         return canRead() && isFile
     }
 
-    private fun Int.length() = when (this) {
-        0 -> 1
-        else -> Math.log10(Math.abs(toDouble())).toInt() + 1
-    }
-
     private fun Properties.put(key: String, value: String, isValidCondition: Boolean) {
         if (isValidCondition) put(key, value)
     }
@@ -135,72 +130,40 @@ object Utils {
     fun parseSemVer(input: String?, version: Version): Boolean {
         if (input.isNullOrBlank()) return false
 
-        var semver = StringBuilder(input)
-        var start = semver.indexOf(version.separator)
-        var minor = -1
-        var major = -1
-        var patch = -1
-        var preRelease = ""
-        var buildMeta = ""
-
         try {
-            // major
-            if (start != -1) {
-                major = Math.abs(semver.substring(0, start).toInt())
-                semver.delete(0, start + major.length())
-                start = semver.indexOf(version.separator)
-                // minor
-                if (start != -1) {
-                    minor = Math.abs(semver.substring(0, start).toInt())
-                    semver = semver.delete(0, start + minor.length())
-                    start = semver.indexOf(version.preReleasePrefix)
-                    // patch
-                    if (start != -1) {
-                        patch = Math.abs(semver.substring(0, start).toInt())
-                        semver.delete(0, start + minor.length())
-                        start = semver.lastIndexOf(version.buildMetaPrefix)
-                        // pre-release
-                        if (start != -1) {
-                            preRelease = semver.substring(0, start)
-                            semver.delete(0, preRelease.length)
-                            start = semver.indexOf(version.buildMetaPrefix)
-                            // build meta
-                            if (start != -1) {
-                                buildMeta = semver.substring(version.preReleasePrefix.length)
-                                semver.clear()
+            val parts = input.split(
+                Regex("[\\Q${version.separator}${version.preReleasePrefix}${version.buildMetaPrefix}\\E]"),
+                5
+            )
+
+            if (parts.size >= 3) {
+                version.major = parts[0].toInt()
+                version.minor = parts[1].toInt()
+                version.patch = parts[2].toInt()
+                version.preRelease = ""
+                version.buildMeta = ""
+
+                if (parts.size > 3) {
+                    when {
+                        parts.size == 5 -> {
+                            version.preRelease = parts[3]
+                            version.buildMeta = parts[4]
+                        }
+                        parts.size == 4 -> {
+                            if (input.contains(version.buildMetaPrefix)) {
+                                version.buildMeta = parts[3]
+                            } else {
+                                version.preRelease = parts[3]
                             }
-                        } else {
-                            // no build meta
-                            preRelease = semver.toString()
-                            semver.clear()
                         }
-                    } else if (semver.isNotEmpty()) {
-                        // no pre-release
-                        start = semver.lastIndexOf(version.buildMetaPrefix)
-                        // patch & build meta
-                        if (start != -1) {
-                            patch = semver.substring(0, start).toInt()
-                            semver.delete(0, start + minor.length())
-                            buildMeta = semver.toString()
-                        } else {
-                            // patch
-                            patch = semver.toString().toInt()
-                        }
-                        semver.clear()
                     }
                 }
+            } else {
+                throw NumberFormatException("Not enough parts.")
             }
         } catch (e: NumberFormatException) {
             throw GradleException("Unable to parse version: \"$input\" (${e.message})", e)
         }
-
-        if (semver.isNotEmpty()) throw GradleException("Unable to parse version: \"$input\".")
-
-        version.major = major
-        version.minor = minor
-        version.patch = patch
-        version.preRelease = preRelease
-        version.buildMeta = buildMeta
 
         return true
     }
@@ -224,15 +187,21 @@ object Utils {
                     put(config.buildMetaKey, version.buildMeta)
                     put(config.semverKey, version.semver)
 
-                    put(config.buildMetaPrefixKey, version.buildMetaPrefix,
+                    put(
+                        config.buildMetaPrefixKey, version.buildMetaPrefix,
                         version.buildMetaPrefix != Version.DEFAULT_BUILDMETA_PREFIX ||
-                            containsKey(config.buildMetaPrefixKey))
-                    put(config.preReleasePrefixKey, version.preReleasePrefix,
+                            containsKey(config.buildMetaPrefixKey)
+                    )
+                    put(
+                        config.preReleasePrefixKey, version.preReleasePrefix,
                         version.preReleasePrefix != Version.DEFAULT_PRERELEASE_PREFIX ||
-                            containsKey(config.preReleasePrefixKey))
-                    put(config.separatorKey, version.separator,
+                            containsKey(config.preReleasePrefixKey)
+                    )
+                    put(
+                        config.separatorKey, version.separator,
                         version.separator != Version.DEFAULT_SEPARATOR ||
-                            containsKey(config.separatorKey))
+                            containsKey(config.separatorKey)
+                    )
 
                     if (canWrite()) {
                         FileOutputStream(this).writer().use {

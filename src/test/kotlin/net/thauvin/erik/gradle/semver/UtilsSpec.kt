@@ -46,7 +46,7 @@ import kotlin.test.assertTrue
 object UtilsSpec : Spek({
     Feature("Utils") {
         val version = Version()
-        val config = SemverConfig()
+        val config = SemverConfig(version)
         val propsFile = File("test.properties")
         val projectDir = File("./")
         lateinit var props: Properties
@@ -88,12 +88,19 @@ object UtilsSpec : Spek({
                     Pair(config.minorKey, "1"),
                     Pair(config.patchKey, "1"),
                     Pair(config.preReleaseKey, "beta"),
-                    Pair(config.buildMetaKey, "007"))
+                    Pair(config.buildMetaKey, "007")
+                )
             }
 
             Then("none should already exists") {
-                assertTrue(Utils.isNotSystemProperty(setOf(config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
-                    config.buildMetaKey)))
+                assertTrue(
+                    Utils.isNotSystemProperty(
+                        setOf(
+                            config.majorKey, config.minorKey, config.patchKey, config.preReleaseKey,
+                            config.buildMetaKey
+                        )
+                    )
+                )
             }
 
             Then("version should match system properties") {
@@ -147,7 +154,15 @@ object UtilsSpec : Spek({
 
         Scenario("Testing Version Parsing") {
             When("validating version parsing") {
-                listOf("1.0.0", "2.1.0-beta", "3.2.1-beta+007", "4.3.2+007").forEach {
+                listOf(
+                    "1.0.0",
+                    "2.1.0-beta",
+                    "3.2.1-beta+007",
+                    "4.3.2+007",
+                    "11.11.1",
+                    "111.11.11-beta",
+                    "1111.111.11-beta+001.12"
+                ).forEach {
                     assertTrue(Utils.parseSemVer(it, version), "parsing semver: $it")
                     assertEquals(it, version.semver, it)
                 }
@@ -166,8 +181,8 @@ object UtilsSpec : Spek({
             }
 
             Then("verifying pre-release and meta") {
-                assertEquals(version.preRelease, "beta.1")
-                assertEquals(version.buildMeta, "007")
+                assertEquals(version.preRelease, "beta")
+                assertEquals(version.buildMeta, "1.007")
             }
         }
 
