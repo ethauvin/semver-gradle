@@ -32,7 +32,11 @@
 
 package net.thauvin.erik.gradle.semver
 
-open class SemverConfig {
+import javax.inject.Inject
+
+open class SemverConfig @Inject constructor(
+    private val semVersion: Version
+) {
     companion object {
         const val DEFAULT_KEYS_PREFIX = "version."
         const val DEFAULT_PROPERTIES = "${DEFAULT_KEYS_PREFIX}properties"
@@ -48,6 +52,8 @@ open class SemverConfig {
     }
 
     var properties = DEFAULT_PROPERTIES
+
+    // Keys
     var semverKey = DEFAULT_SEMVER_KEY
         get() = "$keysPrefix$field"
     var majorKey = DEFAULT_MAJOR_KEY
@@ -68,10 +74,32 @@ open class SemverConfig {
         get() = "$keysPrefix$field"
     var keysPrefix = DEFAULT_KEYS_PREFIX
 
+    // Properties
+    val semver: String
+        get() = semVersion.semver
+    val version: String
+        get() = semVersion.semver
+    val major: Int
+        get() = semVersion.major
+    val minor: Int
+        get() = semVersion.minor
+    val patch: Int
+        get() = semVersion.patch
+    val preRelease: String
+        get() = semVersion.preRelease
+    val buildMeta: String
+        get() = semVersion.buildMeta
+    val preReleasePrefix: String
+        get() = semVersion.preReleasePrefix
+    val buildMetaPrefix: String
+        get() = semVersion.buildMetaPrefix
+    val separator: String
+        get() = semVersion.separator
+
     override fun toString(): String {
         return "SemverConfig(" +
             "properties='$properties', " +
-            "semver='$semverKey', " +
+            "semverKey='$semverKey', " +
             "majorKey='$majorKey', " +
             "minorKey='$minorKey', " +
             "patchKey='$patchKey', " +
@@ -80,7 +108,16 @@ open class SemverConfig {
             "buildMetaKey='$buildMetaKey', " +
             "buildMetaPrefixKey='$buildMetaPrefixKey', " +
             "separator='$separatorKey', " +
-            "keysPrefix='$keysPrefix')" +
+            "keysPrefix='$keysPrefix', " +
+            "semver='$semver', " +
+            "major='$major', " +
+            "minor='$minor', " +
+            "patch='$patch', " +
+            "preRelease='$preRelease', " +
+            "buildMeta='$buildMeta', " +
+            "preReleasePrefix='$preReleasePrefix', " +
+            "buildMetaPrefix='$buildMetaPrefix', " +
+            "separator='$separator'" +
             ')'
     }
 }

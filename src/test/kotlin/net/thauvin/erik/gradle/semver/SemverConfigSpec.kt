@@ -41,7 +41,7 @@ import kotlin.test.assertTrue
 object SemverConfigSpec : Spek({
     Feature("SemverConfig") {
         Scenario("Testing configs") {
-            val config by memoized { SemverConfig() }
+            val config by memoized { SemverConfig(Version()) }
             val vars = listOf(
                 config.semverKey,
                 config.majorKey,

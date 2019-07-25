@@ -46,7 +46,7 @@ class SemverPlugin : Plugin<Project> {
         if (GradleVersion.current() < GradleVersion.version("4.8.1")) {
             throw GradleException("The $simpleName plugin requires Gradle version 4.8.1 or greater.")
         }
-        config = project.extensions.create("semver", SemverConfig::class.java)
+        config = project.extensions.create("semver", SemverConfig::class.java, version)
         project.afterEvaluate(this::afterEvaluate)
 
         project.tasks.apply {
@@ -62,18 +62,22 @@ class SemverPlugin : Plugin<Project> {
 
         if (project.version != "unspecified") {
             project.logger.warn(
-                "Please specify the version in ${propsFile.name} and remove it from ${project.buildFile.name}")
+                "Please specify the version in ${propsFile.name} and remove it from ${project.buildFile.name}"
+            )
         }
 
         propsFile.apply {
             val isNew = !exists()
 
             project.logger.info(
-                "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: $isNew, isFile: $isFile, canRead: ${propsFile.canRead()}]")
+                "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: $isNew, isFile: $isFile, canRead: ${canRead()}]"
+            )
 
             val props = Utils.loadProperties(this)
-            val requiredProps = setOf(config.semverKey, config.majorKey, config.minorKey, config.patchKey,
-                config.preReleaseKey, config.buildMetaKey)
+            val requiredProps = setOf(
+                config.semverKey, config.majorKey, config.minorKey, config.patchKey,
+                config.preReleaseKey, config.buildMetaKey
+            )
             val hasReqProps = !isNew && props.stringPropertyNames().containsAll(requiredProps) &&
                 Utils.isNotSystemProperty(requiredProps)
 

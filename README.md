@@ -244,6 +244,32 @@ test.semver=1.0.0
 
 - __Examples__: [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/java), [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/kotlin)
 
+### Semver Extension Properties
+
+The values stored in the version properties file can individually be accessed using the `semver` extension, for example:
+
+```gradle
+    fooTask {
+        println "Build: $semver.buildMeta"
+    }
+```
+
+The semver extension properties are:
+
+Property                  | Description
+:-------------------------|:----------------------------
+`semver.semver`           | The full semantic version.
+`semver.version`          | Same as `semver.semver`.
+`semver.major`            | The major version.
+`semver.minor`            | The minor version.
+`semver.patch`            | The patch version.
+`semver.preRelease`       | The pre-release version
+`semver.preReleasePrefix` | The pre-release prefix
+`semver.buildMeta`        | The build metatdata version
+`semver.buildMetaPrefix`  | The build metadata prefix
+`semver.separator`        | The version separator.
+
+
 ## Source Code Generation
 
 If you'd like to incorporate the version number data into your source code, please have a look at the [__Semantic Version Annotation Processor__](https://github.com/ethauvin/semver).
