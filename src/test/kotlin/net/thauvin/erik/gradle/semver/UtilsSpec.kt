@@ -171,16 +171,16 @@ object UtilsSpec : Spek({
             }
 
             Then("should throw exceptions") {
-                assertFailsWith<GradleException> {
+                assertFailsWith<GradleException>("2.1.1a") {
                     Utils.parseSemVer("2.1.1a", version)
                 }
-                assertFailsWith<GradleException> {
+                assertFailsWith<GradleException>("2a.1.1") {
                     Utils.parseSemVer("2a.1.1", version)
                 }
-                assertFailsWith<GradleException> {
+                assertFailsWith<GradleException>("2.1a.1") {
                     Utils.parseSemVer("2.1a.1", version)
                 }
-                assertFailsWith<GradleException> {
+                assertFailsWith<GradleException>("2.1") {
                     Utils.parseSemVer("2.1", version)
                 }
             }
