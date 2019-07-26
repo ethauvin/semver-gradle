@@ -14,7 +14,7 @@ plugins {
     kotlin("jvm") version "1.3.31"
 }
 
-version = "1.0.3-beta"
+version = "1.0.4"
 group = "net.thauvin.erik.gradle"
 
 var github = "https://github.com/ethauvin/semver-gradle"

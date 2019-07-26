@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'net.thauvin.erik.gradle.semver' version '1.0.2'
+    id 'net.thauvin.erik.gradle.semver' version '1.0.4'
     id 'com.github.ben-manes.versions' version '0.21.0'
 }
 
