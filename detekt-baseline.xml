@@ -1,13 +1,16 @@
 <?xml version="1.0" ?>
 <SmellBaseline>
   <Blacklist timestamp="1555043579716"></Blacklist>
-  <Whitelist timestamp="1555043579714">
+  <Whitelist timestamp="1564167428855">
     <ID>ComplexMethod:Utils.kt$Utils$fun loadProperties(file: File): Properties</ID>
+    <ID>ComplexMethod:Utils.kt$Utils$fun parseSemVer(input: String?, version: Version): Boolean</ID>
+    <ID>ComplexMethod:Utils.kt$Utils$fun saveProperties(projectDir: File, config: SemverConfig, version: Version)</ID>
     <ID>MagicNumber:Utils.kt$Utils$3</ID>
     <ID>MagicNumber:Utils.kt$Utils$4</ID>
+    <ID>MagicNumber:Utils.kt$Utils$5</ID>
     <ID>MaxLineLength:SemverPlugin.kt$net.thauvin.erik.gradle.semver.SemverPlugin.kt</ID>
     <ID>NestedBlockDepth:Utils.kt$Utils$fun loadProperties(file: File): Properties</ID>
-    <ID>NestedBlockDepth:Utils.kt$Utils$fun parseSemVer(input: String, version: Version): String</ID>
-    <ID>NestedBlockDepth:Utils.kt$Utils$fun saveProperties(config: SemverConfig, version: Version)</ID>
+    <ID>NestedBlockDepth:Utils.kt$Utils$fun parseSemVer(input: String?, version: Version): Boolean</ID>
+    <ID>NestedBlockDepth:Utils.kt$Utils$fun saveProperties(projectDir: File, config: SemverConfig, version: Version)</ID>
   </Whitelist>
 </SmellBaseline>
