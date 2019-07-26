@@ -152,8 +152,10 @@ object UtilsSpec : Spek({
             }
         }
 
-        Scenario("Testing Version Parsing") {
-            When("validating version parsing") {
+        Scenario("Version Parsing") {
+            When("validating version parsing") {}
+
+            Then("versions should parse") {
                 listOf(
                     "1.0.0",
                     "2.1.0-beta",
@@ -168,19 +170,34 @@ object UtilsSpec : Spek({
                 }
             }
 
+            Then("should throw exceptions") {
+                assertFailsWith<GradleException> {
+                    Utils.parseSemVer("2.1.1a", version)
+                }
+                assertFailsWith<GradleException> {
+                    Utils.parseSemVer("2a.1.1", version)
+                }
+                assertFailsWith<GradleException> {
+                    Utils.parseSemVer("2.1a.1", version)
+                }
+                assertFailsWith<GradleException> {
+                    Utils.parseSemVer("2.1", version)
+                }
+            }
+
             Given("new prefixes") {
                 version.preReleasePrefix = "."
                 version.buildMetaPrefix = "."
             }
 
-            Then("validating prefixes parsing") {
+            Then("prefixes should parse") {
                 listOf("2.1.0.beta.1", "2.1.1.1", "3.2.1.beta.1.007").forEach {
                     assertTrue(Utils.parseSemVer(it, version), "parsing semver: $it")
                     assertEquals(it, version.semver, it)
                 }
             }
 
-            Then("verifying pre-release and meta") {
+            Then("last pre-release and meta should match") {
                 assertEquals(version.preRelease, "beta")
                 assertEquals(version.buildMeta, "1.007")
             }
