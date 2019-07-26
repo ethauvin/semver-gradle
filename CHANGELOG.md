@@ -1,5 +1,19 @@
 # Change Log
 
+## [1.0.4](https://github.com/ethauvin/semver-gradle/tree/1.0.4) (2019-07-26)
+[Full Changelog](https://github.com/ethauvin/semver-gradle/compare/1.0.3-beta...1.0.4)
+
+**Implemented enhancements:**
+
+- Access semver version properties in Gradle build file. [\#8](https://github.com/ethauvin/semver-gradle/issues/8)
+
+## [1.0.3-beta](https://github.com/ethauvin/semver-gradle/tree/1.0.3-beta) (2019-07-25)
+[Full Changelog](https://github.com/ethauvin/semver-gradle/compare/1.0.2...1.0.3-beta)
+
+**Closed issues:**
+
+- Thanks! [\#7](https://github.com/ethauvin/semver-gradle/issues/7)
+
 ## [1.0.2](https://github.com/ethauvin/semver-gradle/tree/1.0.2) (2019-05-24)
 [Full Changelog](https://github.com/ethauvin/semver-gradle/compare/1.0.1...1.0.2)
 
