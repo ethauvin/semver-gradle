@@ -74,7 +74,7 @@ open class SemverConfig @Inject constructor(
         get() = "$keysPrefix$field"
     var keysPrefix = DEFAULT_KEYS_PREFIX
 
-    // Properties
+    // Extension Properties
     val semver: String
         get() = semVersion.semver
     val version: String

@@ -90,13 +90,34 @@ object SemverConfigSpec : Spek({
                     config.preReleasePrefixKey,
                     config.buildMetaKey,
                     config.buildMetaPrefixKey,
-                    config.separatorKey)
+                    config.separatorKey
+                )
             }
 
             Then("all config keys should start with test.xxxx") {
                 newKeys.forEach { k ->
                     assertTrue(k.startsWith("test."), k)
                 }
+            }
+
+            When("checking extension properties") {}
+
+            Then("semver should be defaults") {
+                val defaultSemver =
+                    "${Version.DEFAULT_MAJOR}${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_MINOR}${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_PATCH}"
+                assertEquals(config.semver, defaultSemver)
+                assertEquals(
+                    "${config.major}${config.separator}${config.minor}${config.separator}${config.patch}",
+                    defaultSemver
+                )
+                assertEquals(config.preRelease, Version.DEFAULT_EMPTY)
+                assertEquals(config.buildMeta, Version.DEFAULT_EMPTY)
+                assertEquals(config.preReleasePrefix, Version.DEFAULT_PRERELEASE_PREFIX)
+                assertEquals(config.buildMetaPrefix, Version.DEFAULT_BUILDMETA_PREFIX)
+            }
+
+            Then("semver = version") {
+                assertEquals(config.semver, config.version)
             }
         }
     }
