@@ -23,9 +23,7 @@ dependencies {
 
 tasks.withType(JavaCompile) {
     options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
-    if (JavaVersion.current().isJava12Compatible()) {
-        options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
-    }
+    options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
 }
 
 repositories {
