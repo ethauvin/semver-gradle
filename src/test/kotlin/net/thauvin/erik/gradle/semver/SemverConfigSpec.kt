@@ -1,7 +1,7 @@
 /*
  * SemverConfigSpec.kt
  *
- * Copyright (c) 2018-2019, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2018-2020, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,8 +40,8 @@ import kotlin.test.assertTrue
 @Suppress("unused")
 object SemverConfigSpec : Spek({
     Feature("SemverConfig") {
+        val config = SemverConfig(Version())
         Scenario("Testing configs") {
-            val config by memoized { SemverConfig(Version()) }
             val vars = listOf(
                 config.semverKey,
                 config.majorKey,

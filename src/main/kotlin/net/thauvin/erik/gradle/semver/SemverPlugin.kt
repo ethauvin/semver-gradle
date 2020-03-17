@@ -1,7 +1,7 @@
 /*
  * SemverPlugin.kt
  *
- * Copyright (c) 2018-2019, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2018-2020, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -70,7 +70,8 @@ class SemverPlugin : Plugin<Project> {
             val isNew = !exists()
 
             project.logger.info(
-                "[$simpleName] Attempting to read properties from: `$absoluteFile`. [exists: $isNew, isFile: $isFile, canRead: ${canRead()}]"
+                "[$simpleName] Attempting to read properties from: `$absoluteFile`. " +
+                    "[exists: $isNew, isFile: $isFile, canRead: ${canRead()}]"
             )
 
             val props = Utils.loadProperties(this)

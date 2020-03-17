@@ -1,3 +1,3 @@
 <component name="DependencyValidationManager">
-  <scope name="Copyright" pattern="file[semver.main]:*.kt/||file[semver.test]:*.kt/" />
+  <scope name="Copyright" pattern="file[semver-gradle]:src/main/kotlin/net/thauvin/erik/gradle/semver//*||file[semver-gradle]:src/test/kotlin/net/thauvin/erik/gradle/semver//*||file[examples-kotlin.main]:*/||file[examples-kotlin.test]:*/||file[examples-java.main]:*/||file[examples-java.test]:*/||file[ap-examples-kotlin.main]:*/||file[ap-examples-java.main]:*/" />
 </component>

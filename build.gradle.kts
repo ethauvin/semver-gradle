@@ -5,21 +5,20 @@ plugins {
     `kotlin-dsl`
     `maven-publish`
     jacoco
-    id("com.github.ben-manes.versions") version "0.21.0"
-    id("com.gradle.build-scan") version "2.3"
+    id("com.github.ben-manes.versions") version "0.28.0"
     id("com.gradle.plugin-publish") version "0.10.1"
-    id("io.gitlab.arturbosch.detekt") version "1.0.0-RC14" // don't update until kotlin 1.3.41 is supported by Gradle
-    id("org.jmailen.kotlinter") version "1.26.0" // don't update until kotlin 1.3.41 supported by Gradle
-    id("org.sonarqube") version "2.7.1"
-    kotlin("jvm") version "1.3.31"
+    id("io.gitlab.arturbosch.detekt") version "1.6.0"
+    id("org.jmailen.kotlinter") version "2.3.2"
+    id("org.sonarqube") version "2.8"
+    kotlin("jvm") version "1.3.61"
 }
 
 version = "1.0.4"
 group = "net.thauvin.erik.gradle"
 
 object VersionInfo {
-    const val kotlin = "1.3.31"
-    const val spek = "2.0.5"
+    const val kotlin = "1.3.61"
+    const val spek = "2.0.10"
 }
 val versions: VersionInfo by extra { VersionInfo }
 
@@ -33,13 +32,15 @@ repositories {
 dependencies {
     implementation(gradleApi())
 
+    implementation(kotlin("stdlib-jdk8", version = versions.kotlin))
+
     testImplementation(kotlin("reflect", version = versions.kotlin))
     testImplementation(kotlin("test", version = versions.kotlin))
     testImplementation(gradleTestKit())
 
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:${versions.spek}")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:${versions.spek}")
-    implementation(kotlin("stdlib-jdk8", version = versions.kotlin))
+
 }
 
 tasks {
@@ -78,8 +79,8 @@ buildScan {
 }
 
 detekt {
-    input = files("src/main/kotlin", "src/test/kotlin")
-    filters = ".*/resources/.*,.*/build/.*"
+    // input = files("src/main/kotlin", "src/test/kotlin")
+    // filters = ".*/resources/.*,.*/build/.*"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
 }
 
@@ -87,7 +88,7 @@ kotlinter {
     ignoreFailures = false
     reporters = arrayOf("html")
     experimentalRules = false
-    //disabledRules = arrayOf("import-ordering")
+    disabledRules = arrayOf("import-ordering")
 }
 
 sonarqube {
