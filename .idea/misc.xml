@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/examples/annotation-processor/java" />
     <file type="web" url="file://$PROJECT_DIR$/examples/annotation-processor/kotlin" />
     <file type="web" url="file://$PROJECT_DIR$/examples/java" />
+    <file type="web" url="file://$PROJECT_DIR$/examples/kotlin" />
   </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
