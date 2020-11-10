@@ -4,10 +4,10 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 plugins {
-    kotlin("jvm").version("1.3.61")
+    kotlin("jvm").version("1.4.10")
     application
     id("net.thauvin.erik.gradle.semver").version("1.0.4")
-    id("com.github.ben-manes.versions").version("0.28.0")
+    id("com.github.ben-manes.versions").version("0.36.0")
 }
 
 // ./gradlew
@@ -20,7 +20,7 @@ defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
 dependencies {
     implementation(kotlin("stdlib"))
-    testImplementation("org.testng:testng:7.2.0")
+    testImplementation("org.testng:testng:7.3.0")
 }
 
 repositories {
@@ -29,6 +29,9 @@ repositories {
 
 application {
     mainClassName = "com.example.MainKt"
+//    project.afterEvaluate {
+//        println("Version: $version")
+//    }
 }
 
 semver {

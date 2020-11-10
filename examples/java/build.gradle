@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'net.thauvin.erik.gradle.semver' version '1.0.4'
-    id 'com.github.ben-manes.versions' version '0.28.0'
+    id 'com.github.ben-manes.versions' version '0.36.0'
 }
 
 // ./gradlew
@@ -10,14 +10,14 @@ plugins {
 // ./gradlew incrementMinor run
 // ./gradlew incrementMajor run
 // ./gradlew incrementBuildMeta run
+// ./gradlew echoVersion
 
-mainClassName = 'App'
 
 defaultTasks 'run'
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
 repositories {
@@ -27,6 +27,13 @@ repositories {
 test {
     useJUnitPlatform()
 }
+
+application {
+    mainClassName = 'App'
+//    project.afterEvaluate {
+//        println "Version: $version"
+//    }
+}    
 
 semver {
 //     properties = "example.properties"
@@ -44,9 +51,14 @@ incrementBuildMeta {
 
 run {
     doFirst {
+//        println "Version: ${-> version}"
         println "Version: $version"
     }
 
 //    args = ['example.properties']
     args = ['version.properties']
+}
+
+task echoVersion(type:Exec) {
+    commandLine 'echo', "${-> project.version}"
 }

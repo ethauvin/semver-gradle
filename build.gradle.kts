@@ -5,18 +5,18 @@ plugins {
     `maven-publish`
     jacoco
     kotlin("jvm") version "1.3.72"
-    id("com.github.ben-manes.versions") version "0.29.0"
+    id("com.github.ben-manes.versions") version "0.36.0"
     id("com.gradle.plugin-publish") version "0.12.0"
-    id("io.gitlab.arturbosch.detekt") version "1.10.0"
+    id("io.gitlab.arturbosch.detekt") version "1.14.2"
     id("org.gradle.kotlin.kotlin-dsl") version "1.3.6"
     id("org.sonarqube") version "3.0"
 }
 
-version = "1.0.4"
+version = "1.0.5-beta"
 group = "net.thauvin.erik.gradle"
 
 object VersionInfo {
-    const val spek = "2.0.12"
+    const val spek = "2.0.13"
 }
 val versions: VersionInfo by extra { VersionInfo }
 
