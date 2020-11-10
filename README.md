@@ -273,7 +273,7 @@ Property                  | Description
 
 ## Version is "unspecified"
 
-This is a common problem steaming from the configuration and build phases in Gradle.
+This is a common problem stemming from the configuration and build phases in Gradle.
 
 It is always preferable to access to version during the execution stage, in a `doFirst` or `doLast` closure within your tasks:
 
