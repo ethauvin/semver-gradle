@@ -250,7 +250,9 @@ The values stored in the version properties file can individually be accessed us
 
 ```gradle
     fooTask {
-        println "Build: $semver.buildMeta"
+        doFirst {
+            println "Build: $semver.buildMeta"
+        }
     }
 ```
 
@@ -269,6 +271,29 @@ Property                  | Description
 `semver.buildMetaPrefix`  | The build metadata prefix
 `semver.separator`        | The version separator.
 
+## Version is "unspecified"
+
+This is a common problem steaming from the configuration and build phases in Gradle.
+
+It is always preferable to access to version during the execution stage, in a `doFirst` or `doLast` closure within your tasks:
+
+```gradle
+task foo() {
+    doFirst {
+        println project.version
+    }
+}
+```
+
+or if absolutely necessary, at the end of the configuration stage in a `project.afterEvaluate` block:
+
+```gradle
+foo {
+    project.afterEvaluate {
+        println project.version
+    }
+}
+```
 
 ## Source Code Generation
 
