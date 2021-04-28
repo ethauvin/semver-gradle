@@ -2,7 +2,7 @@
 
 # set source and test locations
 src="src/main/kotlin/net/thauvin/erik/gradle/semver/"
-test="src/main/kotlin/net/thauvin/erik/gradle/semver/"
+test="src/test/kotlin/net/thauvin/erik/gradle/semver/"
 # e.g: .java, .kt, etc.
 ext=".kt"
 java8=true
