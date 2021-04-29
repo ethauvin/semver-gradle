@@ -26,6 +26,7 @@ val packageName = "net.thauvin.erik.gradle.semver"
 repositories {
     mavenCentral()
     jcenter()
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
 dependencies {
@@ -55,10 +56,15 @@ tasks {
         }
     }
 
-    withType<JacocoReport> {
+    jacoco {
+        toolVersion = "0.8.7-SNAPSHOT"
+    }
+
+    jacocoTestReport {
+        dependsOn(test)
         reports {
-            html.isEnabled = true
             xml.isEnabled = true
+            html.isEnabled = true
         }
     }
 
