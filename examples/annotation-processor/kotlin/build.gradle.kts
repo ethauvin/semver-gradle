@@ -24,7 +24,7 @@ dependencies {
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
 }
 
 application {
