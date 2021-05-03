@@ -9,7 +9,7 @@ plugins {
     id("com.gradle.plugin-publish") version "0.14.0"
     id("io.gitlab.arturbosch.detekt") version "1.16.0"
     id("org.gradle.kotlin.kotlin-dsl") version "2.1.4"
-    id("org.sonarqube") version "3.1.1"
+    id("org.sonarqube") version "3.2.0"
 }
 
 version = "1.0.5"
@@ -25,7 +25,6 @@ val packageName = "net.thauvin.erik.gradle.semver"
 
 repositories {
     mavenCentral()
-    jcenter()
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
@@ -74,8 +73,7 @@ tasks {
 }
 
 detekt {
-    // input = files("src/main/kotlin", "src/test/kotlin")
-    // filters = ".*/resources/.*,.*/build/.*"
+    toolVersion = "main-SNAPSHOT"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
 }
 
