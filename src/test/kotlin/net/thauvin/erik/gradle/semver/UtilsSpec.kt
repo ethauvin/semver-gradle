@@ -232,8 +232,10 @@ object UtilsSpec : Spek(
                 }
 
                 Then("saving the locked properties file") {
-                    assertFailsWith<GradleException> {
-                        Utils.saveProperties(propsLocked.parentFile, config, version)
+                    if (!propsLocked.canWrite()) {
+                       assertFailsWith<GradleException> {
+                            Utils.saveProperties(propsLocked.parentFile, config, version)
+                        }
                     }
                     propsLocked.delete()
                 }
