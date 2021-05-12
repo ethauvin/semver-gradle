@@ -28,7 +28,7 @@ repositories {
 }
 
 application {
-    mainClassName = "com.example.MainKt"
+    mainClass.set("com.example.MainKt")
 //    project.afterEvaluate {
 //        println("Version: $version")
 //    }

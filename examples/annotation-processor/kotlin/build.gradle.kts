@@ -28,7 +28,7 @@ repositories {
 }
 
 application {
-    mainClassName = "com.example.Main"
+    mainClass.set("com.example.Main")
 }
 
 kapt {

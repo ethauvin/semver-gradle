@@ -1,10 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
+    java
     `java-gradle-plugin`
     `maven-publish`
     jacoco
-    kotlin("jvm") version "1.4.31"
+    kotlin("jvm") version "1.4.31" // Don't upgrade until kotlin-dsl plugin is upgraded.
     id("com.github.ben-manes.versions") version "0.38.0"
     id("com.gradle.plugin-publish") version "0.14.0"
     id("io.gitlab.arturbosch.detekt") version "1.16.0"
@@ -16,7 +18,7 @@ version = "1.0.5"
 group = "net.thauvin.erik.gradle"
 
 object VersionInfo {
-    const val spek = "2.0.15"
+    const val spek = "2.0.15" // Don't upgrade until 2.0.17
 }
 val versions: VersionInfo by extra { VersionInfo }
 
@@ -33,10 +35,11 @@ dependencies {
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation(kotlin("stdlib"))
+   
     testImplementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
 
-    testImplementation(gradleTestKit())
+    //testImplementation(gradleTestKit())
 
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:${versions.spek}")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:${versions.spek}")
@@ -50,13 +53,17 @@ tasks {
     }
 
     withType<Test> {
+        testLogging {
+            exceptionFormat = TestExceptionFormat.FULL
+        }
+
         useJUnitPlatform {
             includeEngines("spek2")
         }
     }
 
     jacoco {
-        toolVersion = "0.8.7-SNAPSHOT"
+        toolVersion = "0.8.7"
     }
 
     jacocoTestReport {
