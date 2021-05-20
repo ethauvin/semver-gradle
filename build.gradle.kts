@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     java
@@ -9,7 +10,7 @@ plugins {
     kotlin("jvm") version "1.4.31" // Don't upgrade until kotlin-dsl plugin is upgraded.
     id("com.github.ben-manes.versions") version "0.38.0"
     id("com.gradle.plugin-publish") version "0.14.0"
-    id("io.gitlab.arturbosch.detekt") version "1.16.0"
+    id("io.gitlab.arturbosch.detekt") version "1.17.0"
     id("org.gradle.kotlin.kotlin-dsl") version "2.1.4"
     id("org.sonarqube") version "3.2.0"
 }
@@ -47,14 +48,17 @@ dependencies {
 
 tasks {
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-        // Gradle 4.6
-        kotlinOptions.apiVersion = "1.2"
+        kotlinOptions {
+            jvmTarget = "1.8"
+            // Gradle 4.6
+            apiVersion = "1.2"
+        }
     }
 
     withType<Test> {
         testLogging {
             exceptionFormat = TestExceptionFormat.FULL
+            events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
         }
 
         useJUnitPlatform {
@@ -80,14 +84,15 @@ tasks {
 }
 
 detekt {
-    toolVersion = "main-SNAPSHOT"
+    //toolVersion = "main-SNAPSHOT"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
 }
 
 sonarqube {
     properties {
-        property("sonar.projectName", "semver-gradle")
-        property("sonar.projectKey", "ethauvin_semver-gradle")
+        property("sonar.projectKey", "ethauvin_$name")
+        property("sonar.organization", "ethauvin-github")
+        property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.sourceEncoding", "UTF-8")
     }
 }
