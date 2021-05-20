@@ -104,7 +104,8 @@ object SemverConfigSpec : Spek({
 
             Then("semver should be defaults") {
                 val defaultSemver =
-                    "${Version.DEFAULT_MAJOR}${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_MINOR}${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_PATCH}"
+                    "${Version.DEFAULT_MAJOR}${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_MINOR}" +
+                    "${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_PATCH}"
                 assertEquals(config.semver, defaultSemver)
                 assertEquals(
                     "${config.major}${config.separator}${config.minor}${config.separator}${config.patch}",
