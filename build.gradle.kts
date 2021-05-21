@@ -10,7 +10,7 @@ plugins {
     kotlin("jvm") version "1.4.31" // Don't upgrade until kotlin-dsl plugin is upgraded.
     id("com.github.ben-manes.versions") version "0.38.0"
     id("com.gradle.plugin-publish") version "0.14.0"
-    id("io.gitlab.arturbosch.detekt") version "1.17.0"
+    id("io.gitlab.arturbosch.detekt") version "1.17.1"
     id("org.gradle.kotlin.kotlin-dsl") version "2.1.4"
     id("org.sonarqube") version "3.2.0"
 }
