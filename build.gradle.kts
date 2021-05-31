@@ -3,25 +3,24 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    java
-    `java-gradle-plugin`
-    `maven-publish`
-    jacoco
-    kotlin("jvm") version "1.4.31" // Don't upgrade until kotlin-dsl plugin is upgraded.
-    id("com.github.ben-manes.versions") version "0.38.0"
-    id("com.gradle.plugin-publish") version "0.14.0"
+    id("com.github.ben-manes.versions") version "0.39.0"
+    id("com.gradle.plugin-publish") version "0.15.0"
     id("io.gitlab.arturbosch.detekt") version "1.17.1"
+    id("jacoco")
+    id("java")
+    id("java-gradle-plugin")
+    id("maven-publish")
     id("org.gradle.kotlin.kotlin-dsl") version "2.1.4"
     id("org.sonarqube") version "3.2.0"
+    kotlin("jvm") version "1.4.31" // Don't upgrade until kotlin-dsl plugin is upgraded.
 }
 
 version = "1.0.5"
 group = "net.thauvin.erik.gradle"
 
-object VersionInfo {
-    const val spek = "2.0.15" // Don't upgrade until 2.0.17
+object Versions {
+    const val SPEK = "2.0.15" // Don't upgrade until 2.0.17
 }
-val versions: VersionInfo by extra { VersionInfo }
 
 val github = "https://github.com/ethauvin/semver-gradle"
 val packageName = "net.thauvin.erik.gradle.semver"
@@ -34,7 +33,7 @@ repositories {
 dependencies {
     implementation(gradleApi())
 
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    implementation(platform(kotlin("bom")))
     implementation(kotlin("stdlib"))
    
     testImplementation(kotlin("reflect"))
@@ -42,8 +41,8 @@ dependencies {
 
     //testImplementation(gradleTestKit())
 
-    testImplementation("org.spekframework.spek2:spek-dsl-jvm:${versions.spek}")
-    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:${versions.spek}")
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:${Versions.SPEK}")
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:${Versions.SPEK}")
 }
 
 tasks {
@@ -58,7 +57,7 @@ tasks {
     withType<Test> {
         testLogging {
             exceptionFormat = TestExceptionFormat.FULL
-            events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+            events = setOf(TestLogEvent.SKIPPED, TestLogEvent.FAILED)
         }
 
         useJUnitPlatform {

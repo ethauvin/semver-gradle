@@ -4,10 +4,10 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 plugins {
-    kotlin("jvm").version("1.5.0")
-    application
-    id("net.thauvin.erik.gradle.semver").version("1.0.4")
-    id("com.github.ben-manes.versions").version("0.38.0")
+    id("application")
+    id("com.github.ben-manes.versions") version "0.39.0"
+    id("net.thauvin.erik.gradle.semver") version "1.0.4"
+    kotlin("jvm") version "1.5.10"
 }
 
 // ./gradlew

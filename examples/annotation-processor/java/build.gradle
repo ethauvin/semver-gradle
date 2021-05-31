@@ -14,7 +14,7 @@ mainClassName = 'com.example.Example'
 
 defaultTasks 'run'
 
-def semverProcessor = "net.thauvin.erik:semver:1.2.0"
+def semverProcessor = 'net.thauvin.erik:semver:1.2.0'
 
 dependencies {
     annotationProcessor semverProcessor
@@ -41,8 +41,8 @@ run {
 }
 
 semver {
-//    properties = "example.properties"
-//    keysPrefix = "example."
-//    preReleaseKey = "release"
-//    buildMetaKey = "meta"
+//    properties = 'example.properties'
+//    keysPrefix = 'example.'
+//    preReleaseKey = 'release'
+//    buildMetaKey = 'meta'
 }

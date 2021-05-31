@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'net.thauvin.erik.gradle.semver' version '1.0.4'
-    id 'com.github.ben-manes.versions' version '0.38.0'
+    id 'com.github.ben-manes.versions' version '0.39.0'
 }
 
 // ./gradlew
@@ -36,10 +36,10 @@ application {
 }    
 
 semver {
-//     properties = "example.properties"
-//     keysPrefix = "example."
-//     preReleaseKey = "release"
-//     buildMetaKey = "meta"
+//     properties = 'example.properties'
+//     keysPrefix = 'example.'
+//     preReleaseKey = 'release'
+//     buildMetaKey = 'meta'
 }
 
 incrementBuildMeta {
@@ -60,5 +60,5 @@ run {
 }
 
 task echoVersion(type:Exec) {
-    commandLine 'echo', "${-> project.version}"
+    commandLine('echo', "${-> project.version}")
 }

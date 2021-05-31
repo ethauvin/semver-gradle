@@ -49,7 +49,7 @@ or in your `gradle.build` file:
 
 ```gradle
 someTask {
-    dependsOn(incrementPatch)
+    dependsOn incrementPatch
     ...
 }
 ```
@@ -178,7 +178,7 @@ But, for example, if you wanted to save the version properties in a different fi
 
 ```gradle
 semver {
-    properties = "my.version" // read and save properties in "my.version"
+    properties = 'my.version' // read and save properties in "my.version"
 }
 ```
 
@@ -186,13 +186,13 @@ or using different property keys for the version data:
 
 ```gradle
 semver {
-    keysPrefix = "" // no prefix
-    semverKey = "version"
-    majorKey = "maj"
-    minorKey = "min"
-    patchKey = "build"
-    preReleaseKey = "rel"
-    buildMetaKey = "meta"
+    keysPrefix = '' // no prefix
+    semverKey = 'version'
+    majorKey = 'maj'
+    minorKey = 'min'
+    patchKey = 'build'
+    preReleaseKey = 'rel'
+    buildMetaKey = 'meta'
 }
 ```
 which would match the data in `my.version`:
@@ -227,8 +227,8 @@ In order to quickly support multiple projects. The `keysPrefix` property is avai
 
 ```gradle
 semver {
-    properties = "test.properties"
-    keysPrefix = "test."
+    properties = 'test.properties'
+    keysPrefix = 'test.'
 }
 ```
 

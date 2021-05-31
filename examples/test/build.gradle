@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "net.thauvin.erik.gradle:semver:1.0.5-beta"
+        classpath 'net.thauvin.erik.gradle:semver:1.0.5-beta'
     }
 }
 
@@ -31,9 +31,9 @@ repositories {
 }
 
 application {
-    println(project.version)
+    println project.version
     project.afterEvaluate {
-        println(project.version)
+        println project.version
     }
 }
 
@@ -47,13 +47,13 @@ incrementBuildMeta {
 
 run {
     doFirst {
-        println("Version: $semver.major$semver.separator$semver.minor$semver.separator$semver.patch$semver.preReleasePrefix$semver.preRelease$semver.buildMetaPrefix$semver.buildMeta")
+        println "Version: $semver.major$semver.separator$semver.minor$semver.separator$semver.patch$semver.preReleasePrefix$semver.preRelease$semver.buildMetaPrefix$semver.buildMeta"
         args = [f.name]
     }
 }
 
 task echoVersion(type:Exec) {
-	commandLine "echo", "${-> version}"
+	commandLine('echo', "${-> version}")
 }
 
 semver {
