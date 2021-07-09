@@ -5,13 +5,13 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 plugins {
     id("com.github.ben-manes.versions") version "0.39.0"
     id("com.gradle.plugin-publish") version "0.15.0"
-    id("io.gitlab.arturbosch.detekt") version "1.17.1"
+    id("io.gitlab.arturbosch.detekt") version "1.18.0-RC1"
     id("jacoco")
     id("java")
     id("java-gradle-plugin")
     id("maven-publish")
     id("org.gradle.kotlin.kotlin-dsl") version "2.1.4"
-    id("org.sonarqube") version "3.2.0"
+    id("org.sonarqube") version "3.3"
     kotlin("jvm") version "1.4.31" // Don't upgrade until kotlin-dsl plugin is upgraded.
 }
 
@@ -72,13 +72,13 @@ tasks {
     jacocoTestReport {
         dependsOn(test)
         reports {
-            xml.isEnabled = true
-            html.isEnabled = true
+            html.required.set(true)
+            xml.required.set(true)
         }
     }
 
     "sonarqube" {
-        dependsOn("jacocoTestReport")
+        dependsOn(jacocoTestReport)
     }
 }
 

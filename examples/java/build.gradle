@@ -12,12 +12,13 @@ plugins {
 // ./gradlew incrementBuildMeta run
 // ./gradlew echoVersion
 
-
 defaultTasks 'run'
 
+mainClassName = 'App'
+
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation platform('org.junit:junit-bom:5.8.0-M1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 repositories {
@@ -27,13 +28,6 @@ repositories {
 test {
     useJUnitPlatform()
 }
-
-application {
-    mainClassName = 'App'
-//    project.afterEvaluate {
-//        println "Version: $version"
-//    }
-}    
 
 semver {
 //     properties = 'example.properties'
@@ -50,8 +44,10 @@ incrementBuildMeta {
 }
 
 run {
+//    project.afterEvaluate {
+//        println "Version: $version"
+//    }
     doFirst {
-//        println "Version: ${-> version}"
         println "Version: $version"
     }
 
