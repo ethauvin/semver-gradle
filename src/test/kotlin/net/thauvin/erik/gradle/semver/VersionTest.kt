@@ -49,6 +49,7 @@ class VersionTest {
         assertEquals("+", version.buildMetaPrefix, "meta prefix should be +")
         assertEquals(".", version.separator, "separator should be .")
         assertEquals("1.0.0", version.semver, "version should be 1.0.0")
+        assertEquals(version.toString(), version.semver, "toString should be semver")
     }
 
     @Test
@@ -102,5 +103,7 @@ class VersionTest {
 
         version.separator = "-"
         assertEquals("1-0-0--beta++007", version.semver, "should return 1-0-0--beta++007")
+
+        assertEquals(version.toString(), version.semver, "toString() should return semver")
     }
 }

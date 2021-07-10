@@ -78,6 +78,7 @@ detekt {
 
 sonarqube {
     properties {
+        property("sonar.projectName", "semver-gradle")
         property("sonar.projectKey", "ethauvin_semver-gradle")
         property("sonar.organization", "ethauvin-github")
         property("sonar.host.url", "https://sonarcloud.io")

@@ -69,6 +69,11 @@ class SemverConfigTest {
         }
 
         assertEquals(config.properties, "version.properties", "config.properties should be version.properties")
+
+        assertTrue(
+            config.toString().contains("properties=${SemverConfig.DEFAULT_PROPERTIES}"),
+            "toString contains default properties"
+        )
     }
 
     @Test

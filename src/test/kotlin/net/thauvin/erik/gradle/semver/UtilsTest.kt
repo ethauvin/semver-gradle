@@ -135,6 +135,16 @@ class UtilsTest {
     }
 
     @Test
+    fun testLoadIntProperty() {
+        val props = SortedProperties()
+        props["foo"] = "bar"
+
+        assertFailsWith<GradleException> { Utils.loadIntProperty(props, "foo", 1) }
+
+        assertEquals(Utils.loadIntProperty(props, "none", 1), 1, "default int value")
+    }
+
+    @Test
     fun testPrefix() {
         version.preReleasePrefix = "."
         version.buildMetaPrefix = "."
@@ -198,6 +208,7 @@ class UtilsTest {
         newPropsFile.delete()
 
         System.getProperties().setProperty(config.semverKey, "3.2.2")
+        props["foo"] = "bar"
         Utils.loadVersion(config, version, props)
         assertEquals(version.semver, System.getProperty(config.semverKey), "versions should match")
     }

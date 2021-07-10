@@ -96,28 +96,29 @@ open class SemverConfig @Inject constructor(
     val separator: String
         get() = semVersion.separator
 
+
     override fun toString(): String {
-        return "SemverConfig(" +
-            "properties='$properties', " +
-            "semverKey='$semverKey', " +
-            "majorKey='$majorKey', " +
-            "minorKey='$minorKey', " +
-            "patchKey='$patchKey', " +
-            "preReleaseKey='$preReleaseKey', " +
-            "preReleasePrefixKey='$preReleasePrefixKey', " +
-            "buildMetaKey='$buildMetaKey', " +
-            "buildMetaPrefixKey='$buildMetaPrefixKey', " +
-            "separator='$separatorKey', " +
-            "keysPrefix='$keysPrefix', " +
-            "semver='$semver', " +
-            "major='$major', " +
-            "minor='$minor', " +
-            "patch='$patch', " +
-            "preRelease='$preRelease', " +
-            "buildMeta='$buildMeta', " +
-            "preReleasePrefix='$preReleasePrefix', " +
-            "buildMetaPrefix='$buildMetaPrefix', " +
-            "separator='$separator'" +
-            ')'
+        return mapOf(
+            Pair("properties", properties),
+            Pair("semverKey", semverKey),
+            Pair("majorKey", majorKey),
+            Pair("minorKey", minorKey),
+            Pair("patchKey", patchKey),
+            Pair("preReleaseKey", preReleaseKey),
+            Pair("preReleasePrefixKey", preReleasePrefixKey),
+            Pair("buildMetaKey", buildMetaKey),
+            Pair("buildMetaPrefixKey", buildMetaPrefixKey),
+            Pair("separator", separatorKey),
+            Pair("keysPrefix", keysPrefix),
+            Pair("semver", semver),
+            Pair("major", major),
+            Pair("minor", minor),
+            Pair("patch", patch),
+            Pair("preRelease", preRelease),
+            Pair("buildMeta", buildMeta),
+            Pair("preReleasePrefix", preReleasePrefix),
+            Pair("buildMetaPrefix", buildMetaPrefix),
+            Pair("separator", separator)
+        ).toString()
     }
 }

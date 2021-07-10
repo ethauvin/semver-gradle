@@ -1,5 +1,5 @@
 /*
- * Version.kt
+ * testSortedProperties.kt
  *
  * Copyright (c) 2018-2021, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
@@ -32,43 +32,27 @@
 
 package net.thauvin.erik.gradle.semver
 
-class Version {
-    companion object {
-        const val DEFAULT_MAJOR: Int = 1
-        const val DEFAULT_MINOR: Int = 0
-        const val DEFAULT_PATCH: Int = 0
-        const val DEFAULT_EMPTY: String = ""
-        const val DEFAULT_PRERELEASE_PREFIX = "-"
-        const val DEFAULT_BUILDMETA_PREFIX = "+"
-        const val DEFAULT_SEPARATOR = "."
-    }
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
-    var major = DEFAULT_MAJOR
-    var minor = DEFAULT_MINOR
-    var patch = DEFAULT_PATCH
-    var preRelease = DEFAULT_EMPTY
-    var preReleasePrefix = DEFAULT_PRERELEASE_PREFIX
-    var buildMeta = DEFAULT_EMPTY
-    var buildMetaPrefix = DEFAULT_BUILDMETA_PREFIX
-    var separator = DEFAULT_SEPARATOR
+class SortedPropertiesTest {
+    @Test
+    fun testSortedProperties() {
+        val props = SortedProperties()
+        val fruits = setOf("Avocado", "Tomato", "apple", "banana", "cucumber", "zucchini")
 
-    val semver: String
-        get() = "$major$separator$minor$separator$patch" +
-            (if (preRelease.isNotEmpty()) "$preReleasePrefix$preRelease" else "") +
-            (if (buildMeta.isNotEmpty()) "$buildMetaPrefix$buildMeta" else "")
-
-    fun increment(isMajor: Boolean = false, isMinor: Boolean = false, isPatch: Boolean = false) {
-        if (isMajor) {
-            major++
-            minor = DEFAULT_MINOR
-            patch = DEFAULT_PATCH
+        fruits.reversed().forEach {
+            props[it] = "test"
         }
-        if (isMinor) {
-            minor++
-            patch = DEFAULT_PATCH
-        }
-        if (isPatch) patch++
-    }
 
-    override fun toString() = semver
+        val keys = props.keys().iterator()
+        fruits.forEach {
+            assertEquals(it, keys.next(), "$it key")
+        }
+
+        val entries = props.entries.iterator()
+        fruits.forEach {
+            assertEquals(it, entries.next().key, "$it entry")
+        }
+    }
 }
