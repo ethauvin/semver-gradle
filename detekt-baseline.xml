@@ -2,6 +2,7 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
+    <ID>LongMethod:UtilsTest.kt$UtilsTest$@Test fun testSystemProperties()</ID>
     <ID>MagicNumber:Utils.kt$Utils$3</ID>
     <ID>MagicNumber:Utils.kt$Utils$4</ID>
     <ID>MagicNumber:Utils.kt$Utils$5</ID>

@@ -18,10 +18,6 @@ plugins {
 version = "1.0.5"
 group = "net.thauvin.erik.gradle"
 
-object Versions {
-    const val SPEK = "2.0.15" // Don't upgrade until 2.0.17
-}
-
 val github = "https://github.com/ethauvin/semver-gradle"
 val packageName = "net.thauvin.erik.gradle.semver"
 
@@ -35,14 +31,11 @@ dependencies {
 
     implementation(platform(kotlin("bom")))
     implementation(kotlin("stdlib"))
-   
-    testImplementation(kotlin("reflect"))
-    testImplementation(kotlin("test"))
 
     //testImplementation(gradleTestKit())
 
-    testImplementation("org.spekframework.spek2:spek-dsl-jvm:${Versions.SPEK}")
-    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:${Versions.SPEK}")
+    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-junit"))
 }
 
 tasks {
@@ -57,11 +50,7 @@ tasks {
     withType<Test> {
         testLogging {
             exceptionFormat = TestExceptionFormat.FULL
-            events = setOf(TestLogEvent.SKIPPED, TestLogEvent.FAILED)
-        }
-
-        useJUnitPlatform {
-            includeEngines("spek2")
+            events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
         }
     }
 
