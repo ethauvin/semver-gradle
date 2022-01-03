@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'net.thauvin.erik.gradle:semver:1.0.5-beta'
+        classpath 'net.thauvin.erik.gradle:semver:1.0.5'
     }
 }
 
@@ -12,9 +12,12 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'net.thauvin.erik.gradle.semver'
 
+
+defaultTasks 'run'
+
 mainClassName = 'App'
 
-//version = 1.0
+// version = 1.0
 
 def f = new File("version.properties")
 
@@ -27,13 +30,12 @@ dependencies {
 
 repositories {
     mavenLocal()
-    jcenter()
 }
 
 application {
     println project.version
     project.afterEvaluate {
-        println project.version
+        println "afterEvaluate: $project.version"
     }
 }
 
@@ -47,7 +49,7 @@ incrementBuildMeta {
 
 run {
     doFirst {
-        println "Version: $semver.major$semver.separator$semver.minor$semver.separator$semver.patch$semver.preReleasePrefix$semver.preRelease$semver.buildMetaPrefix$semver.buildMeta"
+        println "$semver"
         args = [f.name]
     }
 }

@@ -1,7 +1,7 @@
 /*
  * UtilsTest.kt
  *
- * Copyright (c) 2018-2021, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2018-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,11 @@ package net.thauvin.erik.gradle.semver
 import net.thauvin.erik.gradle.semver.Utils.canReadFile
 import org.gradle.api.GradleException
 import java.io.File
-import kotlin.test.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 /**
  * [Utils] Tests

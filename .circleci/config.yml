@@ -1,45 +1,54 @@
 version: 2
 defaults: &defaults
   working_directory: ~/repo
-  docker:
-    - image: circleci/openjdk:8-jdk
   environment:
     JVM_OPTS: -Xmx3200m
     TERM: dumb
     CI: true
 
-jobs:
-  build_gradle:
-    <<: *defaults
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
+defaults_gradle: &defaults_gradle
+  steps:
+    - checkout
+    - restore_cache:
+        keys:
           - gradle-dependencies-{{ checksum "build.gradle.kts" }}
           # fallback to using the latest cache if no exact match is found
           - gradle-dependencies-
+    - run:
+        name: Gradle Dependencies
+        command: ./gradlew dependencies
+    - save_cache:
+        paths: ~/.m2
+        key: gradle-dependencies-{{ checksum "build.gradle.kts" }}
+    - run:
+        name: Run All Checks
+        command: ./gradlew check
+    - store_artifacts:
+        path: build/reports/
+        destination: reports
+    - store_test_results:
+        path: build/reports/
 
-      - run:
-          name: Gradle Dependencies
-          command: ./gradlew dependencies
+jobs:
+  build_gradle_jdk16:
+    <<: *defaults
 
-      - save_cache:
-          paths: ~/.gradle
-          key: gradle-dependencies-{{ checksum "build.gradle.kts" }}
+    docker:
+      - image: cimg/openjdk:16.0
 
-      - run:
-          name: Run All Checks
-          command: ./gradlew check --scan
+    <<: *defaults_gradle
 
-      - store_artifacts:
-          path: build/reports/
-          destination: reports
-      - store_test_results:
-          path: build/reports/
+  build_gradle_jdk8:
+    <<: *defaults
+
+    docker:
+      - image: cimg/openjdk:8.0
+
+    <<: *defaults_gradle
 
 workflows:
   version: 2
-  build_gradle:
+  gradle:
     jobs:
-      - build_gradle
+      - build_gradle_jdk8
+      - build_gradle_jdk16

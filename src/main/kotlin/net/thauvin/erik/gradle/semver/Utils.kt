@@ -1,7 +1,7 @@
 /*
  * Utils.kt
  *
- * Copyright (c) 2018-2021, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2018-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -194,17 +194,17 @@ object Utils {
                     put(
                         config.buildMetaPrefixKey, version.buildMetaPrefix,
                         version.buildMetaPrefix != Version.DEFAULT_BUILDMETA_PREFIX ||
-                            containsKey(config.buildMetaPrefixKey)
+                                containsKey(config.buildMetaPrefixKey)
                     )
                     put(
                         config.preReleasePrefixKey, version.preReleasePrefix,
                         version.preReleasePrefix != Version.DEFAULT_PRERELEASE_PREFIX ||
-                            containsKey(config.preReleasePrefixKey)
+                                containsKey(config.preReleasePrefixKey)
                     )
                     put(
                         config.separatorKey, version.separator,
                         version.separator != Version.DEFAULT_SEPARATOR ||
-                            containsKey(config.separatorKey)
+                                containsKey(config.separatorKey)
                     )
 
                     if (canWrite()) {

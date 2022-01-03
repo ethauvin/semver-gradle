@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'net.thauvin.erik.gradle.semver' version '1.0.4'
-    id 'com.github.ben-manes.versions' version '0.39.0'
+    id 'com.github.ben-manes.versions' version '0.40.0'
 }
 
 // ./gradlew
@@ -17,7 +17,7 @@ defaultTasks 'run'
 mainClassName = 'App'
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.8.0-M1')
+    testImplementation platform('org.junit:junit-bom:5.8.0-RC1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 

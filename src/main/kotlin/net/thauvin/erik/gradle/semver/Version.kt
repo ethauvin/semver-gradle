@@ -1,7 +1,7 @@
 /*
  * Version.kt
  *
- * Copyright (c) 2018-2021, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2018-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,8 @@ class Version {
 
     val semver: String
         get() = "$major$separator$minor$separator$patch" +
-            (if (preRelease.isNotEmpty()) "$preReleasePrefix$preRelease" else "") +
-            (if (buildMeta.isNotEmpty()) "$buildMetaPrefix$buildMeta" else "")
+                (if (preRelease.isNotEmpty()) "$preReleasePrefix$preRelease" else "") +
+                (if (buildMeta.isNotEmpty()) "$buildMetaPrefix$buildMeta" else "")
 
     fun increment(isMajor: Boolean = false, isMinor: Boolean = false, isPatch: Boolean = false) {
         if (isMajor) {
