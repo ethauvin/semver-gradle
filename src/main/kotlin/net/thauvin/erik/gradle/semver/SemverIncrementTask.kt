@@ -57,7 +57,7 @@ open class SemverIncrementTask @Inject constructor(
             isPatch = type == SemverConfig.DEFAULT_PATCH_KEY
         )
         project.version = version.semver
-        logger.lifecycle("Version: ${project.version}")
+        if (logger.isLifecycleEnabled) logger.lifecycle("Version: ${project.version}")
         Utils.saveProperties(project.projectDir, config, version)
     }
 }

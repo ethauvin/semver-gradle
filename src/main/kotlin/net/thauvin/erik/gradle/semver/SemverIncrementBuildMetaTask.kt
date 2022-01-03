@@ -58,7 +58,7 @@ open class SemverIncrementBuildMetaTask @Inject constructor(
         if (version.buildMeta != buildMeta) {
             version.buildMeta = buildMeta
             project.version = version.semver
-            logger.lifecycle("Version: ${project.version}")
+            if (logger.isLifecycleEnabled) logger.lifecycle("Version: ${project.version}")
             Utils.saveProperties(project.projectDir, config, version)
         }
     }

@@ -148,12 +148,12 @@ object Utils {
                 version.buildMeta = ""
 
                 if (parts.size > min) {
-                    when {
-                        parts.size == max -> {
+                    when (parts.size) {
+                        max -> {
                             version.preRelease = parts[3]
                             version.buildMeta = parts[4]
                         }
-                        parts.size == 4 -> {
+                        4 -> {
                             if (input.endsWith(version.buildMetaPrefix + parts[3])) {
                                 version.buildMeta = parts[3]
                             } else {

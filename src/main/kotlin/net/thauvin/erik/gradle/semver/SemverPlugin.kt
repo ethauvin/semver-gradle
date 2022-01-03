@@ -37,6 +37,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.util.GradleVersion
 
+@Suppress("unused")
 class SemverPlugin : Plugin<Project> {
     private val simpleName = SemverPlugin::class.simpleName
     private var version = Version()
@@ -60,7 +61,7 @@ class SemverPlugin : Plugin<Project> {
     private fun afterEvaluate(project: Project) {
         val propsFile = Utils.getPropertiesFile(project.projectDir, config.properties)
 
-        if (project.version != "unspecified") {
+        if (project.version != "unspecified" && project.logger.isWarnEnabled) {
             project.logger.warn(
                 "Please specify the version in ${propsFile.name} and remove it from ${project.buildFile.name}"
             )
@@ -69,10 +70,12 @@ class SemverPlugin : Plugin<Project> {
         propsFile.apply {
             val isNew = !exists()
 
-            project.logger.info(
-                "[$simpleName] Attempting to read properties from: `$absoluteFile`. " +
-                    "[exists: $isNew, isFile: $isFile, canRead: ${canRead()}]"
-            )
+            if (project.logger.isInfoEnabled) {
+                project.logger.info(
+                    "[$simpleName] Attempting to read properties from: `$absoluteFile`. " +
+                            "[exists: $isNew, isFile: $isFile, canRead: ${canRead()}]"
+                )
+            }
 
             val props = Utils.loadProperties(this)
             val requiredProps = setOf(
@@ -89,10 +92,14 @@ class SemverPlugin : Plugin<Project> {
             }
 
             project.version = version.semver
-            project.logger.info("[$simpleName] Project version set to: ${project.version}")
+            if (project.logger.isInfoEnabled) {
+                project.logger.info("[$simpleName] Project version set to: ${project.version}")
+            }
 
             if (!hasReqProps || !isFile) {
-                project.logger.info("[$simpleName] Saving version properties to `$absoluteFile`.")
+                if (project.logger.isInfoEnabled) {
+                    project.logger.info("[$simpleName] Saving version properties to `$absoluteFile`.")
+                }
                 Utils.saveProperties(project.projectDir, config, version)
             }
         }

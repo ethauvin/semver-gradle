@@ -38,11 +38,11 @@ import java.util.Properties
 
 internal class SortedProperties : Properties() {
     override val entries: MutableSet<MutableMap.MutableEntry<Any, Any>>
-        get() = super.entries.sortedWith(Comparator { a, b -> a.toString().compareTo(b.toString()) }).toMutableSet()
+        get() = super.entries.sortedWith { a, b -> a.toString().compareTo(b.toString()) }.toMutableSet()
 
     override fun keys(): Enumeration<Any> {
         val keys = Collections.list(super.keys())
-        keys.sortWith(Comparator { a, b -> a.toString().compareTo(b.toString()) })
+        keys.sortWith { a, b -> a.toString().compareTo(b.toString()) }
         return Collections.enumeration(keys)
     }
 }
