@@ -1,5 +1,5 @@
 /*
- * UtilsTest.kt
+ * est.kt
  *
  * Copyright (c) 2018-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
@@ -32,7 +32,6 @@
 
 package net.thauvin.erik.gradle.semver
 
-import net.thauvin.erik.gradle.semver.Utils.canReadFile
 import org.gradle.api.GradleException
 import java.io.File
 import kotlin.test.Test
@@ -42,7 +41,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * [Utils] Tests
+ * Tests
  */
 class UtilsTest {
     private val version = Version()
@@ -53,16 +52,16 @@ class UtilsTest {
     @Test
     fun testExceptions() {
         assertFailsWith<GradleException>("2.1.1a") {
-            Utils.parseSemVer("2.1.1a", version)
+            parseSemVer("2.1.1a", version)
         }
         assertFailsWith<GradleException>("2a.1.1") {
-            Utils.parseSemVer("2a.1.1", version)
+            parseSemVer("2a.1.1", version)
         }
         assertFailsWith<GradleException>("2.1a.1") {
-            Utils.parseSemVer("2.1a.1", version)
+            parseSemVer("2.1a.1", version)
         }
         assertFailsWith<GradleException>("2.1") {
-            Utils.parseSemVer("2.1", version)
+            parseSemVer("2.1", version)
         }
     }
 
@@ -72,7 +71,7 @@ class UtilsTest {
         fooDir.mkdir()
         val fooFile = File(fooDir, propsFile.name)
         config.properties = fooFile.absolutePath
-        Utils.saveProperties(projectDir, config, version)
+        saveProperties(projectDir, config, version)
 
         assertEquals(
             fooFile.canReadFile(),
@@ -80,7 +79,7 @@ class UtilsTest {
             "foo properties file should exists and be readable"
         )
 
-        val fooProps = Utils.loadProperties(fooFile)
+        val fooProps = fooFile.loadProperties()
         fooFile.delete()
         fooDir.delete()
 
@@ -94,14 +93,14 @@ class UtilsTest {
     @Test
     fun testLoadSaveProperties() {
         config.properties = propsFile.name
-        Utils.saveProperties(projectDir, config, version)
+        saveProperties(projectDir, config, version)
         assertEquals(
             propsFile.canReadFile(),
             propsFile.canRead() && propsFile.isFile,
             "properties file should exists and be readable"
         )
 
-        val props = Utils.loadProperties(propsFile)
+        val props = propsFile.loadProperties()
 
         assertEquals(props.getProperty(config.majorKey), version.major.toString(), "Major")
         assertEquals(props.getProperty(config.minorKey), version.minor.toString(), "Minor")
@@ -121,7 +120,7 @@ class UtilsTest {
         var locked = File("locked")
 
         assertFailsWith<GradleException> {
-            Utils.loadProperties(File(locked, propsFile.name))
+            File(locked, propsFile.name).loadProperties()
         }
         locked.delete()
 
@@ -132,7 +131,7 @@ class UtilsTest {
 
         if (!locked.canWrite()) {
             assertFailsWith<GradleException> {
-                Utils.saveProperties(locked.parentFile, config, version)
+                saveProperties(locked.parentFile, config, version)
             }
         }
         locked.delete()
@@ -143,9 +142,9 @@ class UtilsTest {
         val props = SortedProperties()
         props["foo"] = "bar"
 
-        assertFailsWith<GradleException> { Utils.loadIntProperty(props, "foo", 1) }
+        assertFailsWith<GradleException> { loadIntProperty(props, "foo", 1) }
 
-        assertEquals(Utils.loadIntProperty(props, "none", 1), 1, "default int value")
+        assertEquals(loadIntProperty(props, "none", 1), 1, "default int value")
     }
 
     @Test
@@ -154,7 +153,7 @@ class UtilsTest {
         version.buildMetaPrefix = "."
 
         listOf("2.1.0.beta.1", "2.1.1.1", "3.2.1.beta.1.007").forEach {
-            assertTrue(Utils.parseSemVer(it, version), "parsing semver: $it")
+            assertTrue(parseSemVer(it, version), "parsing semver: $it")
             assertEquals(it, version.semver, it)
         }
 
@@ -173,37 +172,34 @@ class UtilsTest {
         )
 
         assertTrue(
-            Utils.isNotSystemProperty(
-                setOf(
-                    config.majorKey,
-                    config.minorKey,
-                    config.patchKey,
-                    config.preReleaseKey,
-                    config.buildMetaKey
-                )
-            ),
-            "none should already exists"
+            setOf(
+                config.majorKey,
+                config.minorKey,
+                config.patchKey,
+                config.preReleaseKey,
+                config.buildMetaKey
+            ).isNotSystemProperty(), "none should already exists"
         )
 
-        val props = Utils.loadProperties(propsFile)
+        val props = propsFile.loadProperties()
 
         sysProps.forEach {
             val msg = "${it.first} should match system properties"
             System.getProperties().setProperty(it.first, it.second)
             if (it.first == config.majorKey || it.first == config.minorKey || it.first == config.patchKey) {
-                assertEquals(Utils.loadIntProperty(props, it.first, -1), it.second.toInt(), msg)
+                assertEquals(loadIntProperty(props, it.first, -1), it.second.toInt(), msg)
             } else {
-                assertEquals(Utils.loadProperty(props, it.first, ""), it.second, msg)
+                assertEquals(loadProperty(props, it.first, ""), it.second, msg)
             }
         }
 
-        Utils.loadVersion(config, version, props)
+        loadVersion(config, version, props)
         assertEquals(version.semver, "2.1.1-beta+007", "version should be identical")
 
-        Utils.saveProperties(projectDir, config, version)
+        saveProperties(projectDir, config, version)
 
         val newPropsFile = File(config.properties)
-        val newProps = Utils.loadProperties(newPropsFile)
+        val newProps = newPropsFile.loadProperties()
 
         sysProps.forEach {
             assertEquals(newProps.getProperty(it.first), it.second, "new properties should validate")
@@ -213,7 +209,7 @@ class UtilsTest {
 
         System.getProperties().setProperty(config.semverKey, "3.2.2")
         props["foo"] = "bar"
-        Utils.loadVersion(config, version, props)
+        loadVersion(config, version, props)
         assertEquals(version.semver, System.getProperty(config.semverKey), "versions should match")
     }
 
@@ -228,7 +224,7 @@ class UtilsTest {
             "111.11.11-beta",
             "1111.111.11-beta+001.12"
         ).forEach {
-            assertTrue(Utils.parseSemVer(it, version), "parsing semver: $it")
+            assertTrue(parseSemVer(it, version), "parsing semver: $it")
             assertEquals(it, version.semver, it)
         }
     }

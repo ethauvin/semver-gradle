@@ -59,7 +59,7 @@ class SemverPlugin : Plugin<Project> {
     }
 
     private fun afterEvaluate(project: Project) {
-        val propsFile = Utils.getPropertiesFile(project.projectDir, config.properties)
+        val propsFile = getPropertiesFile(project.projectDir, config.properties)
 
         if (project.version != "unspecified" && project.logger.isWarnEnabled) {
             project.logger.warn(
@@ -77,15 +77,15 @@ class SemverPlugin : Plugin<Project> {
                 )
             }
 
-            val props = Utils.loadProperties(this)
+            val props = this.loadProperties()
             val requiredProps = setOf(
                 config.semverKey, config.majorKey, config.minorKey, config.patchKey,
                 config.preReleaseKey, config.buildMetaKey
             )
             val hasReqProps = !isNew && props.stringPropertyNames().containsAll(requiredProps) &&
-                    Utils.isNotSystemProperty(requiredProps)
+                    requiredProps.isNotSystemProperty()
 
-            Utils.loadVersion(config, version, props)
+            loadVersion(config, version, props)
 
             project.tasks.withType(SemverIncrementBuildMetaTask::class.java) {
                 buildMeta = version.buildMeta
@@ -100,7 +100,7 @@ class SemverPlugin : Plugin<Project> {
                 if (project.logger.isInfoEnabled) {
                     project.logger.info("[$simpleName] Saving version properties to `$absoluteFile`.")
                 }
-                Utils.saveProperties(project.projectDir, config, version)
+                saveProperties(project.projectDir, config, version)
             }
         }
     }
