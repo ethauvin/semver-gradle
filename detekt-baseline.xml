@@ -2,11 +2,11 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
-    <ID>MagicNumber:Utils.kt$3</ID>
-    <ID>MagicNumber:Utils.kt$4</ID>
-    <ID>MagicNumber:Utils.kt$5</ID>
-    <ID>NestedBlockDepth:Utils.kt$fun File.loadProperties(): Properties</ID>
-    <ID>NestedBlockDepth:Utils.kt$fun parseSemVer(input: String?, version: Version): Boolean</ID>
-    <ID>NestedBlockDepth:Utils.kt$fun saveProperties(projectDir: File, config: SemverConfig, version: Version)</ID>
+    <ID>MagicNumber:utils.kt$3</ID>
+    <ID>MagicNumber:utils.kt$4</ID>
+    <ID>MagicNumber:utils.kt$5</ID>
+    <ID>NestedBlockDepth:utils.kt$fun File.loadProperties(): Properties</ID>
+    <ID>NestedBlockDepth:utils.kt$fun parseSemVer(input: String?, version: Version): Boolean</ID>
+    <ID>NestedBlockDepth:utils.kt$fun saveProperties(projectDir: File, config: SemverConfig, version: Version)</ID>
   </CurrentIssues>
 </SmellBaseline>

@@ -1,4 +1,4 @@
-image: openjdk:8
+image: maven:3-openjdk-18
 
 pipelines:
   default:

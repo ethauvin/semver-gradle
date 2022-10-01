@@ -3,16 +3,16 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id("com.github.ben-manes.versions") version "0.40.0"
-    id("com.gradle.plugin-publish") version "0.19.0"
-    id("io.gitlab.arturbosch.detekt") version "1.19.0"
+    id("com.github.ben-manes.versions") version "0.42.0"
+    id("com.gradle.plugin-publish") version "1.0.0"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
     id("java-gradle-plugin")
     id("java")
     id("maven-publish")
-    id("org.gradle.kotlin.kotlin-dsl") version "2.1.7"
-    id("org.jetbrains.kotlinx.kover") version "0.4.4"
-    id("org.sonarqube") version "3.3"
-    // kotlin("jvm") version "1.4.31"
+    id("org.gradle.kotlin.kotlin-dsl") version "2.3.3"
+    id("org.jetbrains.kotlinx.kover") version "0.6.0"
+    id("org.sonarqube") version "3.4.0.2513"
+    // kotlin("jvm") version "1.6.21"
 }
 
 version = "1.0.5"
@@ -32,7 +32,7 @@ dependencies {
     implementation(platform(kotlin("bom")))
     implementation(kotlin("stdlib"))
 
-    //testImplementation(gradleTestKit())
+    // testImplementation(gradleTestKit())
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
@@ -66,7 +66,7 @@ tasks {
 }
 
 detekt {
-    //toolVersion = "main-SNAPSHOT"
+    // toolVersion = "main-SNAPSHOT"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
 }
 
@@ -77,7 +77,7 @@ sonarqube {
         property("sonar.organization", "ethauvin-github")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.sourceEncoding", "UTF-8")
-        property("sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/kover/report.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/kover/xml/report.xml")
     }
 }
 
@@ -96,8 +96,8 @@ pluginBundle {
     website = github
     vcsUrl = github
     tags = listOf("semver", "semantic", "version", "versioning", "auto-increment", "kotlin", "java")
-    mavenCoordinates {
-        groupId = project.group.toString()
-        artifactId = project.name
-    }
+    // mavenCoordinates {
+    //     groupId = project.group.toString()
+    //     artifactId = project.name
+    // }
 }

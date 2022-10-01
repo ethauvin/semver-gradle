@@ -30,11 +30,11 @@ defaults_gradle: &defaults_gradle
         path: build/reports/
 
 jobs:
-  build_gradle_jdk16:
+  build_gradle_jdk17:
     <<: *defaults
 
     docker:
-      - image: cimg/openjdk:16.0
+      - image: cimg/openjdk:17.0
 
     <<: *defaults_gradle
 
@@ -51,4 +51,4 @@ workflows:
   gradle:
     jobs:
       - build_gradle_jdk8
-      - build_gradle_jdk16
+      - build_gradle_jdk17
