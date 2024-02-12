@@ -35,6 +35,7 @@ package net.thauvin.erik.gradle.semver
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.TaskAction
+import java.util.Locale
 import javax.inject.Inject
 
 @CacheableTask
@@ -45,7 +46,13 @@ open class SemverIncrementTask @Inject constructor(
 ) : DefaultTask() {
     init {
         group = "version"
-        description = "Increments ${type.capitalize()} version number."
+        description =
+            "Increments ${
+                type.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase(Locale.getDefault())
+                    else it.toString()
+                }
+            } version number."
     }
 
     @Suppress("unused")
