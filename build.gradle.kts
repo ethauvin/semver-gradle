@@ -3,16 +3,14 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id("com.github.ben-manes.versions") version "0.42.0"
-    id("com.gradle.plugin-publish") version "1.0.0"
-    id("io.gitlab.arturbosch.detekt") version "1.21.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
+    id("com.gradle.plugin-publish") version "1.2.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.5"
     id("java-gradle-plugin")
     id("java")
     id("maven-publish")
-    id("org.gradle.kotlin.kotlin-dsl") version "2.3.3"
-    id("org.jetbrains.kotlinx.kover") version "0.6.0"
-    id("org.sonarqube") version "3.4.0.2513"
-    // kotlin("jvm") version "1.6.21"
+    id("org.gradle.kotlin.kotlin-dsl") version "4.2.1"
+    kotlin("jvm") version "1.9.20"
 }
 
 version = "1.0.5"
@@ -48,8 +46,7 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = java.targetCompatibility.toString()
-            // Gradle 4.6
-            apiVersion = "1.2"
+            apiVersion = "1.6"
         }
     }
 
@@ -59,10 +56,6 @@ tasks {
             events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
         }
     }
-
-    "sonarqube" {
-        dependsOn(koverReport)
-    }
 }
 
 detekt {
@@ -70,34 +63,17 @@ detekt {
     baseline = project.rootDir.resolve("detekt-baseline.xml")
 }
 
-sonarqube {
-    properties {
-        property("sonar.projectName", "semver-gradle")
-        property("sonar.projectKey", "ethauvin_semver-gradle")
-        property("sonar.organization", "ethauvin-github")
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.sourceEncoding", "UTF-8")
-        property("sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/kover/xml/report.xml")
-    }
-}
-
 gradlePlugin {
+    website.set(github)
+    vcsUrl.set(github)
+
     plugins {
         create(project.name) {
             id = packageName
             displayName = "SemVer Plugin"
             description = "Semantic Version Plugin for Gradle"
+            tags.set(listOf("semver", "semantic", "version", "versioning", "auto-increment", "kotlin", "java"))
             implementationClass = "$packageName.SemverPlugin"
         }
     }
-}
-
-pluginBundle {
-    website = github
-    vcsUrl = github
-    tags = listOf("semver", "semantic", "version", "versioning", "auto-increment", "kotlin", "java")
-    // mavenCoordinates {
-    //     groupId = project.group.toString()
-    //     artifactId = project.name
-    // }
 }

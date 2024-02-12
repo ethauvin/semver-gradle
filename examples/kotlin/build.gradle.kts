@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter
 
 plugins {
     id("application")
-    id("com.github.ben-manes.versions") version "0.42.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
     id("net.thauvin.erik.gradle.semver") version "1.0.4"
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.7.22"
 }
 
 // ./gradlew
@@ -20,7 +20,7 @@ defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
 dependencies {
     implementation(kotlin("stdlib"))
-    testImplementation("org.testng:testng:7.6.1")
+    testImplementation("org.testng:testng:7.9.0")
 }
 
 repositories {

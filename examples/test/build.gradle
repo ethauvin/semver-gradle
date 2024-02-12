@@ -1,17 +1,8 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'net.thauvin.erik.gradle:semver:1.0.5'
-    }
+plugins {
+    id 'java'
+    id 'application'
+    id("net.thauvin.erik.gradle.semver") version "1.0.4"
 }
-
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'net.thauvin.erik.gradle.semver'
-
 
 defaultTasks 'run'
 

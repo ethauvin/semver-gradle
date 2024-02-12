@@ -64,7 +64,6 @@ dist/
 ehthumbs.db
 fabric.properties
 gen/
-gradle.properties
 hs_err_pid*
 kobaltBuild
 kobaltw*-test

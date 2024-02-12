@@ -15,7 +15,7 @@ declare -a examples=(
 # e.g: empty or javadoc, etc.
 gradle_doc=""
 # e.g. empty or sonarqube
-gradle_sonar="sonarqube"
+gradle_sonar=""
 # gradle options for examples
 gradle_opts="--console=plain --no-build-cache --no-daemon"
 # maven arguments for examples
