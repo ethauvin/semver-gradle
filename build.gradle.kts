@@ -1,11 +1,12 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 
 plugins {
-    id("com.github.ben-manes.versions") version "0.51.0"
-    id("com.gradle.plugin-publish") version "1.2.1"
-    id("io.gitlab.arturbosch.detekt") version "1.23.5"
+    id("com.github.ben-manes.versions") version "0.52.0"
     id("java-gradle-plugin")
     id("java")
     id("maven-publish")
@@ -41,15 +42,14 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
+        languageVersion.set(KotlinVersion.KOTLIN_1_7)
+    }
+}
 
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = java.targetCompatibility.toString()
-            apiVersion = "1.6"
-        }
-    }
-
     withType<Test> {
         testLogging {
             exceptionFormat = TestExceptionFormat.FULL
