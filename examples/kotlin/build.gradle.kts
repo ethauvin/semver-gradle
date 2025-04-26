@@ -20,7 +20,7 @@ defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
 dependencies {
     implementation(kotlin("stdlib"))
-    testImplementation("org.testng:testng:7.9.0")
+    testImplementation("org.testng:testng:7.11.0")
 }
 
 repositories {
