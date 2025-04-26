@@ -51,9 +51,8 @@ class SemverPluginTest {
             .forwardOutput()
             .build()
 
-        assertTrue(result.output.contains("version.buildmeta="))
+        assertTrue(result.output.contains("version.meta="))
         assertEquals(SUCCESS, result.task(":incrementBuildMeta")?.outcome ?: FAILED)
         assertEquals(SUCCESS, result.task(":run")?.outcome ?: FAILED)
-
     }
 }
