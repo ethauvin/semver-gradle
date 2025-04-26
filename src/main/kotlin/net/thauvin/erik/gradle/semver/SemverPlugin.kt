@@ -51,10 +51,10 @@ class SemverPlugin : Plugin<Project> {
         project.afterEvaluate(this::afterEvaluate)
 
         project.tasks.apply {
-            create("incrementMajor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MAJOR_KEY)
-            create("incrementMinor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MINOR_KEY)
-            create("incrementPatch", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_PATCH_KEY)
-            create("incrementBuildMeta", SemverIncrementBuildMetaTask::class.java, config, version)
+            register("incrementMajor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MAJOR_KEY)
+            register("incrementMinor", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_MINOR_KEY)
+            register("incrementPatch", SemverIncrementTask::class.java, config, version, SemverConfig.DEFAULT_PATCH_KEY)
+            register("incrementBuildMeta", SemverIncrementBuildMetaTask::class.java, config, version)
         }
     }
 
