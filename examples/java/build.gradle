@@ -16,16 +16,19 @@ defaultTasks 'run'
 
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.12.2')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+
 }
 
 repositories {
     mavenCentral()
 }
 
-test {
-    useJUnitPlatform()
+testing {
+    suites {
+        test {
+            useJUnitJupiter('5.12.2')
+        }
+    }
 }
 
 application {
