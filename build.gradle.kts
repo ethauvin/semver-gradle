@@ -1,3 +1,4 @@
+import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -59,8 +60,14 @@ tasks {
 }
 
 detekt {
-    // toolVersion = "main-SNAPSHOT"
+    toolVersion = "main-SNAPSHOT"
     baseline = project.rootDir.resolve("detekt-baseline.xml")
+}
+
+tasks.withType<Detekt>().configureEach {
+    if (JavaVersion.current() >= JavaVersion.VERSION_24) {
+        jvmTarget = "23"
+    }
 }
 
 gradlePlugin {
