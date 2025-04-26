@@ -20,6 +20,10 @@ def semverProcessor = 'net.thauvin.erik:semver:1.2.2-SNAPSHOT'
 repositories {
     mavenLocal()
     mavenCentral()
+    maven {
+        name = "SonatypeSnapshots"
+        url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+    }
 }
 
 dependencies {
