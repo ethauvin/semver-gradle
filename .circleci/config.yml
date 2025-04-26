@@ -22,7 +22,7 @@ defaults_gradle: &defaults_gradle
         key: gradle-dependencies-{{ checksum "build.gradle.kts" }}
     - run:
         name: Run All Checks
-        command: ./gradlew check
+        command: ./gradlew check --stacktrace
     - store_artifacts:
         path: build/reports/
         destination: reports

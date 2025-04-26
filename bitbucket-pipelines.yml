@@ -6,4 +6,4 @@ pipelines:
         caches:
           - gradle
         script:
-          - bash ./gradlew check
+          - bash ./gradlew check --stacktrace
