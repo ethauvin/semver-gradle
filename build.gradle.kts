@@ -10,8 +10,8 @@ plugins {
     id("java-gradle-plugin")
     id("java")
     id("maven-publish")
-    id("org.gradle.kotlin.kotlin-dsl") version "4.2.1"
     id("org.gradle.kotlin.kotlin-dsl") version "5.2.0"
+    kotlin("jvm") version "2.0.21"
 }
 
 version = "1.0.5"
