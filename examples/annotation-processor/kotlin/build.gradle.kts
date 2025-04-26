@@ -27,13 +27,19 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 application {
     mainClass.set("com.example.Main")
 }
 
 kapt {
     arguments {
-        arg("semver.project.dir", projectDir)
+        arg("semver.project.dir", projectDir.absolutePath)
     }
 }
 
