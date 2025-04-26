@@ -31,6 +31,10 @@ repositories {
     mavenCentral()
 }
 
+application {
+    mainClass = 'com.example.Example'
+}
+
 run {
     doFirst {
         println "Version: $version"

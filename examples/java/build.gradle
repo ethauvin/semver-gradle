@@ -29,6 +29,10 @@ test {
     useJUnitPlatform()
 }
 
+application {
+    mainClass = 'App'
+}
+
 semver {
 //     properties = 'example.properties'
 //     keysPrefix = 'example.'
