@@ -1,17 +1,17 @@
 plugins {
-  id("com.gradle.enterprise").version("3.19.2")
+  id("com.gradle.develocity") version "4.0.1"
 }
 
-gradleEnterprise {
+develocity {
     buildScan {
       link("GitHub", "https://github.com/ethauvin/semver/tree/master")
       if (!System.getenv("CI").isNullOrEmpty()) {
-          isUploadInBackground = false
-          publishOnFailure()
+          uploadInBackground.set(false)
+          publishing.onlyIf { true }
           tag("CI")
       }
-      termsOfServiceUrl = "https://gradle.com/terms-of-service"
-      termsOfServiceAgree = "yes"
+      termsOfUseUrl.set("https://gradle.com/help/legal-terms-of-use")
+      termsOfUseAgree.set("yes")
     }
 }
 
