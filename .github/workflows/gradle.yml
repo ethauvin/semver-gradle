@@ -37,8 +37,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-${{ matrix.java-version }}-
 
-      - name: Test with Gradle
+      - name: Check with Gradle
+        if: matrix.java-version != '24'
         run: ./gradlew build check --stacktrace
+
+      - name: Test with Gradle
+        if: matrix.java-version == '24'
+        run: ./gradlew build test --stacktrace
 
       - name: Cleanup Gradle Cache
         run: |
