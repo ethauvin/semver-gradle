@@ -1,4 +1,4 @@
-image: maven:3-openjdk-18
+image: maven:3-openjdk-21
 
 pipelines:
   default:

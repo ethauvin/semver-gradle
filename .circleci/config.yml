@@ -38,11 +38,11 @@ jobs:
 
     <<: *defaults_gradle
 
-  build_gradle_jdk8:
+  build_gradle_jdk21:
     <<: *defaults
 
     docker:
-      - image: cimg/openjdk:8.0
+      - image: cimg/openjdk:21.0
 
     <<: *defaults_gradle
 
@@ -50,5 +50,5 @@ workflows:
   version: 2
   gradle:
     jobs:
-      - build_gradle_jdk8
+      - build_gradle_jdk21
       - build_gradle_jdk17
