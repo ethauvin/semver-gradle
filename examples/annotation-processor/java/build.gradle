@@ -10,8 +10,6 @@ plugins {
 // ./gradlew clean incrementMinor run
 // ./gradlew clean incrementMajor run
 
-mainClassName = 'com.example.Example'
-
 defaultTasks 'run'
 
 def semverProcessor = 'net.thauvin.erik:semver:1.2.1'
@@ -22,7 +20,7 @@ dependencies {
 }
 
 tasks.withType(JavaCompile) {
-    options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
+    options.generatedSourceOutputDirectory = file("${projectDir}/src/generated/java")
     options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
 }
 
