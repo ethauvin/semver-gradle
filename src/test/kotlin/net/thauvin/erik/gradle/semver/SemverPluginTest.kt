@@ -1,7 +1,7 @@
 /*
- * SemverIncrementTask.kt
+ * SemverPluginTest.kt
  *
- * Copyright (c) 2018-2022, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2018-2025, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,38 +32,28 @@
 
 package net.thauvin.erik.gradle.semver
 
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.CacheableTask
-import org.gradle.api.tasks.TaskAction
-import java.util.Locale
-import javax.inject.Inject
+import org.gradle.testkit.runner.GradleRunner
+import org.gradle.testkit.runner.TaskOutcome.FAILED
+import org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import org.junit.Test
+import java.io.File
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
-@CacheableTask
-open class SemverIncrementTask @Inject constructor(
-    private val config: SemverConfig,
-    private val version: Version,
-    private val type: String
-) : DefaultTask() {
-    init {
-        group = "version"
-        description =
-            "Increments ${
-                type.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(Locale.getDefault())
-                    else it.toString()
-                }
-            } version number."
-    }
 
-    @TaskAction
-    fun increment() {
-        version.increment(
-            isMajor = type == SemverConfig.DEFAULT_MAJOR_KEY,
-            isMinor = type == SemverConfig.DEFAULT_MINOR_KEY,
-            isPatch = type == SemverConfig.DEFAULT_PATCH_KEY
-        )
-        project.version = version.semver
-        if (logger.isLifecycleEnabled) logger.lifecycle("Version: ${project.version}")
-        saveProperties(project.projectDir, config, version)
+class SemverPluginTest {
+    @Test
+    fun testSemverPlugin() {
+        val result = GradleRunner.create()
+            .withProjectDir(File("examples/test/"))
+            .withPluginClasspath()
+            .withArguments("incrementBuildMeta", "run")
+            .forwardOutput()
+            .build()
+
+        assertTrue(result.output.contains("version.buildmeta="))
+        assertEquals(SUCCESS, result.task(":incrementBuildMeta")?.outcome ?: FAILED)
+        assertEquals(SUCCESS, result.task(":run")?.outcome ?: FAILED)
+
     }
 }

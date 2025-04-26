@@ -48,11 +48,9 @@ open class SemverIncrementBuildMetaTask @Inject constructor(
         description = "Increments Build version metadata."
     }
 
-    @Suppress("MemberVisibilityCanBePrivate")
     @Input
     var buildMeta: String = ""
 
-    @Suppress("unused")
     @TaskAction
     fun increment() {
         if (version.buildMeta != buildMeta) {

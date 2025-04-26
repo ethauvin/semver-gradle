@@ -1,8 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id("com.github.ben-manes.versions") version "0.52.0"
-    id("net.thauvin.erik.gradle.semver") version "1.0.4"
+    id("net.thauvin.erik.gradle.semver")
 }
 
 defaultTasks 'run'
@@ -16,15 +15,16 @@ application {
 
 def f = new File("version.properties")
 
-def semverProcessor = 'net.thauvin.erik:semver:1.2.0'
+def semverProcessor = 'net.thauvin.erik:semver:1.2.2-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
 
 dependencies {
     annotationProcessor semverProcessor
     compileOnly semverProcessor
-}
-
-repositories {
-    mavenLocal()
 }
 
 application {
@@ -49,8 +49,8 @@ run {
     }
 }
 
-task echoVersion(type:Exec) {
-	commandLine('echo', "${-> version}")
+tasks.register('echoVersion', Exec) {
+    commandLine('echo', "${-> version}")
 }
 
 semver {

@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/examples/annotation-processor/java" />
-    <file type="web" url="file://$PROJECT_DIR$/examples/annotation-processor/kotlin" />
-    <file type="web" url="file://$PROJECT_DIR$/examples/java" />
-    <file type="web" url="file://$PROJECT_DIR$/examples/kotlin" />
+    <file type="web" url="file://$PROJECT_DIR$" />
   </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />

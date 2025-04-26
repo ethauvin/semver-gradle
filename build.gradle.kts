@@ -2,8 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 
 plugins {
     id("com.github.ben-manes.versions") version "0.52.0"
@@ -16,7 +14,7 @@ plugins {
     kotlin("jvm") version "2.0.21"
 }
 
-version = "1.0.5"
+version = "1.0.5-SNAPSHOT"
 group = "net.thauvin.erik.gradle"
 
 val github = "https://github.com/ethauvin/semver-gradle"
