@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.github.ben-manes.versions") version "0.52.0"
     id("com.gradle.plugin-publish") version "1.3.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("java-gradle-plugin")
     id("java")
     id("maven-publish")
