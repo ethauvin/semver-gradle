@@ -1,5 +1,5 @@
 /*
- * SortedPropertiesTest.kt
+ * SortedPropertiesTests.kt
  *
  * Copyright (c) 2018-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
@@ -32,12 +32,12 @@
 
 package net.thauvin.erik.gradle.semver
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
-class SortedPropertiesTest {
+class SortedPropertiesTests {
     @Test
-    fun testSortedProperties() {
+    fun sortedProperties() {
         val props = SortedProperties()
         val fruits = setOf("Avocado", "Tomato", "apple", "banana", "cucumber", "zucchini")
 

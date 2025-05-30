@@ -1,5 +1,5 @@
 /*
- * SemverPluginTest.kt
+ * SemverPluginTests.kt
  *
  * Copyright (c) 2018-2025, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
@@ -35,24 +35,76 @@ package net.thauvin.erik.gradle.semver
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome.FAILED
 import org.gradle.testkit.runner.TaskOutcome.SUCCESS
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import java.io.File
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import java.time.Year
 
 
-class SemverPluginTest {
+class SemverPluginTests {
     @Test
-    fun testSemverPlugin() {
+    fun incrementMajorTask() {
         val result = GradleRunner.create()
             .withProjectDir(File("examples/test/"))
             .withPluginClasspath()
-            .withArguments("incrementBuildMeta", "run")
+            .withArguments("incrementMajor")
             .forwardOutput()
             .build()
 
-        assertTrue(result.output.contains("version.meta="))
+        assertTrue(result.output.contains("Version: "))
+        assertEquals(SUCCESS, result.task(":incrementMajor")?.outcome ?: FAILED)
+    }
+
+    @Test
+    fun incrementMinorTask() {
+        val result = GradleRunner.create()
+            .withProjectDir(File("examples/test/"))
+            .withPluginClasspath()
+            .withArguments("incrementMinor")
+            .forwardOutput()
+            .build()
+
+        assertTrue(result.output.contains("Version: "))
+        assertEquals(SUCCESS, result.task(":incrementMinor")?.outcome ?: FAILED)
+    }
+
+    @Test
+    fun incrementPatchTask() {
+        val result = GradleRunner.create()
+            .withProjectDir(File("examples/test/"))
+            .withPluginClasspath()
+            .withArguments("incrementPatch")
+            .forwardOutput()
+            .build()
+
+        assertTrue(result.output.contains("Version: "))
+        assertEquals(SUCCESS, result.task(":incrementPatch")?.outcome ?: FAILED)
+    }
+
+    @Test
+    fun incrementBuildMetaTask() {
+        val result = GradleRunner.create()
+            .withProjectDir(File("examples/test/"))
+            .withPluginClasspath()
+            .withArguments("incrementBuildMeta")
+            .forwardOutput()
+            .build()
+
+        assertTrue(result.output.contains("Version: "))
         assertEquals(SUCCESS, result.task(":incrementBuildMeta")?.outcome ?: FAILED)
+    }
+
+    @Test
+    fun runTask() {
+        val result = GradleRunner.create()
+            .withProjectDir(File("examples/test/"))
+            .withPluginClasspath()
+            .withArguments("run")
+            .forwardOutput()
+            .build()
+
+        assertTrue(result.output.contains("version.meta=" + Year.now().value))
         assertEquals(SUCCESS, result.task(":run")?.outcome ?: FAILED)
     }
 }

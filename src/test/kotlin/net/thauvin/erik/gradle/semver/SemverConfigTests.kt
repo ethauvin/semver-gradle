@@ -1,5 +1,5 @@
 /*
- * SemverConfigTest.kt
+ * SemverConfigTests.kt
  *
  * Copyright (c) 2018-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
@@ -32,15 +32,14 @@
 
 package net.thauvin.erik.gradle.semver
 
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 
-class SemverConfigTest {
-    private val config = SemverConfig(Version())
-
+class SemverConfigTests {
     @Test
-    fun testConfigs() {
+    fun checkDefaults() {
+        val config = SemverConfig(Version())
         val vars = listOf(
             config.semverKey,
             config.majorKey,
@@ -65,10 +64,12 @@ class SemverConfigTest {
         )
 
         defaults.forEachIndexed { i, d ->
-            assertEquals(vars[i], "${config.keysPrefix}$d", " ${vars[i]} should be the same: ${config.keysPrefix}$d")
+            assertEquals("${config.keysPrefix}$d", vars[i],
+                " ${vars[i]} should be the same: ${config.keysPrefix}$d")
         }
 
-        assertEquals(config.properties, "version.properties", "config.properties should be version.properties")
+        assertEquals("version.properties", config.properties,
+            "config.properties should be version.properties")
 
         assertTrue(
             config.toString().contains("properties='${SemverConfig.DEFAULT_PROPERTIES}'"),
@@ -77,7 +78,8 @@ class SemverConfigTest {
     }
 
     @Test
-    fun testExtensionProperties() {
+    fun checkProperties() {
+        val config = SemverConfig(Version())
         config.keysPrefix = "test."
 
         val newKeys = listOf(
@@ -99,17 +101,19 @@ class SemverConfigTest {
         val defaultSemver =
             "${Version.DEFAULT_MAJOR}${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_MINOR}" +
                     "${Version.DEFAULT_SEPARATOR}${Version.DEFAULT_PATCH}"
-        assertEquals(config.semver, defaultSemver, "semver should be defaults")
+        assertEquals(defaultSemver, config.semver, "semver should be defaults")
         assertEquals(
-            "${config.major}${config.separator}${config.minor}${config.separator}${config.patch}",
             defaultSemver,
+            "${config.major}${config.separator}${config.minor}${config.separator}${config.patch}",
             "major-minor-patch should be defaults."
         )
-        assertEquals(config.preRelease, Version.DEFAULT_EMPTY, "preRelease empty default")
-        assertEquals(config.buildMeta, Version.DEFAULT_EMPTY, "buildMeta empty default")
-        assertEquals(config.preReleasePrefix, Version.DEFAULT_PRERELEASE_PREFIX, "preReleasePrefix default")
-        assertEquals(config.buildMetaPrefix, Version.DEFAULT_BUILDMETA_PREFIX, "buildMetaPrefix default")
+        assertEquals(Version.DEFAULT_EMPTY, config.preRelease, "preRelease empty default")
+        assertEquals(Version.DEFAULT_EMPTY, config.buildMeta, "buildMeta empty default")
+        assertEquals(Version.DEFAULT_PRERELEASE_PREFIX, config.preReleasePrefix,
+            "preReleasePrefix default")
+        assertEquals(Version.DEFAULT_BUILDMETA_PREFIX, config.buildMetaPrefix,
+            "buildMetaPrefix default")
 
-        assertEquals(config.semver, config.version, "semver = version")
+        assertEquals(config.version, config.semver, "semver = version")
     }
 }

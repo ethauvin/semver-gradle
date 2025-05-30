@@ -34,8 +34,10 @@ dependencies {
 
     // testImplementation(gradleTestKit())
 
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
+    testImplementation(platform("org.junit:junit-bom:5.13.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
 }
 
 java {
@@ -52,6 +54,7 @@ kotlin {
 
 tasks {
     withType<Test> {
+        useJUnitPlatform()
         testLogging {
             exceptionFormat = TestExceptionFormat.FULL
             events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
