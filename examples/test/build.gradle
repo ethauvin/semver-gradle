@@ -21,8 +21,8 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven {
-        name = "SonatypeSnapshots"
-        url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+        name = 'Central Portal Snapshots'
+        url = uri("https://central.sonatype.com/repository/maven-snapshots/")
     }
 }
 
