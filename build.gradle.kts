@@ -12,7 +12,7 @@ plugins {
     id("java")
     id("maven-publish")
     id("org.gradle.kotlin.kotlin-dsl") version "5.2.0"
-    kotlin("jvm") version "2.1.21"
+    kotlin("jvm") version "2.2.0"
 }
 
 version = "1.0.5-SNAPSHOT"
