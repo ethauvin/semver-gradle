@@ -9,7 +9,7 @@ plugins {
     id("java-gradle-plugin")
     id("java")
     id("maven-publish")
-    id("org.gradle.kotlin.kotlin-dsl") version "5.2.0"
+    id("org.gradle.kotlin.kotlin-dsl") version "6.4.1"
     kotlin("jvm") version "2.3.0"
 }
 
