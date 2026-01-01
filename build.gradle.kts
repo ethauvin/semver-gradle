@@ -1,11 +1,9 @@
-import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     id("com.github.ben-manes.versions") version "0.53.0"
     id("com.gradle.plugin-publish") version "2.0.0"
-    id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("java-gradle-plugin")
     id("java")
     id("maven-publish")
@@ -28,7 +26,6 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.3.0"))
     implementation(gradleApi())
 
-
     // testImplementation(gradleTestKit())
 
     testImplementation(platform("org.junit:junit-bom:6.0.1"))
@@ -48,17 +45,6 @@ tasks {
             exceptionFormat = TestExceptionFormat.FULL
             events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
         }
-    }
-}
-
-detekt {
-    toolVersion = "main-SNAPSHOT"
-    baseline = project.rootDir.resolve("detekt-baseline.xml")
-}
-
-tasks.withType<Detekt>().configureEach {
-    if (JavaVersion.current() >= JavaVersion.VERSION_24) {
-        jvmTarget = "23"
     }
 }
 
