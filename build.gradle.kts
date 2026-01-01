@@ -34,9 +34,9 @@ dependencies {
 
 }
 
-kotlin {
-    jvmToolchain(17)
-}
+//kotlin {
+//    jvmToolchain(17)
+//}
 
 tasks {
     withType<Test> {
