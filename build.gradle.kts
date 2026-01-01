@@ -5,8 +5,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    id("com.github.ben-manes.versions") version "0.52.0"
     id("com.gradle.plugin-publish") version "1.3.1"
+    id("com.github.ben-manes.versions") version "0.53.0"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
     id("java-gradle-plugin")
     id("java")

@@ -1,6 +1,6 @@
 plugins {
     id("application")
-    id("com.github.ben-manes.versions") version "0.52.0"
+    id("com.github.ben-manes.versions") version "0.53.0"
     id("net.thauvin.erik.gradle.semver") version "1.0.4"
     kotlin("jvm") version "2.2.0"
     kotlin("kapt") version "1.9.25"
