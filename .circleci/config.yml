@@ -1,54 +1,116 @@
-version: 2
-defaults: &defaults
-  working_directory: ~/repo
-  environment:
-    JVM_OPTS: -Xmx3200m
-    TERM: dumb
-    CI: true
+version: 2.1
 
-defaults_gradle: &defaults_gradle
-  steps:
-    - checkout
-    - restore_cache:
-        keys:
-          - gradle-dependencies-{{ checksum "build.gradle.kts" }}
-          # fallback to using the latest cache if no exact match is found
-          - gradle-dependencies-
-    - run:
-        name: Gradle Dependencies
-        command: ./gradlew dependencies
-    - save_cache:
-        paths: ~/.m2
-        key: gradle-dependencies-{{ checksum "build.gradle.kts" }}
-    - run:
-        name: Run All Checks
-        command: ./gradlew check --stacktrace
-    - store_artifacts:
-        path: build/reports/
-        destination: reports
-    - store_test_results:
-        path: build/reports/
-
-jobs:
-  build_gradle_jdk17:
-    <<: *defaults
-
+# Define the JDK Docker image to use
+executors:
+  jdk-executor:
     docker:
       - image: cimg/openjdk:17.0
+    working_directory: ~/project
+    environment:
+      JVM_OPTS: -Xmx3200m
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 
-    <<: *defaults_gradle
+# Reusable commands
+commands:
+  restore_gradle_cache:
+    description: "Restore Gradle dependencies from cache"
+    steps:
+      - restore_cache:
+          keys:
+            - gradle-{{ checksum "build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+            - gradle-
 
-  build_gradle_jdk21:
-    <<: *defaults
+  save_gradle_cache:
+    description: "Save Gradle dependencies to cache"
+    steps:
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+            - ~/.gradle/wrapper
+          key: gradle-{{ checksum "build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
 
-    docker:
-      - image: cimg/openjdk:21.0
+jobs:
+  build:
+    executor: jdk-executor
+    steps:
+      - checkout
 
-    <<: *defaults_gradle
+      - restore_gradle_cache
+
+      # Download dependencies
+      - run:
+          name: Download Dependencies
+          command: ./gradlew dependencies --no-daemon
+
+      - save_gradle_cache
+
+      # Build the project
+      - run:
+          name: Build Project
+          command: ./gradlew build -x test --no-daemon
+
+      # Store build artifacts
+      - store_artifacts:
+          path: build/libs
+          destination: jars
+
+  test:
+    executor: jdk-executor
+    steps:
+      - checkout
+
+      - restore_gradle_cache
+
+      # Run tests
+      - run:
+          name: Run Tests
+          command: ./gradlew test --no-daemon
+
+      # Store test results
+      - run:
+          name: Save Test Results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+
+      - store_test_results:
+          path: ~/test-results
+
+      - store_artifacts:
+          path: ~/test-results/junit
+          destination: test-results
+
+      # Store test reports
+      - store_artifacts:
+          path: build/reports/tests
+          destination: test-reports
+
+  check:
+    executor: jdk-executor
+    steps:
+      - checkout
+
+      - restore_gradle_cache
+
+      # Run all checks (includes test, code quality, etc.)
+      - run:
+          name: Run Checks
+          command: ./gradlew check --no-daemon
+
+      # Store check reports
+      - store_artifacts:
+          path: build/reports
+          destination: reports
 
 workflows:
   version: 2
-  gradle:
+  build-test-check:
     jobs:
-      - build_gradle_jdk21
-      - build_gradle_jdk17
+      - build
+      - test:
+          requires:
+            - build
+      - check:
+          requires:
+            - build
