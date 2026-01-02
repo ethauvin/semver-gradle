@@ -1,5 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.github.ben-manes.versions") version "0.53.0"
@@ -34,9 +35,14 @@ dependencies {
 
 }
 
-//kotlin {
-//    jvmToolchain(17)
-//}
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+    jvmToolchain(17)
+}
 
 tasks {
     withType<Test> {
